@@ -196,7 +196,7 @@
             // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
             $(this).next("table").toggleClass("hide");
         });
-    });
+    });    
 </script>
 
 </body>
