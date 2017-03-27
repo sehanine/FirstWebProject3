@@ -14,7 +14,7 @@
 	ArrayList<String> main_list = dao.getMainVO(fesno);
 	ArrayList<ListVO> first_list = dao.getFirst_list(fesno);
 	ArrayList<ListVO> second_list = dao.getSecond_list(fesno);
-	ArrayList<ListVO> third_list = dao.getSecond_list(fesno);
+	ArrayList<ListVO> third_list = dao.getThird_list(fesno);
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -66,7 +66,7 @@
 										%>
 									</tr>
 								</table>
- 
+ 						
                            	<table id="table1" width=730 border="0px">
                             <%
                 				for(int i = 0; i < first_list.size(); i++){
@@ -82,10 +82,11 @@
                 			<%
                 				}
                 			%>
-                        
+                        	</table>
                             <!-- 개요 -->
                             <div class="menu">
-                            <a id="a_color"><h1 class="h1_back" align="left" >개요</h1></a>
+                           	 <a id="a_color"><h1 class="h1_back" align="left" >개요</h1></a>
+                            
                              <table id="table2" class="hide" width=730 border="0px">
                             	<%
 									for(int i = 0; i < second_list.size(); i++){
@@ -100,8 +101,9 @@
 									}
 								%>
 						 
-                            </div>
                            
+                         	  </table>
+                         	  </div>
                              <!-- 이용안내 -->
                              <div class="menu">
                              <a id="a_color"><h1 class="h1_back" align="left">이용안내</h1></a>
@@ -118,10 +120,11 @@
 								<%
 									}
 								%>
+								</table>
                             </div>
                             
 <!-- 게시판 연습 -->
-               	<br> <h3 align="left">자유로운 이야기</h1><br>                   
+               	<h3 align="left">자유로운 이야기</h1><br>                   
               
                 <table id="commentTable" class="table table-condensed"></table>
                     <table class="table table-condensed"  >
