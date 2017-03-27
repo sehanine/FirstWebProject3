@@ -3,7 +3,6 @@
 
 <%
 	String pageNum = request.getParameter("page");
-	String pageNum2=null;
 	
 	if(pageNum == null){
 		pageNum = "1";
@@ -55,6 +54,7 @@ $(function(){
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 	<link href="css/update.css" rel="stylesheet" type="text/css">
 	<link href="css/w3.css" rel="stylesheet" type="text/css">
+	
 </head>
 <body id="page-top" class="index">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
@@ -136,7 +136,7 @@ $(function(){
            			String url = dao.getFirstImage(vo.getFesno());
             %>
                 <div class="col-sm-4 portfolio-item">
-                    <a href="content.jsp?page=<%=vo.getFesno() %>" class="portfolio-link" data-toggle="modal">
+                    <a href="content.jsp?page=<%=vo.getFesno() %>&curr=<%=curPage %>" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
                                 <i class="fa fa-search-plus fa-3x"></i>
