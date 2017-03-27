@@ -16,7 +16,8 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 	<link href="css/update.css" rel="stylesheet" type="text/css">
- 
+	<link href="css/event1.css" rel="stylesheet" type="text/css" >
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
 	<!-- Portfolio Modals -->
@@ -184,5 +185,38 @@
             </div>
         </div>
     </div>
+    
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/freelancer.min.js"></script>
+    
+    
+    
+<script src="js/reply.js"></script>
+
+<script>
+    // html dom 이 다 로딩된 후 실행된다.
+    $(document).ready(function(){
+        // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+        $(".menu>a").click(function(){
+            // 현재 클릭한 태그가 a 이기 때문에
+            // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
+            $(this).next("table").toggleClass("hide");
+        });
+    });
+</script>
+
 </body>
 </html>
