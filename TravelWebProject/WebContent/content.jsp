@@ -2,12 +2,13 @@
     pageEncoding="EUC-KR" import ="web.dao.*, java.util.ArrayList"%>
 <%
 	String pageNum = request.getParameter("page");
-	
+	String curr = request.getParameter("curr");
 	if(pageNum == null){
 		pageNum = "1";
 	}   
 	int TITLE_INDEX_NUMBER = 0;
 	int fesno = Integer.parseInt(pageNum);
+	int curPage = Integer.parseInt(curr);
 	QueryDAO dao = new QueryDAO();
 	ArrayList<String> image_list = dao.getImage_list(fesno);
 	ArrayList<String> main_list = dao.getMainVO(fesno);
@@ -26,8 +27,7 @@
  	 -->
  
     <link href="css/freelancer.min.css" rel="stylesheet">
-  
- 
+    
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
@@ -38,7 +38,7 @@
 	<!-- Portfolio Modals -->
     <div class="portfolio-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" onclick="location.href='test_main.jsp#portfolio'">
+            <div class="close-modal" onclick="location.href='test_main.jsp?page=<%=curPage %>#portfolio'">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -82,7 +82,6 @@
                 				}
                 			%>
                         
-                            
                             <!-- 개요 -->
                             <div class="menu">
                             <a id="a_color"><h1 class="h1_back" align="left" >개요</h1></a>
@@ -101,8 +100,7 @@
 								%>
 						 
                             </div>
-                            
-                            
+                           
                              <!-- 이용안내 -->
                              <div class="menu">
                              <a id="a_color"><h1 class="h1_back" align="left">이용안내</h1></a>
@@ -157,7 +155,7 @@
                                 <li>·등록 및 수정문의:02-123-4567
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" onclick="location.href='test_main.jsp#portfolio'" ></i> Close</button>
+                            <button type="button" class="btn btn-default" onclick="location.href='test_main.jsp?page=<%=curPage %>#portfolio'" ></i> Close</button>
                         </div>
                     </div>
                 </div>
