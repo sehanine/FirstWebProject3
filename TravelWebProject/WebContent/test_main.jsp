@@ -3,7 +3,6 @@
 
 <%
 	String pageNum = request.getParameter("page");
-	String pageNum2=null;
 	
 	if(pageNum == null){
 		pageNum = "1";
