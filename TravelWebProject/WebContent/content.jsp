@@ -21,7 +21,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>content_test</title>
+<title><%= main_list.get(TITLE_INDEX_NUMBER)%></title>
 	<!--  
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	 -->
@@ -70,6 +70,7 @@
                            	<table id="table1" width=730 border="0px">
                             <%
                 				for(int i = 0; i < first_list.size(); i++){
+                					if(i != first_list.size() -1){
                 			%>
                 			<tr>
                 	
@@ -79,6 +80,22 @@
                      	   		<td width="80%" align="left"><%=first_list.get(i).getContent() %></td>
                 		
                 			</tr>
+                			<%
+                					} else {
+                			%>
+                				<tr>
+                	
+	                				<td width="20%" align="left">
+	                           			<span style="font-weight:bold;"><%=first_list.get(i).getTitle() %></span>
+	                           		</td>
+	                     	   		<td width="80%" align="left">
+	                     	   			<a href="<%=first_list.get(i).getContent() %>">
+	                     	   			<%=first_list.get(i).getContent() %></td>
+                		
+                				</tr>
+                			<%
+                					}
+                			%>
                 			<%
                 				}
                 			%>
