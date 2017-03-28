@@ -42,6 +42,18 @@ $(function(){
 	});
 });
 
+var i=0;
+$(function(){
+	$('#logBtn').click(function(){
+		if(i==0){
+			$('#logPop').show();
+			i=1;
+		}else{
+			$('#logPop').hide();
+			i=0;
+		}
+	});
+});
 </script>
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
@@ -86,7 +98,7 @@ $(function(){
                     <li class="page-scroll">
                         <a href="#contact">Contact Us</a>
                     </li>
-                    <li class="page-scroll">
+                    <li class="page-scroll" id="logBtn">
                         <a>Log-in</a>
                     </li>
                 </ul>
