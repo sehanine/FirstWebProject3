@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class QueryDAO {
-	
+	   
 	private Connection conn;
 	private PreparedStatement ps;
 	private final String URL="jdbc:oracle:thin:@211.238.142.230:1521:ORCL";

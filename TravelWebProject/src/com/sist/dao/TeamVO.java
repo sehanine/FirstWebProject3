@@ -1,7 +1,7 @@
 package com.sist.dao;
 
 import java.util.*;
-
+     
 public class TeamVO {
 	private int no;
 	private String name;

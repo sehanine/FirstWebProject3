@@ -11,9 +11,9 @@ import org.jsoup.select.Elements;
  * @author mdSHin
  * vkDAO 주의사항
 
- */
+ */    
 public class VisitKoreaDAO {
-	
+	      
 	private String addr1 = "https://korean.visitkorea.or.kr/kor/bz15/where/festival/festival.jsp?areaCode=&year=2017&keyword=&type=&gotoPage=";
 	private String addr2 = "&listType=rdesc&cid=&out_service=";
 	private int pageNumber = 1;

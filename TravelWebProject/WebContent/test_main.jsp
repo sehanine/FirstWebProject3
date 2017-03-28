@@ -94,7 +94,7 @@ $(function(){
                     </li>
                     <li class="page-scroll">
                         <a href="#about">About</a>
-                    </li> 
+                    </li>       
                     <li class="page-scroll">
                         <a href="#contact">Contact Us</a>
                     </li>

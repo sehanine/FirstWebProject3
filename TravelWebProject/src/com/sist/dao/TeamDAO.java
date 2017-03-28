@@ -55,7 +55,7 @@ public class TeamDAO {
 			int i=0;
 			int j=0;
 			int pagecnt=(page*10)-10;
-			
+			     
 			
 		}catch(Exception ex){
 			System.out.println("boardListData"+ex.getMessage());
