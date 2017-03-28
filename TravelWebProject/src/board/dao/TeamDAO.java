@@ -1,14 +1,18 @@
-package com.sist.dao;
+package board.dao;
 
 import java.util.*;
+
 import java.sql.*;
+
+
 
 public class TeamDAO {
 	private Connection conn;
 	private PreparedStatement ps;
-	private final String URL="jdbc:oracl:thin:@211.238.142.213:1521:ORCL";
+	private final String URL="jdbc:oracle:thin:@211.238.142.213:1521:ORCL";
 	private static TeamDAO dao;
-
+	
+	//드라이버 등록
 	public TeamDAO(){
 		try{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -18,12 +22,16 @@ public class TeamDAO {
 		}
 	}
 	
+	//싱글턴
 	public static TeamDAO newInstance(){
 		if(dao==null)
 			dao=new TeamDAO();
 		return dao;
 	}
 	
+	
+	
+	//오라클 해제
 	public void disConnection(){
 		try{
 			if(ps!=null)ps.close();
@@ -33,6 +41,7 @@ public class TeamDAO {
 		}
 	}
 	
+	//오라클 연결
 	public void getConnection(){
 		try{
 			conn=DriverManager.getConnection(URL, "scott", "tiger");
@@ -41,14 +50,15 @@ public class TeamDAO {
 		}
 	}
 	
+	//기능처리-리스트
 	public List<TeamVO> boardListData(int page){
 		ArrayList<TeamVO> list=new ArrayList<>();
 		
 		try{
 			getConnection();
-			String sql="SELECT no,subject,name,regdate,hit "
-					+"FROM teamProjects "
-					+"ORDER BY group_id DESC,ASC";
+			String sql="SELECT no,subject,name,regdate,hit,group_tab "
+					+"FROM myBoard "
+					+"ORDER BY group_id DESC,group_step ASC";
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			
@@ -56,19 +66,44 @@ public class TeamDAO {
 			int j=0;
 			int pagecnt=(page*10)-10;
 			
+			while(rs.next()){
+				if(i<10 && j>=pagecnt){
+					TeamVO vo=new TeamVO();
+					vo.setNo(rs.getInt(1));
+					vo.setSubject(rs.getString(2));
+					vo.setName(rs.getString(3));
+					vo.setRegdate(rs.getDate(4));
+					vo.setHit(rs.getInt(5));
+					vo.setGroup_tab(rs.getInt(6));
+					list.add(vo);
+					i++;
+				}
+				j++;
+			}
+			
 			
 		}catch(Exception ex){
-			System.out.println("boardListData"+ex.getMessage());
+			System.out.println("boardListData()"+ex.getMessage());
 		}finally{
 			disConnection();
 		}
+		
+		
 		return list;
 	}
+	
 	public int boardTotalPage(){
 		int total=0;
 		
 		try{
 			getConnection();
+			String sql="SELECT CEIL(COUNT(*)/10) FROM replyBoard";
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			total=rs.getInt(1);
+			rs.close();
+			
 		}catch(Exception ex){
 			System.out.println("boardTotalPage()"+ex.getMessage());
 		}finally{
@@ -78,41 +113,13 @@ public class TeamDAO {
 		return total;
 	}
 	
-	public TeamVO boardContent(int no,int type){
-		TeamVO vo=new TeamVO();
-		
-		try{
-			getConnection();
-			String sql="";
-			if(type==1){
-				sql="UPDATE TeamProjects1 SET "
-						+"hit=hit+1 "
-						+"WHERE no=?";
-				ps=conn.prepareStatement(sql);
-				ps.setInt(1, no);
-				ps.executeQuery();
-				ps.close();
-			}
-			
-			sql="SELECT no,name,email,subject,content,regdate,hit "
-					+"FROM TeamProjects1 "
-					+"WHERE no=?";
-		}catch(Exception ex){
-			
-			
-			System.out.println("boardContent()"+ex.getMessage());
-		}finally{
-			disConnection();
-		}
-		return vo;
-		
-	}
-	
+	//전체 게시글 갯수
 	public int boardRowCount(){
 		int total=0;
+		
 		try{
 			getConnection();
-			String sql="SELECT COUNT(*) FROM teamProjects1";
+			String sql="SELECT COUNT(*) FROM replyBoard";
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
@@ -124,14 +131,16 @@ public class TeamDAO {
 		}finally{
 			disConnection();
 		}
+		
 		return total;
 	}
+	
 	public int boardFindCount(String fs,String ss){
 		int count=0;
 		try{
 			getConnection();
 			String sql="SELECT COUNT(*) "
-					+"FROM teamProjects1 "
+					+"FROM myBoard "
 					+"WHERE "+fs+" LIKE '%'||?||'%'";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, ss);
@@ -146,13 +155,14 @@ public class TeamDAO {
 		}
 		return count;
 	}
+	
 	public List<TeamVO> boardFindData(String fs, String ss){
 		List<TeamVO> list=new ArrayList<>();
 		
 		try{
 			getConnection();
 			String sql="SELECT no,subject,name,regdate,hit,group_tab "
-					+"FROM replyBoard "
+					+"FROM myBoard "
 					+"WHERE "+fs+" LIKE '%'||?||'%'";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, ss);
@@ -165,6 +175,7 @@ public class TeamDAO {
 				vo.setName(rs.getString(3));
 				vo.setRegdate(rs.getDate(4));
 				vo.setHit(rs.getInt(5));
+				vo.setGroup_tab(rs.getInt(6));
 				list.add(vo);
 			}
 			rs.close();
@@ -181,12 +192,52 @@ public class TeamDAO {
 	 * 	
 	 */
 	//내용보기
+	public TeamVO boardContent(int no,int type){
+		TeamVO vo=new TeamVO();
+		
+		try{
+			getConnection();
+			String sql="";
+			if(type==1){
+				sql="UPDATE myBoard SET "
+						+"hit=hit+1 "
+						+"WHERE no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, no);
+				ps.executeUpdate();
+				ps.close();
+			}
+			
+			sql="SELECT no,name,email,subject,content,regdate,hit "
+					+"FROM myBoard "
+					+"WHERE no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setNo(rs.getInt(1));
+			vo.setName(rs.getString(2));
+			vo.setEmail(rs.getString(3));
+			vo.setSubject(rs.getString(4));
+			vo.setContent(rs.getString(5));
+			vo.setRegdate(rs.getDate(6));
+			vo.setHit(rs.getInt(7));
+			rs.close();		
+			
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}finally{
+			disConnection();
+		}
+			
+		return vo;
+	}
 	//SEQUENCE INSERT,UPDATE,SELECT
 	public void boardReply(int pno,TeamVO vo){
 		try{
 			getConnection();
 			String sql="SELECT group_id,group_step,group_tab "
-					+"FROM replyboard "
+					+"FROM my "
 					+"WHERE no=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, pno);
@@ -198,7 +249,7 @@ public class TeamDAO {
 			rs.close();
 			ps.close();
 			//답변의 핵심쿼리
-			sql="UPDATE replyboard SET "
+			sql="UPDATE myboard SET "
 					+"group_step=group_step+1 "
 					+"WHERE group_id=? AND group_step>?";
 			ps=conn.prepareStatement(sql);
@@ -208,7 +259,7 @@ public class TeamDAO {
 			ps.close();
 			
 			//추가
-			sql="INSERT INTO replyBoard(no,name,email,subject,content,pwd,group_id,group_step,group_tab,root) "
+			sql="INSERT INTO myBoard(no,name,email,subject,content,pwd,group_id,group_step,group_tab,root) "
 					+"VALUES(rb_no_seq.nextval,?,?,?,?,?,?,?,?,?)";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, vo.getName());
@@ -223,7 +274,7 @@ public class TeamDAO {
 			ps.executeUpdate();
 			ps.close();
 			//depth=depth+1
-			sql="UPDATE replyBoard SET "
+			sql="UPDATE myBoard SET "
 					+"depth=depth+1 "
 					+"WHERE no=?";
 			ps=conn.prepareStatement(sql);
@@ -240,9 +291,9 @@ public class TeamDAO {
 	public void boardInsert(TeamVO vo){
 		try{
 			getConnection();
-			String sql="INSERT INTO replyBoard(no,name,email,subject,content,pwd,group_id) "
+			String sql="INSERT INTO myBoard(no,name,email,subject,content,pwd,group_id) "
 					+"VALUES(rb_no_seq.nextval,?,?,?,?,?,"
-					+"(SELECT NVL(MAX(group_id)+1,1) FROM replyBoard))";
+					+"(SELECT NVL(MAX(group_id)+1,1) FROM myBoard))";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, vo.getName());
 			ps.setString(2, vo.getEmail());
@@ -258,6 +309,68 @@ public class TeamDAO {
 			disConnection();
 		}
 	}
+		public boolean databoardDelete(int no,String pwd){
+			boolean bCheck=false;
+		
+			try{
+				getConnection();
+				String sql="SELECT pwd FROM myboard "
+						+"WHERE no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, no);
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				String db_pwd=rs.getString("pwd");
+				rs.close();
+				ps.close();
+					
+				if(db_pwd.equals(pwd)){
+					bCheck=true;
+					sql="DELETE FROM myboard "
+							+"WHERE no=?";
+					ps=conn.prepareStatement(sql);
+					ps.setInt(1, no);
+					ps.executeUpdate();
+				}else{
+					bCheck=false;
+				}
+				
+			}catch(Exception ex){
+				System.out.println("databoardDelete()"+ex.getMessage());
+			}finally{
+				disConnection();
+			}
+			
+			return bCheck;
+		}
+		public TeamVO databoardFileInfoData(int no){
+			TeamVO vo=new TeamVO();
+			
+			try{
+				getConnection();
+				
+				String sql="SELECT filename,fileSize "
+						+"FROM dataBoard "
+						+"WHERE no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, no);
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				
+				vo.setFilename(rs.getString(1));
+				vo.setFilesize(rs.getInt(2));
+				rs.close();
+				
+			}catch(Exception ex){
+				System.out.println("databoardFileInfoData()"+ex.getMessage());
+			}finally{
+				disConnection();
+			}
+			
+			return vo;
+		}
+	}
+	
 
 
 
@@ -265,4 +378,3 @@ public class TeamDAO {
 
 
 
-}

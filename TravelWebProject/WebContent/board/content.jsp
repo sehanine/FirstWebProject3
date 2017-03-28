@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import="com.sist.dao.*"%>
+    pageEncoding="EUC-KR" import="board.dao.*"%>
     
 <%
 	//1.사용자 요청 데이터  content.jsp?no=20&
@@ -43,11 +43,35 @@
 				<td width="20%" align="center" bgcolor="#ccccff">제목</td>
 				<td colspan="3"><%=vo.getSubject() %></td>
 			</tr>
+			<tr>
+				<td colspan="4" align="left" valign="top" height="200">
+					<%=vo.getContent() %>
+				</td>
+			</tr>
+		</table>
+		
+		<table border="0" width="600">
+			<tr>
+				<td align="right">
+					<a href="reply.jsp?no=<%=no%>">
+						<img alt="답글쓰기" src="image/reply.gif">
+					</a>
+					<a href="update.jsp?no=<%=no%>">
+						<img alt="수정하기" src="image/modify.gif">
+					</a>
+					<a href="delete.jsp?no=<%=no%>">
+					<img alt="삭제하기" src="image/delete.gif" id="delBtn">
+					</a>
+					<a href="list.jsp">
+						<img alt="리스트" src="image/list.gif">
+					</a>										
+				</td>
+			</tr>
+			
+		</table>
 	</center>
 </body>
 </html>
-
-
 
 
 
