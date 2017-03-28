@@ -44,6 +44,7 @@ $(function(){
 });
 
 </script>
+
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
     <!-- Theme CSS -->
@@ -53,8 +54,42 @@ $(function(){
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-	<link href="css/update.css" rel="stylesheet" type="text/css">
 	<link href="css/w3.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/owl.theme.green.min.css">
+	<link rel="stylesheet" href="css/owl.theme.green.css">
+	
+	<style type="text/css">
+				*{
+			margin:0;padding:0;border:0;
+		}
+		.owl-carousel{}
+		.owl-carousel .item{
+			text-align:center;
+			background:#93e0e4;
+			height:200px;
+			line-height:200px;
+			margin:10px;
+		}
+		.container .slide{
+			position:relative;
+			width:100%;
+			height:400px;
+			overflow:hidden;
+			white-space:nowrap;
+			border:1px solid #000;
+		}
+		.owl-carousel .item {
+		    height: 100%;
+		    line-height: 378px;
+		}
+		.item img{
+			width:50px;
+			height:388px;
+		}
+</style>
+<link rel="stylesheet" href="css/update.css">
 </head>
 <body id="page-top" class="index">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
@@ -98,14 +133,37 @@ $(function(){
 
     <!-- Header -->
     <header>
-    
-        <div class="container" id="maincontent" tabindex="-1">
-            <div class="row">
+    	<div class="container" id="maincontent" tabindex="-1">
+    		<div class="slide">
+	        	<div class="owl-carousel owl-theme">
+	        		<img src="img/protfolio/1.png">
+	        		<img src="img/protfolio/2.png">
+	        		<img src="img/protfolio/3.png">
+	        		<img src="img/protfolio/4.png">
+	        		<img src="img/protfolio/5.png">
+	        		<img src="img/protfolio/6.png">
+	        		
+	    
+	        	<!-- 	<div class="item"> 1 </div>
+				  <img class="item" src="./img/portfolio/1.png">
+				  <div class="item"> 2 </div>
+				  <div class="item"> 3 </div>
+				  <div class="item"> 4 </div>	 -->
+				</div>
+			</div>
+		</div>
+           <!-- <div class="row">
                 <div class="col">
                 	<div class="row1">
-                    	<img class="col-sm-4 portfolio-item" src="img/profile.png" alt="">
-                    	<img class="col-sm-4 portfolio-item" src="img/profile.png" alt="">
-                    	<img class="col-sm-4 portfolio-item" src="img/profile.png" alt="">
+                    	<div class="owl-carousel">
+							  <div class="item"> 1 </div>
+							  <div class="item"> 2 </div>
+							  <div class="item"> 3 </div>
+							  <div class="item"> 4 </div>
+							  <div class="item"> 5 </div>
+							  <div class="item"> 6 </div>
+							  <div class="item"> 7 </div>
+						</div>
                     </div>
                     <div class="intro-text">
                         <h1 class="name">FestiGo</h1>
@@ -114,7 +172,7 @@ $(function(){
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </header>
 
     <!-- Portfolio Grid Section -->
@@ -321,4 +379,69 @@ $(function(){
 
 
 
-</body></html>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/mousewheel.js"></script>
+<script>
+var owl = $('.owl-carousel');
+owl.owlCarousel({
+    loop:true,
+    nav:true,
+    margin:10,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },            
+        960:{
+            items:5
+        },
+        1200:{
+            items:6
+        }
+    }
+});
+owl.on('mousewheel', '.owl-stage', function (e) {
+    if (e.deltaY>0) {
+        owl.trigger('next.owl');
+    } else {
+        owl.trigger('prev.owl');
+    }
+    e.preventDefault();
+});
+/* 	var owl = $('.owl-carousel');
+	owl.owlCarousel({
+	    items:4,
+	    loop:true,
+	    margin:100,
+	    autoplay:true,
+	    autoplayTimeout:2000,
+	    autoplayHoverPause:true
+	});
+	$('.play').on('click',function(){
+	    owl.trigger('play.owl.autoplay',[2000])
+	})
+	$('.stop').on('click',function(){
+	    owl.trigger('stop.owl.autoplay')
+	}) */
+	/* $('.owl-carousel').owlCarousel({
+	    loop:true,
+	    margin:100,
+	    nav:true,
+	    responsive:{
+	        0:{
+	            items:1
+	        },
+	        600:{
+	            items:3
+	        },
+	        1000:{
+	            items:5
+	        }
+	    }
+	}) */
+</script>
+</html>
