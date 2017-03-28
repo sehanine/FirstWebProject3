@@ -59,37 +59,11 @@ $(function(){
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<link rel="stylesheet" href="css/owl.theme.green.min.css">
 	<link rel="stylesheet" href="css/owl.theme.green.css">
-	
+	<link rel="stylesheet" href="css/update.css">
 	<style type="text/css">
-				*{
-			margin:0;padding:0;border:0;
-		}
-		.owl-carousel{}
-		.owl-carousel .item{
-			text-align:center;
-			background:#93e0e4;
-			height:200px;
-			line-height:200px;
-			margin:10px;
-		}
-		.container .slide{
-			position:relative;
-			width:100%;
-			height:400px;
-			overflow:hidden;
-			white-space:nowrap;
-			border:1px solid #000;
-		}
-		.owl-carousel .item {
-		    height: 100%;
-		    line-height: 378px;
-		}
-		.item img{
-			width:50px;
-			height:388px;
-		}
+
 </style>
-<link rel="stylesheet" href="css/update.css">
+
 </head>
 <body id="page-top" class="index">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
@@ -133,46 +107,19 @@ $(function(){
 
     <!-- Header -->
     <header>
-    	<div class="container" id="maincontent" tabindex="-1">
+    	<!-- <div class="container" id="maincontent" tabindex="-1">-->
+    	
     		<div class="slide">
 	        	<div class="owl-carousel owl-theme">
-	        		<img src="img/protfolio/1.png">
-	        		<img src="img/protfolio/2.png">
-	        		<img src="img/protfolio/3.png">
-	        		<img src="img/protfolio/4.png">
-	        		<img src="img/protfolio/5.png">
-	        		<img src="img/protfolio/6.png">
-	        		
-	    
-	        	<!-- 	<div class="item"> 1 </div>
-				  <img class="item" src="./img/portfolio/1.png">
-				  <div class="item"> 2 </div>
-				  <div class="item"> 3 </div>
-				  <div class="item"> 4 </div>	 -->
+	        		<img src="img/1.png">
+	        		<img src="img/2.png">
+	        		<img src="img/3.png">
+	        		<img src="img/4.png">
+	        		<img src="img/5.png">
+	        		<img src="img/6.png">
 				</div>
 			</div>
 		</div>
-           <!-- <div class="row">
-                <div class="col">
-                	<div class="row1">
-                    	<div class="owl-carousel">
-							  <div class="item"> 1 </div>
-							  <div class="item"> 2 </div>
-							  <div class="item"> 3 </div>
-							  <div class="item"> 4 </div>
-							  <div class="item"> 5 </div>
-							  <div class="item"> 6 </div>
-							  <div class="item"> 7 </div>
-						</div>
-                    </div>
-                    <div class="intro-text">
-                        <h1 class="name">FestiGo</h1>
-                        <hr class="star-light">
-                        <span class="skills">Web Developer team Absent is damn right!</span>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </header>
 
     <!-- Portfolio Grid Section -->
