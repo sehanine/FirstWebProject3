@@ -64,9 +64,13 @@ $(function(){
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-	<link href="css/update.css" rel="stylesheet" type="text/css">
 	<link href="css/w3.css" rel="stylesheet" type="text/css">
-	
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/owl.theme.green.min.css">
+	<link rel="stylesheet" href="css/owl.theme.green.css">
+	<link rel="stylesheet" href="css/update.css">
+
 </head>
 <body id="page-top" class="index">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
@@ -110,23 +114,16 @@ $(function(){
 
     <!-- Header -->
     <header>
-    
-        <div class="container" id="maincontent" tabindex="-1">
-            <div class="row">
-                <div class="col">
-                	<div class="row1">
-                    	<img class="col-sm-4 portfolio-item" src="img/profile.png" alt="">
-                    	<img class="col-sm-4 portfolio-item" src="img/profile.png" alt="">
-                    	<img class="col-sm-4 portfolio-item" src="img/profile.png" alt="">
-                    </div>
-                    <div class="intro-text">
-                        <h1 class="name">FestiGo</h1>
-                        <hr class="star-light">
-                        <span class="skills">Web Developer team Absent is damn right!</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    	<div class="slide">
+	       	<div class="owl-carousel owl-theme">
+	       		<img src="img/1.png">
+	       		<img src="img/2.png">
+	       		<img src="img/3.png">
+	       		<img src="img/4.png">
+	       		<img src="img/5.png">
+	       		<img src="img/6.png">
+			</div>
+		</div>
     </header>
 
     <!-- Portfolio Grid Section -->
@@ -333,4 +330,69 @@ $(function(){
 
 
 
-</body></html>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/mousewheel.js"></script>
+<script>
+var owl = $('.owl-carousel');
+owl.owlCarousel({
+    loop:true,
+    nav:true,
+    margin:10,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },            
+        960:{
+            items:5
+        },
+        1200:{
+            items:6
+        }
+    }
+});
+owl.on('mousewheel', '.owl-stage', function (e) {
+    if (e.deltaY>0) {
+        owl.trigger('next.owl');
+    } else {
+        owl.trigger('prev.owl');
+    }
+    e.preventDefault();
+});
+/* 	var owl = $('.owl-carousel');
+	owl.owlCarousel({
+	    items:4,
+	    loop:true,
+	    margin:100,
+	    autoplay:true,
+	    autoplayTimeout:2000,
+	    autoplayHoverPause:true
+	});
+	$('.play').on('click',function(){
+	    owl.trigger('play.owl.autoplay',[2000])
+	})
+	$('.stop').on('click',function(){
+	    owl.trigger('stop.owl.autoplay')
+	}) */
+	/* $('.owl-carousel').owlCarousel({
+	    loop:true,
+	    margin:100,
+	    nav:true,
+	    responsive:{
+	        0:{
+	            items:1
+	        },
+	        600:{
+	            items:3
+	        },
+	        1000:{
+	            items:5
+	        }
+	    }
+	}) */
+</script>
+</html>
