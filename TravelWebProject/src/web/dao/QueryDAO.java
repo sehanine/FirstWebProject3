@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.sist.dao.TeamVO;
+
 public class QueryDAO {
 	
 	private Connection conn;
@@ -295,6 +297,27 @@ public class QueryDAO {
 			disConnection();
 		}
 		return url;
+	}
+	//3/28일 부터 수정~
+	public void loginInsert(LoginVO vo){
+		try{
+			getConnection();
+			String sql="INSERT INTO login_info(id,pwd,name,email) "
+					+"VALUES(?,?,?,?)";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, vo.getName());
+			ps.setString(2, vo.getEmail());
+			ps.setString(3, vo.getName());
+			ps.setString(4, vo.getEmail());
+			
+			
+			ps.executeUpdate();
+			
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}finally{
+			disConnection();
+		}
 	}
 	
 	

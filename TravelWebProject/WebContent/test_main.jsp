@@ -133,7 +133,7 @@ $(function(){
             <%
            		for(int i = 1; i <= list.size(); i++){
            			MainVO vo = list.get(i-1);
-           			String url = dao.getFirstImage(vo.getFesno());
+           			ArrayList<String> url = dao.getImage_list(vo.getFesno());
             %>
                 <div class="col-sm-4 portfolio-item">
                     <a href="content.jsp?page=<%=vo.getFesno() %>" class="portfolio-link" data-toggle="modal">
@@ -142,7 +142,21 @@ $(function(){
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="<%=url %>" class="img-responsive" alt="">
+                        <div class="cycle-slideshow" cycle-slideshow data-cycle-loader="wait" data-cycle-timeout=5000>
+                        <%
+                        if(url.size()>0){
+                        for(int r=0;r<=url.size()-1;r++){
+                        %>
+                        <img src="<%=url.get(r) %>" class="img-responsive" alt="">
+                        <%
+           				}
+                        }else{
+                        %>
+                        <img src="img/1.png" class="img-responsive">
+                        <%
+                        }
+                        %>
+                        </div>
                        	<!-- <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-sand"> 
                        	 --> </br>
                      	<div class="subtitle">
@@ -319,6 +333,7 @@ $(function(){
     <!-- Theme JavaScript -->
     <script src="js/freelancer.min.js"></script>
 
-
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.cycle2.js"></script>
 
 </body></html>
