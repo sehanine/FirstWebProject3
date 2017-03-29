@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import ="web.dao.*, java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import ="web.dao.*, java.util.ArrayList"%>
+
 <%
 	String pageNum = request.getParameter("page");
 	String curr = request.getParameter("curr");
@@ -34,6 +35,10 @@
 	<link href="css/update.css" rel="stylesheet" type="text/css">
 	<link href="css/event1.css" rel="stylesheet" type="text/css" >
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<style type="text/css">
+ul { list-style:none; }
+</style>
 </head>
 <body>
 	<!-- Portfolio Modals -->
@@ -48,7 +53,7 @@
             <div class="container">     
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                    	<!-- √‡¡¶≥ªøÎ  -->
+                    	<!-- Ï∂ïÏ†úÎÇ¥Ïö©  -->
                         <div class="modal-body">
                             <h2><%=main_list.get(TITLE_INDEX_NUMBER) %></h2>
 
@@ -78,8 +83,8 @@
                            			<span style="font-weight:bold;"><%=first_list.get(i).getTitle() %></span>
                            		</td>
                      	   		<td width="80%" align="left"><%=first_list.get(i).getContent() %></td>
-                		
-                			</tr>
+	                		
+	                			</tr>
                 			<%
                 					} else {
                 			%>
@@ -100,11 +105,11 @@
                 				}
                 			%>
                         	</table>
-                            <!-- ∞≥ø‰ -->
+                            <!-- Í∞úÏöî -->
                             <div class="menu">
-                           	 <a id="a_color"><h1 class="h1_back" align="left" >∞≥ø‰</h1></a>
+                           	 <a id="a_color"><h1 class="h1_back" align="left" >Í∞úÏöî</h1></a>
                             
-                             <table id="table2" class="hide" width=730 border="0px">
+                             <table id="table2" class="hide" width=100% border="0px">
                             	<%
 									for(int i = 0; i < second_list.size(); i++){
 								%>
@@ -121,10 +126,10 @@
                            
                          	  </table>
                          	  </div>
-                             <!-- ¿ÃøÎæ»≥ª -->
+                             <!-- Ïù¥Ïö©ÏïàÎÇ¥ -->
                              <div class="menu">
-                             <a id="a_color"><h1 class="h1_back" align="left">¿ÃøÎæ»≥ª</h1></a>
-                             <table id="table2" class="hide" width=730 border="0px">
+                             <a id="a_color"><h1 class="h1_back" align="left">Ïù¥Ïö©ÏïàÎÇ¥</h1></a>
+                             <table id="table2" class="hide" width=100% border="0px">
                             	<%
 									for(int i = 0; i < third_list.size(); i++){
 								%>
@@ -140,43 +145,41 @@
 								</table>
                             </div>
                             
-<!-- ∞‘Ω√∆« ø¨Ω¿ -->
-               	<h3 align="left">¿⁄¿Ø∑ŒøÓ ¿Ãæﬂ±‚</h1><br>                   
+<!-- Í≤åÏãúÌåê Ïó∞Ïäµ -->
+			                
               
-                <table id="commentTable" class="table table-condensed"></table>
-                    <table class="table table-condensed"  >
+                
+                    <table class="table table-condensed" width="100%" >
                         <tr>
                             <td>
-                                <span class="form-inline" role="form">
-                                    <p>
-                                        <div class="form-group">
-                                            <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="¿Ã∏ß" maxlength="10">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" id="commentParentPassword" name="commentParentPassword" class="form-control col-lg-2" data-rule-required="true" placeholder="∆–Ω∫øˆµÂ" maxlength="10">
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="button" id="commentParentSubmit" name="commentParentSubmit" class="btn btn-default">»Æ¿Œ</button>
-                                        </div>
+                            <h3 align="left">ÏûêÏú†Î°úÏö¥ Ïù¥ÏïºÍ∏∞</h1><br>   
+                                    <p align="left">
+                                        
+                                           <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="Ïù¥Î¶Ñ" maxlength="10">
+                                           <input type="password" id="commentParentPassword" name="commentParentPassword" class="form-control col-lg-2" data-rule-required="true" placeholder="Ìå®Ïä§ÏõåÎìú" maxlength="10">
                                     </p>
-                                        <textarea id="commentParentText" class="form-control col-lg-12" style="width:100%" rows="4"></textarea>
-                                </span>
-                            </td>
-                        </tr>
+                                    <div align="left" style="padding:10px 10px 10px 10px; background-color: #c8c8c8;" >
+                                        
+                                        <textarea id="commentParentText" class="form-control col-lg-12" style="width:70%"></textarea>
+                                        <button type="button" id="commentParentSubmit" name="commentParentSubmit" class="btn btn-default" style="WIDTH: 50pt; HEIGHT: 40pt; background-color: #79bfc0; color: white;">Î≥¥ÎÇ¥Í∏∞</button>
+                                    	
+                                    </div> 
+                            
                     </table>
-                            
-                            
-                            
-<!-- /∞‘Ω√∆«ø¨Ω¿ ≥°«•Ω√ -->                            
+                    <br><br>
+                    <table id="commentTable" class="table table-condensed" width="100%"></table>        
+                    <br><br>       
+<!-- /Í≤åÏãúÌåêÏó∞Ïäµ ÎÅùÌëúÏãú -->                            
                             <ul class="list-inline item-details">
-                                <li>°§¥„¥Á∫Œº≠:∞·ºÆ¡∂
+                                <li>¬∑Îã¥ÎãπÎ∂ÄÏÑú:Í≤∞ÏÑùÏ°∞
                                 </li>
-                                <li>°§√÷±Ÿ ºˆ¡§¿œ:March 2017
+                                <li>¬∑ÏµúÍ∑º ÏàòÏ†ïÏùº:March 2017
                                 </li>
-                                <li>°§µÓ∑œ π◊ ºˆ¡§πÆ¿«:02-123-4567
+                                <li>¬∑Îì±Î°ù Î∞è ÏàòÏ†ïÎ¨∏Ïùò:02-123-4567
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" onclick="location.href='test_main.jsp?page=<%=curPage %>#portfolio'" ></i> Close</button>
+                            <button type="button" class="btn btn-default" onclick="location.href='test_main.jsp?page=<%=curPage %>#portfolio'" 
+                            style="WIDTH: 80pt; HEIGHT: 40pt; background-color: #79bfc0; color: white;"></i> Close</button>
                         </div>
                     </div>
                 </div>
@@ -195,7 +198,6 @@
 
     <!-- Contact Form JavaScript -->
     <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
     <script src="js/freelancer.min.js"></script>
@@ -205,15 +207,24 @@
 <script src="js/reply.js"></script>
 
 <script>
-    // html dom ¿Ã ¥Ÿ ∑Œµ˘µ» »ƒ Ω««‡µ»¥Ÿ.
+    // html dom Ïù¥ Îã§ Î°úÎî©Îêú ÌõÑ Ïã§ÌñâÎêúÎã§.
     $(document).ready(function(){
-        // memu ≈¨∑°Ω∫ πŸ∑Œ «œ¿ßø° ¿÷¥¬ a ≈¬±◊∏¶ ≈¨∏Ø«ﬂ¿ª∂ß
+        // memu ÌÅ¥ÎûòÏä§ Î∞îÎ°ú ÌïòÏúÑÏóê ÏûàÎäî a ÌÉúÍ∑∏Î•º ÌÅ¥Î¶≠ÌñàÏùÑÎïå
         $(".menu>a").click(function(){
-            // «ˆ¿Á ≈¨∏Ø«— ≈¬±◊∞° a ¿Ã±‚ ∂ßπÆø°
-            // a ø∑¿« ≈¬±◊¡ﬂ ul ≈¬±◊ø° hide ≈¨∑°Ω∫ ≈¬±◊∏¶ ≥÷¥¯¡ˆ ª©¥¯¡ˆ «—¥Ÿ.
+            // ÌòÑÏû¨ ÌÅ¥Î¶≠Ìïú ÌÉúÍ∑∏Í∞Ä a Ïù¥Í∏∞ ÎïåÎ¨∏Ïóê
+            // a ÏòÜÏùò ÌÉúÍ∑∏Ï§ë ul ÌÉúÍ∑∏Ïóê hide ÌÅ¥ÎûòÏä§ ÌÉúÍ∑∏Î•º ÎÑ£ÎçòÏßÄ ÎπºÎçòÏßÄ ÌïúÎã§.
             $(this).next("table").toggleClass("hide");
         });
     });    
+</script>
+
+<script language="javascript">
+
+function allblur() {
+for (i = 0; i < document.links.length; i++)
+document.links[i].onfocus = document.links[i].blur;
+}
+
 </script>
 
 </body>
