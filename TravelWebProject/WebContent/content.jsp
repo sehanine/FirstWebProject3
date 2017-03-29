@@ -33,6 +33,11 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 	<link href="css/update.css" rel="stylesheet" type="text/css">
 	<link href="css/event1.css" rel="stylesheet" type="text/css" >
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/owl.theme.green.min.css">
+	<link rel="stylesheet" href="css/owl.theme.green.css">
+	
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
@@ -53,6 +58,8 @@
                             <h2><%=main_list.get(TITLE_INDEX_NUMBER) %></h2>
 
                             <hr class="star-primary">
+                       		   
+                       		   <!--  
                        		    <table>
 									<tr>
 										<%
@@ -66,7 +73,23 @@
 										%>
 									</tr>
 								</table>
- 						
+ 						-->
+ 			<center>
+			<div class="slide">
+	    	 	<div id="first_list">
+			       	<div class="owl-carousel">
+			       		<%
+							for(int i = 0; i < image_list.size(); i++){
+						%>
+							<img alt="image<%=i %>" src="<%=image_list.get(i) %>">
+						<%
+							}
+						%>
+					</div>
+				
+				</div>
+			</div>
+			</center>
                            	<table id="table1" width=730 border="0px">
                             <%
                 				for(int i = 0; i < first_list.size(); i++){
@@ -195,7 +218,6 @@
 
     <!-- Contact Form JavaScript -->
     <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
     <script src="js/freelancer.min.js"></script>
@@ -203,7 +225,7 @@
     
     
 <script src="js/reply.js"></script>
-
+<script src="js/owl.carousel.min.js"></script>
 <script>
     // html dom 이 다 로딩된 후 실행된다.
     $(document).ready(function(){
@@ -213,7 +235,21 @@
             // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
             $(this).next("table").toggleClass("hide");
         });
-    });    
+    });   
+    
+</script>
+
+<script>
+var owl = $('.owl-carousel');
+owl.owlCarousel({
+	center:true,
+	items:1,
+    loop:true,
+    autoHeight:true,
+    margin:10,
+    autoplay:true,
+    autoplayTimeout:5000
+});
 </script>
 
 </body>

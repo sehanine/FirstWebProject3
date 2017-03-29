@@ -11,13 +11,21 @@
 }
 header .slide{
 	position:relative;
+	/*
 	width:150%;
-	height:400px;
+	height:400px;*/
 	overflow:hidden;
 	white-space:nowrap;
+	height: 960px;
 	/* border:1px solid #000; */
-	padding-top: 219px;
-	padding-bottom:355px;
+	/*padding-top: 219px;
+	padding-bottom:355px;*/
+}
+#first_list{
+	padding: 10px;
+}
+#second_list{
+	padding: 10px;
 }
 .owl-carousel .item {
     height: 100%;
