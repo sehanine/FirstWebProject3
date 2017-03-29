@@ -29,7 +29,7 @@
 				<tr>
 					<td width="20%" align="right">Á¦¸ñ</td>
 					<td width="80%" align="left">
-						<input type="text" size="50" name="subject">
+						<input type="text" size="50" name="subject" >
 					</td>
 				</tr>	
 				<tr>

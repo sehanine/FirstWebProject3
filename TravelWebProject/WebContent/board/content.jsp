@@ -18,7 +18,21 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-	
+var i=0;
+$(function(){
+	$('#delBtn').click(function(){
+		if(i==0)
+		{
+			$('#del').show();
+			i=1;
+		}
+		else
+		{
+			$('#del').hide();
+			i=0;
+		}
+	});
+});	
 </script>
 <link rel="stylesheet" type="text/css" href="table.css">
 </head>
@@ -59,30 +73,26 @@
 					<a href="update.jsp?no=<%=no%>">
 						<img alt="수정하기" src="image/modify.gif">
 					</a>
-					<a href="delete.jsp?no=<%=no%>">
 					<img alt="삭제하기" src="image/delete.gif" id="delBtn">
-					</a>
 					<a href="list.jsp">
 						<img alt="리스트" src="image/list.gif">
 					</a>										
 				</td>
 			</tr>
 			
+		     <tr id="del" style="display:none">
+		      <td align=right>
+		       <form method="POST" action="delete_ok.jsp">
+		      비밀번호:<input type="password" size=10 name="pwd">
+		        <input type="hidden" name="no" value="<%=no%>">
+		        <input type="submit" value="삭제">
+		       </form>
+		      </td>
+		     </tr>			
 		</table>
 	</center>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

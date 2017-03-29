@@ -55,7 +55,11 @@
 </head>
 <body>
 	<center>
-		<h3>FESTIGO게시판</h3>
+	<tr>
+		<td>
+			<h3>FESTIGO게시판</h3>
+		</td>
+	</tr>
 		<p>
 		<table width="700" border="0" id="abc">
 			<tr>
@@ -129,7 +133,7 @@
 			<tr align="left">
 				<td>
 					<form method="post" action="find.jsp" id="ff">
-					Search:<select name="fs">
+					검색:<select name="fs">
 								<option value="name">이름</option>
 								<option value="subject">제목</option>
 								<option value="content">내용</option>

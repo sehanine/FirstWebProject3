@@ -2,7 +2,7 @@
     pageEncoding="EUC-KR" import="board.dao.*"%>
 
 <%
-	//사용자가 보낸 값을 받는다.=>한글
+	
 	request.setCharacterEncoding("EUC-KR");
 	String name=request.getParameter("name");
 	String email=request.getParameter("email");
@@ -17,7 +17,7 @@
 	vo.setContent(content);
 	vo.setPwd(pwd);
 	
-	//데이터베이스 연결
+	
 	TeamDAO dao=TeamDAO.newInstance();
 	dao.boardInsert(vo);
 	
