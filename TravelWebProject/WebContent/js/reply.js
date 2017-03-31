@@ -22,12 +22,15 @@ $(function(){
             return;
         }
            
+        
+        
         var commentParentText = '<tr id="r1" name="commentParentCode">'+
                                     '<td colspan=2>'+
                                         '<strong>'+pName.val()+'</strong> '+pPassword.val()+' <a style="cursor:pointer;" name="pDel">삭제</a><p>'+pText.val().replace(/\n/g, "<br>")+'</p>'+
                                     '</td>'+
                                 '</tr>';
-           
+        
+        
         //테이블의 tr자식이 있으면 tr 뒤에 붙인다. 없으면 테이블 안에 tr을 붙인다.
         if($('#commentTable').contents().size()==0){
             $('#commentTable').append(commentParentText);

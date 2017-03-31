@@ -1,5 +1,6 @@
+<%@page import="com.sist.reply.ReplyDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import ="web.dao.*, java.util.ArrayList"%>
+    pageEncoding="UTF-8" import ="web.dao.*, java.util.ArrayList, com.sist.reply.*"%>
 
 <%
 	String pageNum = request.getParameter("page");
@@ -16,6 +17,10 @@
 	ArrayList<ListVO> first_list = dao.getFirst_list(fesno);
 	ArrayList<ListVO> second_list = dao.getSecond_list(fesno);
 	ArrayList<ListVO> third_list = dao.getThird_list(fesno);
+	
+	ReplyDAO re_dao=new ReplyDAO();
+	ArrayList<ReplyVO> re_list = re_dao.replyListData(fesno);
+	
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -167,7 +172,22 @@ ul { list-style:none; }
                             
                     </table>
                     <br><br>
-                    <table id="commentTable" class="table table-condensed" width="100%"></table>        
+                    <table id="commentTable" class="table table-condensed" width="100%">
+                            	<%
+									for(int i = 0; i < re_list.size(); i++){
+										
+								%>
+                    	<tr id="r1" name="commentParentCode">
+                    		<td colspan=2>
+                    			<strong><%=re_list.get(i).getReply_name() %></strong><%=re_list.get(i).getReply_pass() %>
+                    			<a style="cursor:pointer;" 	name="pDel">삭제</a>
+                    			<p><%=re_list.get(i).getReply_comment() %></p>
+                    		</td>
+                    	</tr>
+                    			<%
+									}
+								%>
+                    </table>        
                     <br><br>       
 <!-- /게시판연습 끝표시 -->                            
                             <ul class="list-inline item-details">
