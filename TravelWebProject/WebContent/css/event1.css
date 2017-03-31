@@ -1,14 +1,95 @@
 @CHARSET "EUC-KR";
 
-#table1 td,tr { padding:10px }
-#table1 tr:nth-child(1) { border-top:3px solid red; }
-#table1 tr { border-bottom:1px solid gray;  }
+#table1{
+   border-collapse: collapse;
+   border-top-width: 3px;
+   border-bottom-width: 1px;
+   border-top-style: solid;
+   border-bottom-style: solid;
+   border-top-color: red;
+   border-bottom-color: #333;
+   
+}
+ #table1 th,td{
+   margin: 0px;
+   padding: 10px;
+   font-size: 11pt;
+}
+
+#table1 th{
+   background-color: #999;
+   color: #fff;
+   border-bottom-width: 1px;
+   border-bottom-color: #333;
+}
+#table1 td{
+   border-bottom-width: 1px;
+   border-bottom-color: #666;
+   border-bottom-style: dotted; }
+
+#table2{
+   border-collapse: collapse;
+   border-top-width: 3px;
+   border-bottom-width: 1px;
+   border-top-style: solid;
+   border-bottom-style: solid;
+   border-top-color: blue;
+   border-bottom-color: #333;
+   
+}
+ #table2 th,td{
+   margin: 0px;
+   padding: 10px;
+   font-size: 11pt;
+}
+
+#table2 th{
+   background-color: #999;
+   color: #fff;
+   border-bottom-width: 1px;
+   border-bottom-color: #333;
+}
+#table2 td{
+   border-bottom-width: 1px;
+   border-bottom-color: #666;
+   border-bottom-style: dotted; }
+#commentTable{
+   border-collapse: collapse;
+   border-top-width: 3px;
+   border-bottom-width: 1px;
+   border-top-style: solid;
+   border-bottom-style: solid;
+   border-top-color: black;
+   border-bottom-color: #333;
+   text-align: left;
+   
+}
+ #commentTable th,td{
+   margin: 0px;
+   padding: 10px;
+   font-size: 11pt;
+}
+
+#commentTable th{
+   background-color: #999;
+   color: #fff;
+   border-bottom-width: 1px;
+   border-bottom-color: #333;
+}
+#commentTable td{
+   border-bottom-width: 1px;
+   border-bottom-color: #666;
+   border-bottom-style: dotted; }
+
+
+
 .menu a{cursor:pointer; }
 .menu .hide{display:none;}
 .h1_back { background-color: #c8c8c8; padding: 10px; }
 
-#table2 td,tr { padding:10px }
-#table2 tr:nth-child(1) { border-top:3px solid blue; }
-#table2 tr { border-bottom:1px solid gray;  }
 
 #a_color { color:#323C73 !important; }
+
+.portfolio-modal{position:relative;width:1100px;margin:0 auto;}
+
+#commentTable tr { border-bottom:1px solid gray; }
