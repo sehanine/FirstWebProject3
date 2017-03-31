@@ -2,6 +2,7 @@
     pageEncoding="EUC-KR" import="java.util.ArrayList, web.dao.*"%>
 
 <%
+	
 	String pageNum = request.getParameter("page");
 	
 	if(pageNum == null){
@@ -123,7 +124,7 @@ function popupcenter(url, title, w, h) {
                         <a>Log-in</a>
                     </li>
                     <li id="logBtn">
-                    	<a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 220)">회원가입</a>
+                    	<a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>
                     	
                     </li>
                 </ul>
