@@ -133,7 +133,7 @@ public class DataDAO {
 					  "CREATE TABLE vk_first_list("
 					  +"fesno NUMBER, "
 					  +"first_list_title VARCHAR(100), "
-					  +"first_list VARCHAR(100), "
+					  +"first_list CLOB, "
 					  +"CONSTRAINT first FOREIGN KEY(fesno) "
 					  +"REFERENCES vk_main(fesno))",
 						

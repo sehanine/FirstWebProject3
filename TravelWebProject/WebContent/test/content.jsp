@@ -45,7 +45,6 @@
 			for(int i = 0; i < first_list.size(); i++){
 		%>
 			<ul>
-	
 				<li>
 					<b><%=first_list.get(i).getTitle() %></b>
 					<span><%=first_list.get(i).getContent() %></span>

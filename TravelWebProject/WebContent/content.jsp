@@ -133,6 +133,7 @@ ul { list-style:none; }
                 				}
                 			%>
                         	</table>
+                        	<br/>
                             <!-- 개요 -->
                             <div class="menu">
                            	 <a id="a_color"><h1 class="h1_back" align="left" >개요</h1></a>
@@ -153,6 +154,7 @@ ul { list-style:none; }
 						 
                            
                          	  </table>
+                         	  <br/>
                          	  </div>
                              <!-- 이용안내 -->
                              <div class="menu">
@@ -171,6 +173,7 @@ ul { list-style:none; }
 									}
 								%>
 								</table>
+								<br/><br/>
                             </div>
                             
 <!-- 게시판 연습 -->
@@ -184,14 +187,17 @@ ul { list-style:none; }
                                     <p align="left">
                                         
                                            <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10">
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                            <input type="password" id="commentParentPassword" name="commentParentPassword" class="form-control col-lg-2" data-rule-required="true" placeholder="패스워드" maxlength="10">
                                     </p>
+                                   
                                     <div align="left" style="padding:10px 10px 10px 10px; background-color: #c8c8c8;" >
                                         
-                                        <textarea id="commentParentText" class="form-control col-lg-12" style="width:70%"></textarea>
-                                        <button type="button" id="commentParentSubmit" name="commentParentSubmit" class="btn btn-default" style="WIDTH: 50pt; HEIGHT: 40pt; background-color: #79bfc0; color: white;">보내기</button>
+                                        <textarea id="commentParentText" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
+                                        <button type="button" id="commentParentSubmit" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;">보내기</button>
                                     	
-                                    </div> 
+                                    </div>
+                                 
                             
                     </table>
                     <br><br>
