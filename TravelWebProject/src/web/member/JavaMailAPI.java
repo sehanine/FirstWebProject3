@@ -1,22 +1,27 @@
 package web.member;
 
 import java.util.Properties;
-//import javax.mail.Message;
-//import javax.mail.MessagingException;
-//import javax.mail.PasswordAuthentication;
-//import javax.mail.Session;
-//import javax.mail.Transport;
-//import javax.mail.internet.InternetAddress;
-//import javax.mail.internet.MimeMessage;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
+ 
 public class JavaMailAPI {
-	  
-	public JavaMailAPI(){
-		String to = "받는 사람";
-		String from = "보내는 사람";
+	  /**
+	   * 
+	   * @param to 받는 사람
+	   * @param ranCode 랜덤 코드
+	   */
+	public JavaMailAPI(String to, String ranCode){
 		
-		final String username = "~@gmail.com";// your mail
-		final String password = "password"; // your password
+		String from = "festigo.master@gmail.com";
+		
+		final String username = "festigo.master@gmail.com";// your mail
+		final String password = "webproject"; // your password
 		
 		String host = "smtp.gmail.com";
 
@@ -25,36 +30,36 @@ public class JavaMailAPI {
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.port", "587");
-//		
-//		Session session = Session.getInstance(props,
-//		         new javax.mail.Authenticator() {
-//		            protected PasswordAuthentication getPasswordAuthentication() {
-//		               return new PasswordAuthentication(username, password);
-//			   }
-//		});
-//		 try {
-//			   Message message = new MimeMessage(session);
-//			   message.setFrom(new InternetAddress(from));
-//			   message.setRecipients(Message.RecipientType.TO,
-//		               InternetAddress.parse(to));
-//			
-//			
-//			   message.setSubject("제목");
-//			   message.setText("내용");
-//
-//			   // Send message
-//			   Transport.send(message);
-//
-//			   System.out.println("메세지가 성공적으로 보내졌습니다.");
-//
-//		      } catch (MessagingException e) {
-//		         throw new RuntimeException(e);
-//		      }
-//		   
+		
+		Session session = Session.getInstance(props,
+		         new javax.mail.Authenticator() {
+		            protected PasswordAuthentication getPasswordAuthentication() {
+		               return new PasswordAuthentication(username, password);
+			   }
+		});
+		 try {
+			   Message message = new MimeMessage(session);
+			   message.setFrom(new InternetAddress(from));
+			   message.setRecipients(Message.RecipientType.TO,
+		               InternetAddress.parse(to));
+			
+			
+			   message.setSubject("festigo 회원가입 이메일 인증");
+			   message.setText("festigo 회원가입 이메일 인증\n" + "인증번호: " + ranCode);
+
+			   // Send message
+			   Transport.send(message);
+
+			   System.out.println("메세지가 성공적으로 보내졌습니다.");
+
+		      } catch (MessagingException e) {
+		         throw new RuntimeException(e);
+		      }
+		   
 	}
 
 	public static void main(String[] args){
-		new JavaMailAPI();
+		new JavaMailAPI("mymintah@gmail.com", "랜덤코드");
 	}
 
 }

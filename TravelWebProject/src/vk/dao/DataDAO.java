@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * 	a) vk_image_list
  * 	b) vk_second_list
  * 	c)..
- * 
+ *       
  * vk_main이 다른 리스트에서 사용하는 primary key를 보유하고 있기 때문에,
  * list 테이블 생성전에 꼭 생성 해야함
  *
@@ -133,7 +133,7 @@ public class DataDAO {
 					  "CREATE TABLE vk_first_list("
 					  +"fesno NUMBER, "
 					  +"first_list_title VARCHAR(100), "
-					  +"first_list VARCHAR(100), "
+					  +"first_list CLOB, "
 					  +"CONSTRAINT first FOREIGN KEY(fesno) "
 					  +"REFERENCES vk_main(fesno))",
 						

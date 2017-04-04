@@ -11,13 +11,22 @@ import org.jsoup.select.Elements;
  * @author mdSHin
  * vkDAO 주의사항
 
- */
+ */    
 public class VisitKoreaDAO {
-	
-	private String addr1 = "https://korean.visitkorea.or.kr/kor/bz15/where/festival/festival.jsp?areaCode=&year=2017&keyword=&type=&gotoPage=";
+	      
+	private String addr1 = "https://korean.visitkorea.or.kr/kor/bz15/where/festival/festival.jsp?areaCode=&year=2017&month=04&keyword=&type=&gotoPage=";
+	//https://korean.visitkorea.or.kr/kor/bz15/where/festival/festival.jsp?areaCode=&year=2017&month=04&keyword=&type=&gotoPage=&listType=rdesc&cid=&out_service=
 	private String addr2 = "&listType=rdesc&cid=&out_service=";
 	private int pageNumber = 1;
 	private DataDAO dao = new DataDAO();
+	public int getNumberOfContents(String string){
+		
+		int i = 0;
+		while (i < string.length() && !Character.isDigit(string.charAt(i))) i++;
+		int j = i;
+		while (j < string.length() && Character.isDigit(string.charAt(j))) j++;
+		return Integer.parseInt(string.substring(i, j)); // might be an off-by-1 here
+	}
 	public void getAllData(){
 		int fesNo = 1;
 		try{
@@ -30,9 +39,8 @@ public class VisitKoreaDAO {
 			Document contents = Jsoup.connect(addr1 + pageNumber + addr2).get();
 			Elements conNum = contents.select("div.doc p.total");
 			Element conNum_ = conNum.get(0);
-			int numOfContents = Integer.parseInt(conNum_.text().substring(8, 10));
-			
-			System.out.println("content number: " + numOfContents);
+			int numOfContents = getNumberOfContents(conNum_.text());
+			System.out.println("num of contents: " + numOfContents);
 /* 
 	<div class="cnt">
 		<h3>아침고요수목원 오색별빛정원전</h3>
@@ -50,6 +58,7 @@ public class VisitKoreaDAO {
 */			
 			while(numOfContents > 0){
 				Document doc = Jsoup.connect(addr1 + pageNumber + addr2).get();
+				
 				Elements title = doc.select("div.cnt h3");
 				Elements content = doc.select("div.cnt p.txt");
 				Elements mainLoc = doc.select("div.cnt p.info2 span.city");
@@ -67,7 +76,15 @@ public class VisitKoreaDAO {
 					Element eConAddr = conAddr.get(i);
 					VisitKoreaVO vo = new VisitKoreaVO();
 					vo.setFesNo(fesNo++);
-					vo.setUrl("https://korean.visitkorea.or.kr/kor/bz15/where/festival/" + eConAddr.attr("href"));
+					String url_ = eConAddr.attr("href");
+					if(url_.contains("http://korean.visitkorea.or.kr/")){
+						Document subDoc = Jsoup.connect(url_).get();
+						Elements subAddr = subDoc.select("div.function a.more");
+						Element subAddr_ = subAddr.first();
+						vo.setUrl(subAddr_.attr("href"));
+					} else {
+						vo.setUrl("https://korean.visitkorea.or.kr/kor/bz15/where/festival/" + url_);
+					}
 					vo.setTitle(eTitle.text());
 					vo.setContentShort(removeTags(eContent.text()));
 					vo.setMainLoc(eMainLoc.text());
