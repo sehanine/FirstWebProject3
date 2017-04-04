@@ -57,7 +57,7 @@ public class TeamDAO {
 		try{
 			getConnection();
 			String sql="SELECT no,subject,name,regdate,hit,group_tab "
-					+"FROM myBoard "
+					+"FROM festigo_board "
 					+"ORDER BY group_id DESC,group_step ASC";
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
@@ -140,7 +140,7 @@ public class TeamDAO {
 		try{
 			getConnection();
 			String sql="SELECT COUNT(*) "
-					+"FROM myBoard "
+					+"FROM festigo_board "
 					+"WHERE "+fs+" LIKE '%'||?||'%'";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, ss);
@@ -162,7 +162,7 @@ public class TeamDAO {
 		try{
 			getConnection();
 			String sql="SELECT no,subject,name,regdate,hit,group_tab "
-					+"FROM myBoard "
+					+"FROM festigo_board "
 					+"WHERE "+fs+" LIKE '%'||?||'%'";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, ss);
@@ -199,7 +199,7 @@ public class TeamDAO {
 			getConnection();
 			String sql="";
 			if(type==1){
-				sql="UPDATE myBoard SET "
+				sql="UPDATE festigo_board SET "
 						+"hit=hit+1 "
 						+"WHERE no=?";
 				ps=conn.prepareStatement(sql);
@@ -209,7 +209,7 @@ public class TeamDAO {
 			}
 			
 			sql="SELECT no,name,email,subject,content,regdate,hit "
-					+"FROM myBoard "
+					+"FROM festigo_board "
 					+"WHERE no=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, no);
@@ -237,7 +237,7 @@ public class TeamDAO {
 		try{
 			getConnection();
 			String sql="SELECT group_id,group_step,group_tab "
-					+"FROM myboard "
+					+"FROM festigo_board "
 					+"WHERE no=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, pno);
@@ -249,7 +249,7 @@ public class TeamDAO {
 			rs.close();
 			ps.close();
 			//답변의 핵심쿼리
-			sql="UPDATE myboard SET "
+			sql="UPDATE festigo_board SET "
 					+"group_step=group_step+1 "
 					+"WHERE group_id=? AND group_step>?";
 			ps=conn.prepareStatement(sql);
@@ -259,7 +259,7 @@ public class TeamDAO {
 			ps.close();
 			
 			//추가
-			sql="INSERT INTO myBoard(no,name,email,subject,content,pwd,group_id,group_step,group_tab,root) "
+			sql="INSERT INTO festigo_board(no,name,email,subject,content,pwd,group_id,group_step,group_tab,root) "
 					+"VALUES(rb_no_seq.nextval,?,?,?,?,?,?,?,?,?)";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, vo.getName());
@@ -274,7 +274,7 @@ public class TeamDAO {
 			ps.executeUpdate();
 			ps.close();
 			//depth=depth+1
-			sql="UPDATE myBoard SET "
+			sql="UPDATE festigo_board SET "
 					+"depth=depth+1 "
 					+"WHERE no=?";
 			ps=conn.prepareStatement(sql);
@@ -292,7 +292,7 @@ public class TeamDAO {
 		
 		try{
 			getConnection();
-			String sql="SELECT pwd FROM myboard "
+			String sql="SELECT pwd FROM festigo_board "
 					+"WHERE no=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, no);
@@ -305,7 +305,7 @@ public class TeamDAO {
 			
 			if(db_pwd.equals(pwd)){
 				bCheck=true;
-				sql="DELETE FROM myboard "
+				sql="DELETE FROM festigo_board "
 						+"WHERE no=?";
 				ps=conn.prepareStatement(sql);
 				ps.setInt(1, no);
@@ -328,7 +328,7 @@ public class TeamDAO {
 			
 			try{
 				getConnection();
-				String sql="SELECT * FROM myboard "
+				String sql="SELECT * FROM festigo_board "
 						+"WHERE no=?";
 						
 						
@@ -362,7 +362,7 @@ public class TeamDAO {
 			try{
 				System.out.println("업데이트 메서드 in");
 				getConnection();
-				String sql="SELECT pwd FROM myboard "
+				String sql="SELECT pwd FROM festigo_board "
 						+"WHERE no=?";
 				ps=conn.prepareStatement(sql);
 				ps.setInt(1, vo.getNo());
@@ -376,7 +376,7 @@ public class TeamDAO {
 				if(db_pwd.equals(vo.getPwd())){
 					System.out.println("비밀번호 맞다능 ㅎㅎ teamDAO().boardUpdate");
 					bCheck=true;
-					sql="UPDATE myBoard SET "
+					sql="UPDATE festigo_board SET "
 						+"name=?,email=?,"
 						+"subject=?,content=? "
 						+"WHERE no=?";
@@ -401,8 +401,8 @@ public class TeamDAO {
 		public void boardInsert(TeamVO vo){
 			try{
 				getConnection();
-				String sql="INSERT INTO myboard(no,name,email,subject,content,pwd) "
-						+"VALUES((SELECT NVL(MAX(no)+1,1) FROM myboard),?,?,?,?,?)";
+				String sql="INSERT INTO festigo_board(no,name,email,subject,content,pwd) "
+						+"VALUES((SELECT NVL(MAX(no)+1,1) FROM festigo_board),?,?,?,?,?)";
 				ps=conn.prepareStatement(sql);
 				ps.setString(1, vo.getName());
 				ps.setString(2, vo.getEmail());
