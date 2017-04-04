@@ -8,12 +8,24 @@ public class ReplyDAO {
 
 	private Connection conn;
 	private PreparedStatement ps;
-	private final String URL="jdbc:oracle:thin:@211.238.142.214:1521:ORCL";
+	private final String URL="jdbc:oracle:thin:@211.238.142.230:1521:ORCL";
 	private static ReplyDAO dao;
 
 	//드라이버 등록
 	public ReplyDAO(){
+//		try{
+//			dropAll();
+//		}catch(Exception e){
+//			System.out.println("drop table");
+//		}
+//		
+//		try{
+//			initAll();
+//		}catch(Exception e){
+//			System.out.println("init table");
+//		}
 		try{
+			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
 		}catch(Exception ex){
@@ -126,8 +138,55 @@ public class ReplyDAO {
 		}
 		
 	}
-	
+	public void dropAll(){
+		try{
+			getConnection();
+			String[] sql = {
+					"DROP TABLE project_reply CASCADE CONSTRAINTS",
+					"DROP SEQUENCE seq_re_no"
+			};
+			for(int i = 0; i < sql.length; i++){
+				ps=conn.prepareStatement(sql[i]);
+				ps.executeUpdate();
+			}
+		} catch(Exception ex){
+			ex.printStackTrace();
+		} finally{
+			disConnection();
+		}
+	}
+	public void initAll(){
+		String[] sql = {
+				"CREATE TABLE project_reply( "
+				+ "fesno NUMBER NOT NULL ,"
+				+ "reply_ID NUMBER NOT NULL,"
+				+ "reply_name VARCHAR2(20),"
+				+ "reply_pass VARCHAR2(20),"
+				+ "reply_regdate DATE  DEFAULT sysdate,"
+				+ "reply_comment CLOB)",
+				"CREATE SEQUENCE seq_re_no "
+				+ "START WITH 0 "
+				+ "INCREMENT BY 1 "
+				+ "NOCACHE "
+				+ "NOCYCLE "
+				+ "MINVALUE 0 "
+		};
+		
+		try{
+			getConnection();
+			for(int i = 0; i < sql.length; i++){
+				ps=conn.prepareStatement(sql[i]);
+				ps.executeUpdate();
+			}
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			disConnection();
+		}
+	}
 	public static void main(String[] args) {
+		
 		ReplyDAO dao=new ReplyDAO();
 		ArrayList<ReplyVO> list=dao.replyListData(1);
 		ReplyVO vo = new ReplyVO();

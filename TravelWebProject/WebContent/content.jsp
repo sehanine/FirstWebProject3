@@ -49,6 +49,29 @@
 <style type="text/css">
 ul { list-style:none; }
 </style>
+<script language = "javascript">
+function writeCheck()
+{
+var form = document.writeform; 
+
+if( !form.commentParentName.value ){ // form 에 있는 name 값이 없을 때 
+	alert( "이름을 적어주세요" ); // 경고창 띄움 
+	form.name.focus(); // form 에 있는 name 위치로 이동 
+	return; 
+} 
+
+if( !form.commentParentPassword.value ) { 
+	alert( "비밀번호를 적어주세요" ); 
+	form.password.focus(); 
+	return; } 
+if( !form.memo.value ) { 
+	alert( "내용을 적어주세요" ); 
+	form.memo.focus(); 
+	return; } 
+	
+	form.submit(); 
+}
+</script>
 </head>
 <body>
 	<!-- Portfolio Modals -->
@@ -181,9 +204,10 @@ ul { list-style:none; }
               
                 
                     <table class="table table-condensed" width="100%" >
-                        <tr>
+                         <form name=writeform method=post action="reply_ok.jsp?page=<%=pageNum%>&curr=<%=curr%>">
+                          <tr>
                             <td>
-                            <h3 align="left">자유로운 이야기</h1><br>   
+                            <h3 align="left">자유로운 이야기</h3><br>   
                                     <p align="left">
                                         
                                            <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10">
@@ -192,13 +216,17 @@ ul { list-style:none; }
                                     </p>
                                    
                                     <div align="left" style="padding:10px 10px 10px 10px; background-color: #c8c8c8;" >
-                                        
-                                        <textarea id="commentParentText" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
-                                        <button type="button" id="commentParentSubmit" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;">보내기</button>
-                                    	
+                                      <textarea id="commentParentText" name="memo" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
+                                        <button type="button" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;" OnClick="javascript:writeCheck();">보내기</button>
+                                     <!--     
+                                        <textarea id="commentParentText" name="memo" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
+                                        <button type="button" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;">보내기</button>
+                                    	-->
                                     </div>
                                  
-                            
+                            </td>
+                          </tr>
+                     	</form>
                     </table>
                     <br><br>
                     <table id="commentTable" class="table table-condensed" width="100%">
