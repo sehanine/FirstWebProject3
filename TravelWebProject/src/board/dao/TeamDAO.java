@@ -237,7 +237,7 @@ public class TeamDAO {
 		try{
 			getConnection();
 			String sql="SELECT group_id,group_step,group_tab "
-					+"FROM my "
+					+"FROM myboard "
 					+"WHERE no=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, pno);
@@ -287,90 +287,137 @@ public class TeamDAO {
 			disConnection();
 		}
 	}
-	
-	public void boardInsert(TeamVO vo){
+	public boolean boardDelete(int no,String pwd){
+		boolean bCheck=false;
+		
 		try{
 			getConnection();
-			String sql="INSERT INTO myBoard(no,name,email,subject,content,pwd,group_id) "
-					+"VALUES(rb_no_seq.nextval,?,?,?,?,?,"
-					+"(SELECT NVL(MAX(group_id)+1,1) FROM myBoard))";
+			String sql="SELECT pwd FROM myboard "
+					+"WHERE no=?";
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, vo.getName());
-			ps.setString(2, vo.getEmail());
-			ps.setString(3, vo.getSubject());
-			ps.setString(4, vo.getContent());
-			ps.setString(5, vo.getPwd());
+			ps.setInt(1, no);
 			
-			ps.executeUpdate();
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			String db_pwd=rs.getString(1);
+			rs.close();
+			ps.close();
 			
-		}catch(Exception ex){
-			System.out.println("boardInsert()"+ex.getMessage());
-		}finally{
-			disConnection();
-		}
-	}
-		public boolean databoardDelete(int no,String pwd){
-			boolean bCheck=false;
-		
-			try{
-				getConnection();
-				String sql="SELECT pwd FROM myboard "
+			if(db_pwd.equals(pwd)){
+				bCheck=true;
+				sql="DELETE FROM myboard "
 						+"WHERE no=?";
 				ps=conn.prepareStatement(sql);
 				ps.setInt(1, no);
-				ResultSet rs=ps.executeQuery();
-				rs.next();
-				String db_pwd=rs.getString("pwd");
-				rs.close();
-				ps.close();
-					
-				if(db_pwd.equals(pwd)){
-					bCheck=true;
-					sql="DELETE FROM myboard "
-							+"WHERE no=?";
-					ps=conn.prepareStatement(sql);
-					ps.setInt(1, no);
-					ps.executeUpdate();
-				}else{
-					bCheck=false;
-				}
-				
-			}catch(Exception ex){
-				System.out.println("databoardDelete()"+ex.getMessage());
-			}finally{
-				disConnection();
-			}
+				ps.executeUpdate();
+			}else{
+				bCheck=false;
+			}		
 			
-			return bCheck;
+		}catch(Exception ex){
+			System.out.println("boardDelete()"+ex.getMessage());
+		
+		}finally{
+			disConnection();
 		}
-		public TeamVO databoardFileInfoData(int no){
+		
+		return bCheck;
+	}
+		public TeamVO boardUpdateData(int no){
 			TeamVO vo=new TeamVO();
 			
 			try{
 				getConnection();
-				
-				String sql="SELECT filename,fileSize "
-						+"FROM dataBoard "
+				String sql="SELECT * FROM myboard "
 						+"WHERE no=?";
+						
+						
 				ps=conn.prepareStatement(sql);
 				ps.setInt(1, no);
+				
 				ResultSet rs=ps.executeQuery();
 				rs.next();
-				
-				vo.setFilename(rs.getString(1));
-				vo.setFilesize(rs.getInt(2));
+				vo.setNo(rs.getInt(1));
+				vo.setName(rs.getString(2));
+				vo.setEmail(rs.getString(3));
+				vo.setSubject(rs.getString(4));
+				vo.setContent(rs.getString(5));
+				vo.setPwd(rs.getString(6));
+				vo.setRegdate(rs.getDate(7));
+				vo.setHit(rs.getInt(8));
 				rs.close();
 				
 			}catch(Exception ex){
-				System.out.println("databoardFileInfoData()"+ex.getMessage());
+				System.out.println(ex.getMessage());
 			}finally{
 				disConnection();
 			}
 			
 			return vo;
 		}
+		//4-2. 수정하기
+		public boolean boardUpdate(TeamVO vo){
+			boolean bCheck=false;
+			
+			try{
+				System.out.println("업데이트 메서드 in");
+				getConnection();
+				String sql="SELECT pwd FROM myboard "
+						+"WHERE no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, vo.getNo());
+				
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				String db_pwd=rs.getString(1);
+				rs.close();
+				ps.close();
+				
+				if(db_pwd.equals(vo.getPwd())){
+					System.out.println("비밀번호 맞다능 ㅎㅎ teamDAO().boardUpdate");
+					bCheck=true;
+					sql="UPDATE myBoard SET "
+						+"name=?,email=?,"
+						+"subject=?,content=? "
+						+"WHERE no=?";
+					ps=conn.prepareStatement(sql);
+					ps.setString(1, vo.getName());
+					ps.setString(2, vo.getEmail());
+					ps.setString(3, vo.getSubject());
+					ps.setString(4, vo.getContent());
+					ps.setInt(5, vo.getNo());
+					ps.executeUpdate();
+				}else{
+					bCheck=false;
+				}
+				
+			}catch(Exception ex){
+				System.out.println("boardUpdate()"+ex.getMessage());
+			}finally{
+				disConnection();
+			}
+			return bCheck;
+		}
+		public void boardInsert(TeamVO vo){
+			try{
+				getConnection();
+				String sql="INSERT INTO myboard(no,name,email,subject,content,pwd) "
+						+"VALUES((SELECT NVL(MAX(no)+1,1) FROM myboard),?,?,?,?,?)";
+				ps=conn.prepareStatement(sql);
+				ps.setString(1, vo.getName());
+				ps.setString(2, vo.getEmail());
+				ps.setString(3, vo.getSubject());
+				ps.setString(4, vo.getContent());
+				ps.setString(5, vo.getPwd());
+				ps.executeUpdate();
+				
+			}catch(Exception ex){
+				System.out.println("boardInsert()"+ex.getMessage());
+			}finally{
+				disConnection();
 	}
-	
+		}
+}
 
 
 
