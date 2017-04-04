@@ -3,13 +3,13 @@ package vk.dao;
 import java.util.ArrayList;
 
 public class VisitKoreaVO {
-	
+	                   
 	public VisitKoreaVO(){
 		image_list = new ArrayList<>();
 		summary = new ArrayList<>();
 		instruction = new ArrayList<>();
 	}
-	//메인 화면
+	//메인 화면    
 	/**
 	 * fesNo
 	 * 행사 번호

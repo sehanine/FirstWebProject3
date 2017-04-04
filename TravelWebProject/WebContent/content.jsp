@@ -1,28 +1,83 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page import="com.sist.reply.ReplyDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import ="web.dao.*, java.util.ArrayList, com.sist.reply.*"%>
+
+<%
+	String pageNum = request.getParameter("page");
+	String curr = request.getParameter("curr");
+	if(pageNum == null){
+		pageNum = "1";
+	}   
+	int TITLE_INDEX_NUMBER = 0;
+	int fesno = Integer.parseInt(pageNum);
+	int curPage = Integer.parseInt(curr);
+	QueryDAO dao = new QueryDAO();
+	ArrayList<String> image_list = dao.getImage_list(fesno);
+	ArrayList<String> main_list = dao.getMainVO(fesno);
+	ArrayList<ListVO> first_list = dao.getFirst_list(fesno);
+	ArrayList<ListVO> second_list = dao.getSecond_list(fesno);
+	ArrayList<ListVO> third_list = dao.getThird_list(fesno);
+	
+	ReplyDAO re_dao=new ReplyDAO();
+	ArrayList<ReplyVO> re_list = re_dao.replyListData(fesno);
+	
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>content_test</title>
+<title><%= main_list.get(TITLE_INDEX_NUMBER)%></title>
 	<!--  
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	 -->
  
     <link href="css/freelancer.min.css" rel="stylesheet">
-  
- 
+    
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 	<link href="css/update.css" rel="stylesheet" type="text/css">
- 
+	<link href="css/event1.css" rel="stylesheet" type="text/css" >
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/owl.theme.green.min.css">
+	<link rel="stylesheet" href="css/owl.theme.green.css">
+	
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<style type="text/css">
+ul { list-style:none; }
+</style>
+<script language = "javascript">
+function writeCheck()
+{
+var form = document.writeform; 
+
+if( !form.commentParentName.value ){ // form Ïóê ÏûàÎäî name Í∞íÏù¥ ÏóÜÏùÑ Îïå 
+	alert( "Ïù¥Î¶ÑÏùÑ Ï†ÅÏñ¥Ï£ºÏÑ∏Ïöî" ); // Í≤ΩÍ≥†Ï∞Ω ÎùÑÏõÄ 
+	form.name.focus(); // form Ïóê ÏûàÎäî name ÏúÑÏπòÎ°ú Ïù¥Îèô 
+	return; 
+} 
+
+if( !form.commentParentPassword.value ) { 
+	alert( "ÎπÑÎ∞ÄÎ≤àÌò∏Î•º Ï†ÅÏñ¥Ï£ºÏÑ∏Ïöî" ); 
+	form.password.focus(); 
+	return; } 
+if( !form.memo.value ) { 
+	alert( "ÎÇ¥Ïö©ÏùÑ Ï†ÅÏñ¥Ï£ºÏÑ∏Ïöî" ); 
+	form.memo.focus(); 
+	return; } 
+	
+	form.submit(); 
+}
+</script>
 </head>
 <body>
 	<!-- Portfolio Modals -->
     <div class="portfolio-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" onclick="location.href='test_main.jsp#portfolio'">
+            <div class="close-modal" onclick="location.href='test_main.jsp?page=<%=curPage %>#portfolio'">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -31,158 +86,237 @@
             <div class="container">     
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                    	<!-- √‡¡¶≥ªøÎ  -->
+                    	<!-- Ï∂ïÏ†úÎÇ¥Ïö©  -->
                         <div class="modal-body">
-                            <h2>æÁ∆Ú ªÍºˆ¿Ø«—øÏ√‡¡¶ 2017</h2>
+                            <h2><%=main_list.get(TITLE_INDEX_NUMBER) %></h2>
+
                             <hr class="star-primary">
- 
-                            <img src="img/image2_1.JPG" class="img-responsive img-centered" alt="">
-                            <table id="table1" width=730 border="0px">
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°«‡ªÁ±‚∞£ </span>
-                            		</td>
-                            		<td width="80%" align="left">2017.04.01 ~ 2017.04.02</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°¿ßƒ° </span>
-                            		</td>
-                            		<td width="80%" align="left">∞Ê±‚µµ æÁ∆Ú±∫ ∞≥±∫∏È ªÍºˆ¿Ø1±Ê 1 (∞≥±∫∏È)</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°«‡ªÁ¿Âº“</span>
-                            		</td>
-                            		<td width="80%" align="left">¡÷«‡ªÁ¿Â : ∞≥±∫∏È ∑π∆˜√˜∞¯ø¯, ∫Œ«‡ªÁ¿Â : ≥ª∏Æ, ¡÷¿æ∏Æ ªÍºˆ¿Ø ±∫∂Ù¡ˆ</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°ø¨ ∂Ù √≥</span>
-                            		</td>
-                            		<td width="80%" align="left">031-770-3344</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°»®∆‰¿Ã¡ˆ</span>
-                            		</td>
-                            		<td width="80%" align="left">http://www.ypfestival.com</td>
-                            	</tr>
-                            </table>
-                            <br><br><br>
-                            
-                            <!-- ∞≥ø‰ -->
+                       		   
+                       		   <!--  
+                       		    <table>
+									<tr>
+										<%
+											for(int i = 0; i < image_list.size(); i++){
+										%>
+											<td>
+												<img alt="image<%=i %>" src="<%=image_list.get(i) %>">
+											</td>		
+										<%
+											}
+										%>
+									</tr>
+								</table>
+ 						-->
+ 			<center>
+			<div class="slide">
+	    	 	<div id="first_list">
+			       	<div class="owl-carousel">
+			       		<%
+							for(int i = 0; i < image_list.size(); i++){
+						%>
+							<img alt="image<%=i %>" src="<%=image_list.get(i) %>">
+						<%
+							}
+						%>
+					</div>
+				
+				</div>
+			</div>
+			</center>
+                           	<table id="table1" width=730 border="0px">
+                            <%
+                				for(int i = 0; i < first_list.size(); i++){
+                					if(i != first_list.size() -1){
+                			%>
+                			<tr>
+                	
+                				<td width="20%" align="left">
+                           			<span style="font-weight:bold;"><%=first_list.get(i).getTitle() %></span>
+                           		</td>
+                     	   		<td width="80%" align="left"><%=first_list.get(i).getContent() %></td>
+	                		
+	                			</tr>
+                			<%
+                					} else {
+                			%>
+                				<tr>
+                	
+	                				<td width="20%" align="left">
+	                           			<span style="font-weight:bold;"><%=first_list.get(i).getTitle() %></span>
+	                           		</td>
+	                     	   		<td width="80%" align="left">
+	                     	   			<a href="<%=first_list.get(i).getContent() %>">
+	                     	   			<%=first_list.get(i).getContent() %></td>
+                		
+                				</tr>
+                			<%
+                					}
+                			%>
+                			<%
+                				}
+                			%>
+                        	</table>
+                        	<br/>
+                            <!-- Í∞úÏöî -->
                             <div class="menu">
-                            <a id="a_color"><h1 class="h1_back" align="left" >∞≥ø‰</h1></a>
-                             <table id="table2" class="hide" width=730 border="0px">
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°¡÷√÷/¡÷∞¸ </span>
-                            		</td>
-                            		<td width="80%" align="left">æÁ∆Ú ªÍºˆ¿Ø «—øÏ √‡¡¶ √ﬂ¡¯¿ßø¯»∏/æÁ∆Ú ªÍºˆ¿Ø «—øÏ √‡¡¶ √ﬂ¡¯¿ßø¯»∏ Tel. 031-770-3344</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°«‡ªÁº“∞≥ </span>
-                            		</td>
-                            		<td width="80%" align="left">∏º∞Ì «™∏• ∞≥±∫∏È¿∫ ªÍºˆ¿Ø≤…¿Ã ±∫∂Ù¡ˆ∏¶ ¿Ã∑Á¥¬ æ∆∏ß¥ŸøÓ ∞˜¿∏∑Œ ∏≈≥‚ ªÍºˆ¿Ø √‡¡¶∏¶ ∞≥√÷«œ∞Ì ¿÷¥Ÿ. ø√«ÿ∑Œ 14»∏¬∞∏¶ ∏¬¿Ã«œ¥¬ æÁ∆ÚªÍºˆ¿Ø «—øÏ√‡¡¶¥¬√‡¡¶º”¿« √‡¡¶∞° ¿÷¥Ÿ. ¥‹º¯»˜ ≤…¿ª ∫∏±‚∏∏ «œ¥¬ √‡¡¶∞° æ∆¥œ∂Û ªÍºˆ¿Ø±Ê¿ª ªÁ∂˚«œ¥¬ ∞°¡∑∞˙ ø¨¿Œ∞˙ ∞…¿ª ºˆ ¿÷¥¬ ∆Æ∑π≈∑ƒ⁄Ω∫øÕ ∫Ω¿Ã ¿¸∑… ªÍºˆ¿Ø≤…∞˙ æÓøÔ∏Æ¥¬ <π´∏≠¥„ø‰ æÓƒÌΩ∫∆Ω ƒ‹º≠∆Æ>∏¶ ¡ÿ∫Ò«œø© ªı∑ŒøÚ∞˙ Ω≈º±«‘¿ª ¥ı«ﬂ¥Ÿ. ∞°±Óøˆº≠ √£æ∆∞¨¥¯ ∫Ω ≥™µÈ¿Ãø° Ω«∏¡«œΩ≈∫–µÈø°∞‘ ∆˜±Ÿ«‘∞˙ «‡∫π¿ª √§øˆ∞•ºˆ ¿÷¥¬ ¡§∞‹øÓ √‡¡¶¿Ã¥Ÿ.</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°«‡ªÁ≥ªøÎ</span>
-                            		</td>
-                            		<td width="80%" align="left">- ≥Û ∆ØªÍπ∞ ∆«∏≈(∏‘∞≈∏Æ)¿Â≈Õ<br>
-- ¿¸Ω√(∫º∞≈∏Æ) «¡∑Œ±◊∑• ¡¯«‡<br>
-- √‡¡¶º”¿« √‡¡¶∑Œ ¡¯«‡ : ªÍºˆ¿Ø∏∂Ω«±Ê∆Æ∑°≈∑, π´∏≠¥„ø‰ æÓƒÌΩ∫∆Ω ƒ‹º≠∆Æ
-									</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°«¡∑Œ±◊∑•</span>
-                            		</td>
-                            		<td width="80%" align="left">- π´∏≠¥„ø‰ æÓƒÌΩ∫∆Ω ƒ‹º≠∆Æ (¿ŒµπÍµÂ∞¯ø¨)<br>
-- ªÍºˆ¿Ø∏∂Ω«±Ê ∆Æ∑°≈∑<br>
-- ∞¢¡æ π´¥Î ∞¯ø¨
-									</td>
-                            	</tr>
+                           	 <a id="a_color"><h1 class="h1_back" align="left" >Í∞úÏöî</h1></a>
                             
-                            </table>
-                            </div>
-                            
-                            
-                             <!-- ¿ÃøÎæ»≥ª -->
+                             <table id="table2" class="hide" width=100% border="0px">
+                            	<%
+									for(int i = 0; i < second_list.size(); i++){
+								%>
+									<tr>
+										<td width="20%" align="left">
+                            				<span style="font-weight:bold;"><%=second_list.get(i).getTitle() %></span>
+                            			</td>
+                            			<td width="80%" align="left"><%=second_list.get(i).getContent() %></td>
+									</tr>
+								<%
+									}
+								%>
+						 
+                           
+                         	  </table>
+                       
+                         	  </div>
+                             <!-- Ïù¥Ïö©ÏïàÎÇ¥ -->
                              <div class="menu">
-                             <a id="a_color"><h1 class="h1_back" align="left">¿ÃøÎæ»≥ª</h1></a>
-                             <table id="table2" class="hide" width=730 border="0px">
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°∞¯ø¨Ω√∞£ </span>
-                            		</td>
-                            		<td width="80%" align="left">2017.04.01~2017.04.02 /≈‰ 10:30~20:00, ¿œ 11:00~17:00</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°∞¸∂˜º“ø‰Ω√∞£ </span>
-                            		</td>
-                            		<td width="80%" align="left">±‚∞£≥ª¿⁄¿Ø</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°∞¸∂˜∞°¥…ø¨∑…</span>
-                            		</td>
-                            		<td width="80%" align="left">¿¸ø¨∑… ∞°¥…«‘</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">°§°°¿ÃøÎø‰±›</span>
-                            		</td>
-                            		<td width="80%" align="left">π´∑·</td>
-                            	</tr>
-                            </table>
+                             <a id="a_color"><h1 class="h1_back" align="left">Ïù¥Ïö©ÏïàÎÇ¥</h1></a>
+                             <table id="table2" class="hide" width=100% border="0px">
+                            	<%
+									for(int i = 0; i < third_list.size(); i++){
+								%>
+									<tr>
+	                            		<td width="20%" align="left">
+	                            			<span style="font-weight:bold;"><%=third_list.get(i).getTitle() %></span>
+	                            		</td>
+	                            		<td width="80%" align="left"><%=third_list.get(i).getContent() %></td>
+                            		</tr>
+								<%
+									}
+								%>
+								</table>
+								<br/><br/>
                             </div>
                             
-<!-- ∞‘Ω√∆« ø¨Ω¿ -->
-               	<br> <h3 align="left">¿⁄¿Ø∑ŒøÓ ¿Ãæﬂ±‚</h1><br>                   
+<!-- Í≤åÏãúÌåê Ïó∞Ïäµ -->
+			                
               
-                <table id="commentTable" class="table table-condensed"></table>
-                    <table class="table table-condensed"  >
-                        <tr>
+                
+                    <table class="table table-condensed" width="100%" >
+                         <form name=writeform method=post action="reply_ok.jsp?page=<%=pageNum%>&curr=<%=curr%>">
+                          <tr>
                             <td>
-                                <span class="form-inline" role="form">
-                                    <p>
-                                        <div class="form-group">
-                                            <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="¿Ã∏ß" maxlength="10">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" id="commentParentPassword" name="commentParentPassword" class="form-control col-lg-2" data-rule-required="true" placeholder="∆–Ω∫øˆµÂ" maxlength="10">
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="button" id="commentParentSubmit" name="commentParentSubmit" class="btn btn-default">»Æ¿Œ</button>
-                                        </div>
+                            <h3 align="left">ÏûêÏú†Î°úÏö¥ Ïù¥ÏïºÍ∏∞</h3><br>   
+                                    <p align="left">
+                                        
+                                           <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="Ïù¥Î¶Ñ" maxlength="10">
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <input type="password" id="commentParentPassword" name="commentParentPassword" class="form-control col-lg-2" data-rule-required="true" placeholder="Ìå®Ïä§ÏõåÎìú" maxlength="10">
                                     </p>
-                                        <textarea id="commentParentText" class="form-control col-lg-12" style="width:100%" rows="4"></textarea>
-                                </span>
+                                   
+                                    <div align="left" style="padding:10px 10px 10px 10px; background-color: #c8c8c8;" >
+                                      <textarea id="commentParentText" name="memo" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
+                                        <button type="button" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;" OnClick="javascript:writeCheck();">Î≥¥ÎÇ¥Í∏∞</button>
+                                     <!--     
+                                        <textarea id="commentParentText" name="memo" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
+                                        <button type="button" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;">Î≥¥ÎÇ¥Í∏∞</button>
+                                    	-->
+                                    </div>
+                                 
                             </td>
-                        </tr>
+                          </tr>
+                     	</form>
                     </table>
-                            
-                            
-                            
-<!-- /∞‘Ω√∆«ø¨Ω¿ ≥°«•Ω√ -->                            
+                    <br><br>
+                    <table id="commentTable" class="table table-condensed" width="100%">
+                            	<%
+									for(int i = 0; i < re_list.size(); i++){
+										
+								%>
+                    	<tr id="r1" name="commentParentCode">
+                    		<td colspan=2>
+                    			<strong><%=re_list.get(i).getReply_name() %></strong><%=re_list.get(i).getReply_pass() %>
+                    			<a style="cursor:pointer;" 	name="pDel">ÏÇ≠Ï†ú</a>
+                    			<p><%=re_list.get(i).getReply_comment() %></p>
+                    		</td>
+                    	</tr>
+                    			<%
+									}
+								%>
+                    </table>        
+                    <br><br>       
+<!-- /Í≤åÏãúÌåêÏó∞Ïäµ ÎÅùÌëúÏãú -->                            
                             <ul class="list-inline item-details">
-                                <li>°§¥„¥Á∫Œº≠:∞·ºÆ¡∂
+                                <li>¬∑Îã¥ÎãπÎ∂ÄÏÑú:Í≤∞ÏÑùÏ°∞
                                 </li>
-                                <li>°§√÷±Ÿ ºˆ¡§¿œ:March 2017
+                                <li>¬∑ÏµúÍ∑º ÏàòÏ†ïÏùº:March 2017
                                 </li>
-                                <li>°§µÓ∑œ π◊ ºˆ¡§πÆ¿«:02-123-4567
+                                <li>¬∑Îì±Î°ù Î∞è ÏàòÏ†ïÎ¨∏Ïùò:02-123-4567
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" onclick="location.href='test_main.jsp#portfolio'" ></i> Close</button>
+                            <button type="button" class="btn btn-default" onclick="location.href='test_main.jsp?page=<%=curPage %>#portfolio'" 
+                            style="WIDTH: 80pt; HEIGHT: 40pt; background-color: #79bfc0; color: white;"></i> Close</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/freelancer.min.js"></script>
+    
+    
+    
+<script src="js/reply.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script>
+    // html dom Ïù¥ Îã§ Î°úÎî©Îêú ÌõÑ Ïã§ÌñâÎêúÎã§.
+    $(document).ready(function(){
+        // memu ÌÅ¥ÎûòÏä§ Î∞îÎ°ú ÌïòÏúÑÏóê ÏûàÎäî a ÌÉúÍ∑∏Î•º ÌÅ¥Î¶≠ÌñàÏùÑÎïå
+        $(".menu>a").click(function(){
+            // ÌòÑÏû¨ ÌÅ¥Î¶≠Ìïú ÌÉúÍ∑∏Í∞Ä a Ïù¥Í∏∞ ÎïåÎ¨∏Ïóê
+            // a ÏòÜÏùò ÌÉúÍ∑∏Ï§ë ul ÌÉúÍ∑∏Ïóê hide ÌÅ¥ÎûòÏä§ ÌÉúÍ∑∏Î•º ÎÑ£ÎçòÏßÄ ÎπºÎçòÏßÄ ÌïúÎã§.
+            $(this).next("table").toggleClass("hide");
+        });
+    });   
+    
+</script>
+
+<script>
+var owl = $('.owl-carousel');
+owl.owlCarousel({
+	center:true,
+	items:1,
+    loop:true,
+    autoHeight:true,
+    margin:10,
+    autoplay:true,
+    autoplayTimeout:5000
+});
+</script>
+
+<script language="javascript">
+
+function allblur() {
+for (i = 0; i < document.links.length; i++)
+document.links[i].onfocus = document.links[i].blur;
+}
+
+</script>
+
 </body>
 </html>

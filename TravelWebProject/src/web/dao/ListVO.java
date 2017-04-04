@@ -1,12 +1,12 @@
 package web.dao;
 /**
  * @author sistH
- *	
+ *	     
  */
 public class ListVO {
 	private String title;
 	private String content;
-	
+	   
 	public String getTitle() {
 		return title;
 	}

@@ -2,7 +2,6 @@
     pageEncoding="EUC-KR" import="java.util.ArrayList, web.dao.*"%>
 
 <%
-	
 	String pageNum = request.getParameter("page");
 	
 	if(pageNum == null){
@@ -12,7 +11,13 @@
 	int curPage = Integer.parseInt(pageNum);
 	QueryDAO dao = new QueryDAO();    
 	ArrayList<MainVO> list = dao.boardListData(curPage);
+	
 	int totalPage = dao.getDivPage();
+	boolean isOdd = false; // È¦¼ö?
+	if(totalPage % 2 == 1){ // ÃÑÄÁÅÙÃ÷/7(ÄÁÅÙÃ÷per page) ÆäÀÌÁö°¡ È¦¼ö¸é
+		isOdd = true;
+	}
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -55,21 +60,6 @@ $(function(){
 		}
 	});
 });
-/*
- * code ref. from http://stackoverflow.com/questions/4068373/center-a-popup-window-on-screen
- */
-$(function(){
-	$('#btn').click(function(){
-		window.open('member/join.jsp', 'newwindow', 'width=450, height=250,toolbar=no,statusbar=no,scrollbars=no'); 
-	});
-});
-                  
-function popupcenter(url, title, w, h) {
-	  var left = (screen.width/2)-(w/2);
-	  var top = (screen.height/2)-(h/2);
-	  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
-};
-
 </script>
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
@@ -121,10 +111,6 @@ function popupcenter(url, title, w, h) {
                     <li class="page-scroll" id="logBtn">
                         <a>Log-in</a>
                     </li>
-                    <li id="logBtn">
-                    	<a onclick="javascript:popupcenter('member/join.jsp', 'È¸¿ø°¡ÀÔ', 440, 240)">È¸¿ø°¡ÀÔ</a>
-                    	
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -134,18 +120,36 @@ function popupcenter(url, title, w, h) {
 
     <!-- Header -->
     <header>
-    	<div class="slide">
-    	 	<div id="first_list">
+    	
 		       	<div class="owl-carousel">
-		       		<img src="img/1.png">
-		       		<img src="img/2.png">
-		       		<img src="img/3.png">
-				</div>
+		       	
+		       	<%
+		       		
+		       		for(int i = 1; i <= totalPage; i++){
+		       			for(int j = 1; j < list.size(); j++){
+		       				MainVO vo = list.get(j-1);
+	               			String url = dao.getFirstImage(vo.getFesno());
+	               			if(i < totalPage/2){
+		       	%>
+		       	<div id="first_list">
+		       		<img src="<%=url %>" class="img-responsive" alt="">
+		       	</div>
+		       	<%
+	               			} else {
+	      		%>
+       			<div id="first_list">
+      	       		<img src="<%=url %>" class="img-responsive" alt="">
+      	       	</div>
+	      		<%			               				
+	               			}
+		       			}
+		       			list = dao.boardListData(i+1);
+		       		}
+		       	%>
+		       	
+		       	</div>
 			
 				<div class="owl-carousel">
-					<img src="img/4.png">
-		       		<img src="img/5.png">
-		       		<img src="img/6.png">
 				</div>
 			</div>
 	
@@ -169,6 +173,7 @@ function popupcenter(url, title, w, h) {
            		for(int i = 1; i <= list.size(); i++){
            			MainVO vo = list.get(i-1);
            			String url = dao.getFirstImage(vo.getFesno());
+           			
             %>
                 <div class="col-sm-4 portfolio-item">
                     <a href="content.jsp?page=<%=vo.getFesno() %>&curr=<%=curPage %>" class="portfolio-link" data-toggle="modal">
@@ -189,14 +194,15 @@ function popupcenter(url, title, w, h) {
              <%
             	}
              %>  
-     
-     	    <button class="w3-button w3-teal w3-display-left" 
-     	    onclick="location.href='prev.jsp?page=<%=curPage%>'">
-     	 	&#10094;</button>
-			<button class="w3-button w3-teal w3-display-right" 
-			onclick="location.href='next.jsp?page=<%=curPage%>'">
-			&#10095;</button>
-    
+     	
+	     	    <button class="w3-button w3-teal w3-display-left" 
+	     	    onclick="location.href='prev.jsp?page=<%=curPage%>'">
+	     	 	&#10094;</button>
+				<button class="w3-button w3-teal w3-display-right" 
+				onclick="location.href='next.jsp?page=<%=curPage%>'">
+				&#10095;</button>
+    		</div>
+    	</div>
     </section>
 
     <!-- About Section -->
@@ -358,17 +364,35 @@ function popupcenter(url, title, w, h) {
 
 
 </body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script>
-
+/*
+var owl = $('.owl-carousel');
+owl.owlCarousel({
+    loop:true,
+    nav:true,
+    margin:10
+});
+*/
 var owl = $('.owl-carousel');
 owl.owlCarousel({
     items:3,
     loop:true,
     margin:100,
     autoplay:true,
-    autoplayTimeout:5000
+    autoplayTimeout:2500
 });
+/*
+ owl.on('mousewheel', '.owl-stage', function (e) {
+    if (e.deltaY>0) {
+        owl.trigger('next.owl');
+    } else {
+        owl.trigger('prev.owl');
+    }
+    e.preventDefault();
+});
+*/
 
 </script>
 </html>

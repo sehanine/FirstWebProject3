@@ -8,6 +8,6 @@ public class VisitKoreaMain {
 
 	public static void main(String[] args){
 		new VisitKoreaDAO().getAllData();
-	}
+	}     
 
 }

@@ -7,7 +7,7 @@ public class MainVO {
 	private String maincontent;
 	private String mainloc;
 	private String fesdate;
-	
+	   
 	
 	public int getFesno() {
 		return fesno;

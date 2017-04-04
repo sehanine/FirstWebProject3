@@ -7,7 +7,7 @@ public class FesVO {
 	행사장소
 	연 락 처 
 	홈페이지
-*/
+*/     
 	private String date;
 	private String addr;
 	private String loc;
