@@ -207,7 +207,7 @@ if( !form.memo.value ) {
                     	<tr id="r1" name="commentParentCode">
                     		<td colspan=2>
                     			<strong><%=re_list.get(i).getReply_name() %></strong><%=re_list.get(i).getReply_pass() %>
-                    			<a style="cursor:pointer;" 	name="pDel">삭제</a>
+                    			<a style="cursor:pointer;" 	name="pDel" OnClick="window.location='delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>'">삭제</a>
                     			<p><%=re_list.get(i).getReply_comment() %></p>
                     		</td>
                     	</tr>
@@ -251,8 +251,9 @@ if( !form.memo.value ) {
     
     
     
+<!-- 
 <script src="js/reply.js"></script>
-
+ -->
 <script>
     // html dom 이 다 로딩된 후 실행된다.
     $(document).ready(function(){

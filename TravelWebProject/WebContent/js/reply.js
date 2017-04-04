@@ -57,7 +57,7 @@ $(function(){
                 //댓글(depth1)의 댓글(depth2_1)이 있는지 검사하여 삭제
                 while(nextTr.attr("name")=="commentCode"){
                     nextTr = nextTr.next();
-                    delTr = nextTr.prev();//삭제하고 넘기면 삭제되서 없기 때문에 다음값을 가져오기 어려워 다시 앞으로 돌려서 찾은 다음 삭제
+                    delTr = nextTr.prev();//삭제하고 넘기면 삭제돼서 없기 때문에 다음값을 가져오기 어려워 다시 앞으로 돌려서 찾은 다음 삭제
                     delTr.remove();
                 }
                    
