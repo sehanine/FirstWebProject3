@@ -9,7 +9,7 @@ import java.sql.*;
 public class TeamDAO {
 	private Connection conn;
 	private PreparedStatement ps;
-	private final String URL="jdbc:oracle:thin:@211.238.142.213:1521:ORCL";
+	private final String URL="jdbc:oracle:thin:@211.238.142.230:1521:ORCL";
 	private static TeamDAO dao;
 	
 	//드라이버 등록

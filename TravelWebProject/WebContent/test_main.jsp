@@ -313,7 +313,7 @@ function popupcenter(url, title, w, h) {
                     </div>
                     <div class="footer-col col-md-4">
                         <h3>About Us</h3>
-                        <p>Festigo is created by open source, <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                        <p>Festigo is created by open source, <a href="board/list.jsp">Contact Board</a>.</p>
                     </div>
                 </div>
             </div>
