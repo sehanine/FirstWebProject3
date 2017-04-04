@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR" import ="web.dao.*, java.util.ArrayList"%>
+<%
+	String pageNum = request.getParameter("page");
+	
+	if(pageNum == null){
+		pageNum = "1";
+	}   
+	int TITLE_INDEX_NUMBER = 0;
+	int fesno = Integer.parseInt(pageNum);
+	QueryDAO dao = new QueryDAO();
+	ArrayList<String> image_list = dao.getImage_list(fesno);
+	ArrayList<String> main_list = dao.getMainVO(fesno);
+	ArrayList<ListVO> first_list = dao.getFirst_list(fesno);
+	ArrayList<ListVO> second_list = dao.getSecond_list(fesno);
+	ArrayList<ListVO> third_list = dao.getSecond_list(fesno);
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,80 +49,57 @@
                     <div class="col-lg-8 col-lg-offset-2">
                     	<!-- 축제내용  -->
                         <div class="modal-body">
-                            <h2>양평 산수유한우축제 2017</h2>
+                            <h2><%=main_list.get(TITLE_INDEX_NUMBER) %></h2>
+
                             <hr class="star-primary">
+                       		    <table>
+									<tr>
+										<%
+											for(int i = 0; i < image_list.size(); i++){
+										%>
+											<td>
+												<img alt="image<%=i %>" src="<%=image_list.get(i) %>">
+											</td>		
+										<%
+											}
+										%>
+									</tr>
+								</table>
  
-                            <img src="img/image2_1.JPG" class="img-responsive img-centered" alt="">
-                            <table id="table1" width=730 border="0px">
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　행사기간 </span>
-                            		</td>
-                            		<td width="80%" align="left">2017.04.01 ~ 2017.04.02</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　위치 </span>
-                            		</td>
-                            		<td width="80%" align="left">경기도 양평군 개군면 산수유1길 1 (개군면)</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　행사장소</span>
-                            		</td>
-                            		<td width="80%" align="left">주행사장 : 개군면 레포츠공원, 부행사장 : 내리, 주읍리 산수유 군락지</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　연 락 처</span>
-                            		</td>
-                            		<td width="80%" align="left">031-770-3344</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　홈페이지</span>
-                            		</td>
-                            		<td width="80%" align="left">http://www.ypfestival.com</td>
-                            	</tr>
-                            </table>
-                            <br><br><br>
+                           	<table id="table1" width=730 border="0px">
+                            <%
+                				for(int i = 0; i < first_list.size(); i++){
+                			%>
+                			<tr>
+                	
+                				<td width="20%" align="left">
+                           			<span style="font-weight:bold;"><%=first_list.get(i).getTitle() %></span>
+                           		</td>
+                     	   		<td width="80%" align="left"><%=first_list.get(i).getContent() %></td>
+                		
+                			</tr>
+                			<%
+                				}
+                			%>
+                        
                             
                             <!-- 개요 -->
                             <div class="menu">
                             <a id="a_color"><h1 class="h1_back" align="left" >개요</h1></a>
                              <table id="table2" class="hide" width=730 border="0px">
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　주최/주관 </span>
-                            		</td>
-                            		<td width="80%" align="left">양평 산수유 한우 축제 추진위원회/양평 산수유 한우 축제 추진위원회 Tel. 031-770-3344</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　행사소개 </span>
-                            		</td>
-                            		<td width="80%" align="left">맑고 푸른 개군면은 산수유꽃이 군락지를 이루는 아름다운 곳으로 매년 산수유 축제를 개최하고 있다. 올해로 14회째를 맞이하는 양평산수유 한우축제는축제속의 축제가 있다. 단순히 꽃을 보기만 하는 축제가 아니라 산수유길을 사랑하는 가족과 연인과 걸을 수 있는 트레킹코스와 봄이 전령 산수유꽃과 어울리는 <무릎담요 어쿠스틱 콘서트>를 준비하여 새로움과 신선함을 더했다. 가까워서 찾아갔던 봄 나들이에 실망하신분들에게 포근함과 행복을 채워갈수 있는 정겨운 축제이다.</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　행사내용</span>
-                            		</td>
-                            		<td width="80%" align="left">- 농 특산물 판매(먹거리)장터<br>
-- 전시(볼거리) 프로그램 진행<br>
-- 축제속의 축제로 진행 : 산수유마실길트래킹, 무릎담요 어쿠스틱 콘서트
-									</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　프로그램</span>
-                            		</td>
-                            		<td width="80%" align="left">- 무릎담요 어쿠스틱 콘서트 (인디밴드공연)<br>
-- 산수유마실길 트래킹<br>
-- 각종 무대 공연
-									</td>
-                            	</tr>
-                            
-                            </table>
+                            	<%
+									for(int i = 0; i < second_list.size(); i++){
+								%>
+									<tr>
+										<td width="20%" align="left">
+                            				<span style="font-weight:bold;"><%=second_list.get(i).getTitle() %></span>
+                            			</td>
+                            			<td width="80%" align="left"><%=second_list.get(i).getContent() %></td>
+									</tr>
+								<%
+									}
+								%>
+						 
                             </div>
                             
                             
@@ -114,31 +107,18 @@
                              <div class="menu">
                              <a id="a_color"><h1 class="h1_back" align="left">이용안내</h1></a>
                              <table id="table2" class="hide" width=730 border="0px">
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　공연시간 </span>
-                            		</td>
-                            		<td width="80%" align="left">2017.04.01~2017.04.02 /토 10:30~20:00, 일 11:00~17:00</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　관람소요시간 </span>
-                            		</td>
-                            		<td width="80%" align="left">기간내자유</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　관람가능연령</span>
-                            		</td>
-                            		<td width="80%" align="left">전연령 가능함</td>
-                            	</tr>
-                            	<tr>
-                            		<td width="20%" align="left">
-                            			<span style="font-weight:bold;">·　이용요금</span>
-                            		</td>
-                            		<td width="80%" align="left">무료</td>
-                            	</tr>
-                            </table>
+                            	<%
+									for(int i = 0; i < third_list.size(); i++){
+								%>
+									<tr>
+	                            		<td width="20%" align="left">
+	                            			<span style="font-weight:bold;"><%=third_list.get(i).getTitle() %></span>
+	                            		</td>
+	                            		<td width="80%" align="left"><%=third_list.get(i).getContent() %></td>
+                            		</tr>
+								<%
+									}
+								%>
                             </div>
                             
 <!-- 게시판 연습 -->
