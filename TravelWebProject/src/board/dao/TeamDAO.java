@@ -290,7 +290,7 @@ public class TeamDAO {
 	public boolean boardDelete(int no,String pwd){
 		boolean bCheck=false;
 		
-		try{
+		try{     /////¤Ç¤Ç¤Ç
 			getConnection();
 			String sql="SELECT pwd FROM festigo_board "
 					+"WHERE no=?";
