@@ -10,8 +10,8 @@
 	create vo set attributes, put them in the database
 	*/
 	String ranNum = RandomNumGen.getRanNum();
-	//JavaMailAPI mailAPI = new JavaMailAPI(email, ranNum, nick, pwd);
-	System.out.println("ranNum: " + ranNum);
+	JavaMailAPI mailAPI = new JavaMailAPI(email, ranNum, nick, pwd);
+	//System.out.println("ranNum: " + ranNum);
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -24,10 +24,7 @@
 function send(){
 	var ranNum = <%= ranNum%>;
 	var vrfCode=$('[name=vrfCode]').val();
-	var email = "<%= email%>";
-	var nick = "<%=nick%>";
-	var pwd = "<%=pwd%>";
-	var vo = {"email":email,"nick":nick,"pwd":pwd};
+	var vo = {"email": "<%=email%>","nick": "<%=nick%>","pwd": "<%=pwd%>"};
 	if(ranNum == vrfCode){
 		
 		alert("가입을 축하합니다.");
@@ -37,10 +34,12 @@ function send(){
 			url: "member_ok.jsp",
 			data: vo
 		})
+		window.close();
 		
 	} else{
 		alert("인증코드가 일치하지 않습니다.");
 	}
+	
 }
 </script>
 </head>

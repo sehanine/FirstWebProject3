@@ -46,11 +46,12 @@ public class JavaMailAPI {
 			
 			   message.setSubject("festigo 회원가입 이메일 인증");
 			   message.setText(
-					   "안녕하세요" + nick + "님, festigo입니다.\n\n" 
+					   "안녕하세요 " + nick + "님, festigo입니다.\n\n" 
 					  +"닉네임: " + nick + "\n"
 					  +"비밀번호: " + pwd + "\n"
-					  +"인증번호: " + ranCode + "\n"
-					  +"\n이메일을 인증해 주세요.");
+					  
+					  +"\n이메일을 인증해 주세요."
+					  +"인증번호: " + ranCode + "\n");
 
 			   // Send message
 			   Transport.send(message);
