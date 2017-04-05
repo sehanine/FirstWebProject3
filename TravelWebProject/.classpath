@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="C:/Users/sistH/git/TravelWebProject/TravelWebProject/WebContent/WEB-INF/lib/activation.jar"/>
 	<classpathentry kind="lib" path="C:/Users/sistH/git/TravelWebProject/TravelWebProject/WebContent/WEB-INF/lib/javax.mail.jar"/>
 	<classpathentry kind="lib" path="C:/Users/sistH/git/TravelWebProject/TravelWebProject/WebContent/WEB-INF/lib/jsoup-1.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sistH/git/TravelWebProject/TravelWebProject/WebContent/WEB-INF/lib/gson-2.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

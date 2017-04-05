@@ -74,7 +74,7 @@ public class MemberDAO {
 		
 		try{
 			getConnection();
-			String sql= "SELECT COUNT(*) FROM join_member "
+			String sql= "SELECT COUNT(*) FROM festigo_member "
 				   +"WHERE " +target + "=?";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, id);
@@ -89,7 +89,49 @@ public class MemberDAO {
 		} finally{
 			disConnection();
 		}
-		System.out.println("count: " + count);
 		return count;
+	}
+	
+	public String getValue(String id, String target){
+		String str = null;
+		
+		try{
+			getConnection();
+			String sql= "SELECT "+ target + " FROM festigo_member "
+				   +"WHERE " + target + "=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			str =rs.getString(1);
+			rs.close();
+			
+		} catch(Exception ex){
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
+		} finally{
+			disConnection();
+		}
+		return str;
+	}
+	public void joinMember(MemberVO vo){
+		String sql = 
+				"INSERT INTO festigo_member(email, nickname, pwd) "
+			    +"VALUES(?, ?, ?)";
+		
+		try{
+			getConnection();
+			
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, vo.getEmail());
+			ps.setString(2, vo.getNickname());
+			ps.setString(3, vo.getPwd());
+			ps.executeUpdate();
+	
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			disConnection();
+		}
 	}
 }

@@ -10,7 +10,7 @@
 	} else {
 		status = 1;
 	}
-	System.out.println("status: " + status);
+	
 	MemberDAO dao = new MemberDAO();
 	
 	int count = dao.isValueExist(nickname, "nickname");

@@ -164,6 +164,7 @@ public class ReplyDAO {
 				+ "reply_pass VARCHAR2(20),"
 				+ "reply_regdate DATE  DEFAULT sysdate,"
 				+ "reply_comment CLOB)",
+				
 				"CREATE SEQUENCE seq_re_no "
 				+ "START WITH 0 "
 				+ "INCREMENT BY 1 "
@@ -178,7 +179,6 @@ public class ReplyDAO {
 				ps=conn.prepareStatement(sql[i]);
 				ps.executeUpdate();
 			}
-			
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}finally{
