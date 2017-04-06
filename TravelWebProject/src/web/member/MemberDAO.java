@@ -122,7 +122,7 @@ public class MemberDAO {
 		try{
 			getConnection();
 			
-			ps=conn.prepareStatement(sql);
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, vo.getEmail());
 			ps.setString(2, vo.getNickname());
 			ps.setString(3, vo.getPwd());

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" import="java.util.ArrayList, web.dao.*"%>
 <%
-	
 	String pageNum = request.getParameter("page");
 	
 	if(pageNum == null){
@@ -44,7 +43,7 @@ $(function(){
 
 var i=0;
 $(function(){
-	$('#logBtn').click(function(){
+	$('#member-join').click(function(){
 		if(i==0){
 			$('#logPop').show();
 			i=1;
@@ -85,6 +84,7 @@ function popupcenter(url, title, w, h) {
 	<link rel="stylesheet" href="css/owl.theme.green.min.css">
 	<link rel="stylesheet" href="css/owl.theme.green.css">
 	<link rel="stylesheet" href="css/update.css">
+	<link rel="stylesheet" href="css/loginstyle.css">
 
 </head>
 <body id="page-top" class="index">
@@ -117,13 +117,29 @@ function popupcenter(url, title, w, h) {
                     <li class="page-scroll">
                         <a href="#contact">Contact Us</a>
                     </li>
+                    <li id="member-join">
+                    	<a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>	
+                    </li>
                     <li class="page-scroll" id="logBtn">
-                        <a>Log-in</a>
+                    	<a id="loginform">로그인</a>
+                    	<div class="login">
+					      <div class="arrow-up"></div>
+					      <div class="formholder">
+					        <div class="randompad">
+					           <fieldset>
+					             <label name="email">Email</label>
+					             <input type="email" value="example@example.com" />
+					             <label name="password">Password</label>
+					             <input type="password" />
+					             <input type="submit" value="Login" />
+					           </fieldset>
+					        </div>
+					      </div>
+					    </div>
+					    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+						<script src="js/login.js"></script>
                     </li>
-                    <li id="logBtn">
-                    	<a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>
-                    	
-                    </li>
+                   
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

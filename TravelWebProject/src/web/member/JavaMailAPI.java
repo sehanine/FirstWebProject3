@@ -50,7 +50,7 @@ public class JavaMailAPI {
 					  +"닉네임: " + nick + "\n"
 					  +"비밀번호: " + pwd + "\n"
 					  
-					  +"\n이메일을 인증해 주세요."
+					  +"\n이메일을 인증해 주세요.\n"
 					  +"인증번호: " + ranCode + "\n");
 
 			   // Send message
