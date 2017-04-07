@@ -127,7 +127,7 @@ public class MemberDAO {
 			ps.setString(2, vo.getNickname());
 			ps.setString(3, vo.getPwd());
 			ps.executeUpdate();
-	
+			System.out.println("회원가입 완료");
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}finally{

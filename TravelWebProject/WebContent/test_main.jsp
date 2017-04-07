@@ -120,26 +120,25 @@ function popupcenter(url, title, w, h) {
                     <li id="member-join">
                     	<a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>	
                     </li>
-                    <li class="page-scroll" id="logBtn">
+                    <li class="page-scroll" id="logBtn" style="position: fixed; left: 77%;">
                     	<a id="loginform">로그인</a>
                     	<div class="login">
 					      <div class="arrow-up"></div>
 					      <div class="formholder">
 					        <div class="randompad">
-					           <fieldset>
+					           <form action="member/login_ok.jsp">
 					             <label name="email">Email</label>
-					             <input type="email" value="example@example.com" />
+					             <input type="email" name="input_email" value="example@example.com"/>
 					             <label name="password">Password</label>
-					             <input type="password" />
+					             <input type="password" name="input_pwd" />
 					             <input type="submit" value="Login" />
-					           </fieldset>
+					           </form>
 					        </div>
 					      </div>
 					    </div>
 					    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 						<script src="js/login.js"></script>
                     </li>
-                   
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
