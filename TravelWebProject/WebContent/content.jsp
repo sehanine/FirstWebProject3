@@ -49,6 +49,8 @@
 
 <style type="text/css">
 ul { list-style:none; }
+    .menui a{cursor:pointer;}
+    .menui .hidei{display:none;}
 </style>
 <script language = "javascript">
 function writeCheck()
@@ -127,7 +129,22 @@ if( !form.memo.value ) {
                            	<table id="table1" width=730 border="0px">
                             <%
                 				for(int i = 0; i < first_list.size(); i++){
-                					if(i != first_list.size() -1){
+                				
+                					if(i == 1){
+                            			%>
+                            			<tr>
+                            	
+                            				<td width="20%" align="left">
+                                       			<span style="font-weight:bold;"><%=first_list.get(i).getTitle() %></span>
+                                       		</td>
+                                 	   		<td width="80%" align="left"><%=first_list.get(i).getContent() %>
+                                 	   			&nbsp<a href="#" onclick="window.open('googleMap.jsp?add=<%=first_list.get(i).getContent() %>', '지도', 'top=100px, left=100px, height=800px, width=800px')">지도보기</a>
+                                 	   		</td>
+            	                		
+            	                			</tr>
+                            			<%
+                            					}
+                					else if(i != first_list.size() -1){
                 			%>
                 			<tr>
                 	
@@ -238,8 +255,17 @@ if( !form.memo.value ) {
                     	<tr id="r1" name="commentParentCode">
                     		<td colspan=2>
                     			<strong><%=re_list.get(i).getReply_name() %></strong><%=re_list.get(i).getReply_pass() %>
-                    			<a style="cursor:pointer;" 	name="pDel" 
+                    			<%-- <a style="cursor:pointer;" 	name="pDel" 
                     				OnClick="window.location='delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>'">삭제</a>
+      --%>  					    <span class="menui">
+                    				<a style="cursor:pointer;" 	name="pDel" >삭제</a>
+                    					<span class="hidei">
+                    						비밀번호:
+                    						<input name="password" type="password" size="20" >
+                    						<input type=button value="확인" OnClick="window.location='delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>'">
+                    					</span> 
+                    				</span>
+                    			
                     			<p><%=re_list.get(i).getReply_comment() %></p>
                     		</td>
                     	</tr>
@@ -283,7 +309,6 @@ if( !form.memo.value ) {
     
     
     
-<script src="js/reply.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script>
     // html dom 이 다 로딩된 후 실행된다.
@@ -297,7 +322,18 @@ if( !form.memo.value ) {
     });   
     
 </script>
-
+<script>
+    // html dom 이 다 로딩된 후 실행된다.
+    $(document).ready(function(){
+        // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+        $(".menui>a").click(function(){
+            // 현재 클릭한 태그가 a 이기 때문에
+            // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
+            $(this).next("span").toggleClass("hidei");
+        });
+    });   
+    
+</script>
 <script>
 var owl = $('.owl-carousel');
 owl.owlCarousel({
