@@ -73,42 +73,24 @@ function popupcenter(url, title, w, h) {
 	  var top = (screen.height/2)-(h/2);
 	  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
 };
-function showTabMenu(n){
-	var conId;
 
-	for(i=1;i < 3; i++){
-	conId = document.getElementById("con"+i);	
-	if(i==n){
-	conId.style.display = "";
-	}else{
-	conId.style.display = "none";
-	}
-	}
-	}
 function showTabSeason(n){
 	var seasonId;
 
 	for(i=1;i < 5; i++){
-		seasonId = document.getElementById("seasonSeoul"+i);	
+		seasonId = document.getElementById("season"+i);	
 	if(i==n){
 		seasonId.style.display = "";
 	}else{
 		seasonId.style.display = "none";
 	}
 	}
+	
+	$("#menu li").removeClass();
+	$("#menu li").eq(n-1).addClass("on");
+	
 	}
-function showTabSeason1(n){
-	var seasonId;
 
-	for(i=1;i < 5; i++){
-		seasonId = document.getElementById("seasonJeju"+i);	
-	if(i==n){
-		seasonId.style.display = "";
-	}else{
-		seasonId.style.display = "none";
-	}
-	}
-	}
 </script>
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
@@ -127,6 +109,7 @@ function showTabSeason1(n){
 	<link rel="stylesheet" href="css/update.css">
 	<link rel="stylesheet" href="css/loginstyle.css">
 	<link rel="stylesheet" href="css/header1.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body id="page-top" class="index">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
@@ -203,48 +186,70 @@ function showTabSeason1(n){
         <!-- /.container-fluid -->
     </nav>
 
-    <!-- Header -->
+    <!-- Header: emertxe -->
     <header>
-    	<div class="slide">
-
-			<div>
-				<div class="contents" id="con1">
-					<img id="seasonSeoul1" width="100%" height="800px" src="img/seoul_1.jpg">
-					<img id="seasonSeoul2" width="100%" height="800px" src="img/seoul_2.jpg" style="display:none">
-					<img id="seasonSeoul3" width="100%" height="800px" src="img/seoul_3.jpg" style="display:none">
-					<img id="seasonSeoul4" width="100%" height="800px" src="img/seoul_4.jpg" style="display:none">
-					<div class="page-scroll" style=" position:absolute; top:400px; left:400px; z-index:2">
-                        <a href="#portfolio"><font size="10">서울 행사보기</font></a>
-                    </div>  
-                    <div>
-						<a href="javascript:showTabSeason(1)">봄</a>&nbsp
-						<a href="javascript:showTabSeason(2)">여름</a>&nbsp
-						<a href="javascript:showTabSeason(3)">가을</a>&nbsp
-						<a href="javascript:showTabSeason(4)">겨울</a>&nbsp
-					</div>  
-				</div>
-				<div class="contents" id="con2" style="display:none">
-					<img id="seasonJeju1" width="100%" height="800px" src="img/jeju_1.jpg">
-					<img id="seasonJeju2" width="100%" height="800px" src="img/jeju_2.jpg" style="display:none">
-					<img id="seasonJeju3" width="100%" height="800px" src="img/jeju_3.jpg" style="display:none">
-					<img id="seasonJeju4" width="100%" height="800px" src="img/jeju_4.jpg" style="display:none">
-					<div class="page-scroll" style=" position:absolute; top:400px; left:400px; z-index:2">
-                        <a href="#portfolio"><font size="10">제주도 행사보기</font></a>
-                    </div>  
-                    <div>
-						<a href="javascript:showTabSeason1(1)">봄</a>&nbsp
-						<a href="javascript:showTabSeason1(2)">여름</a>&nbsp
-						<a href="javascript:showTabSeason1(3)">가을</a>&nbsp
-						<a href="javascript:showTabSeason1(4)">겨울</a>&nbsp
+  	 	<ul id="menu">
+			<li class="on"><a href="javascript:showTabSeason(1)">Spring</a></li>
+			<li><a href="javascript:showTabSeason(2)">Summer</a></li>
+			<li><a href="javascript:showTabSeason(3)">Autumn</a></li>
+			<li><a href="javascript:showTabSeason(4)">Winter</a></li>
+		</ul>
+   		<div class="slide">
+			<div class="contents">
+				<!-- 첫 번째 박스 -->
+				<div id="season1" >
+					<img src="img/bg1.jpg" width="100%" height="960px">
+					<div class=mouseMove>
+						<article>
+							<p>FULL BLOSSOM</p>
+							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
+						</article>
+						<img class="p11" src="img/obj11.png" />
+						<img class="p12" src="img/obj12.png" />
+						<img class="p13" src="img/obj13.png" />
 					</div>
 				</div>
+				<!-- 두 번째 박스 -->
+				<div id="season2" style="display:none">
+					<img width="100%" height="960px" src="img/bg2.jpg" >
+					<div class=mouseMove>
+						<article>
+							<p>BE COLORFUL</p>
+							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
+						</article>
+						<img class="p21" src="img/obj21.png" />
+						<img class="p22" src="img/obj22.png" />
+					</div>
+				</div>	
+				<!-- 세 번째 박스 -->	
+				<div id="season3" style="display:none">
+					<img width="100%" height="960px" src="img/bg3.jpg">
+					<div class=mouseMove>
+						<article>
+							<p>TIME ON BOARD</p>
+							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
+						</article>
+						<img class="p31" src="img/obj31.png" />
+						<img class="p32" src="img/obj32.png" />
+						<img class="p33" src="img/obj33.png" />
+					</div>
+				</div>	
+				<!-- 네 번째 박스 -->
+				<div id="season4" style="display:none">
+					<img width="100%" height="960px" src="img/bg4.jpg">
+					<div class=mouseMove>
+						<article>
+							<p>SHINY ADDICT</p>
+							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
+						</article>
+						<img class="p41" src="img/obj41.png" />
+						<img class="p42" src="img/obj42.png" />
+					</div>
+				</div>
+				
 			</div>
-			 <div style=" position:absolute; top:200px; left:100px; z-index:2">
-				<a href="javascript:showTabMenu(1)"><font size="7">서울</font></a><br><br><br><br>
-				<a href="javascript:showTabMenu(2)"><font size="7">제주도</font></a>
-			</div>
-
 		</div>
+
     </header>
      <!-- About Section -->
     <section class="success" id="about">
@@ -473,7 +478,7 @@ function showTabSeason1(n){
  	-->
     <!-- Theme JavaScript -->
     <script src="js/freelancer.min.js"></script>
-
+<script type="text/javascript" src="js/custom.js"></script>
 
 
 </body>
