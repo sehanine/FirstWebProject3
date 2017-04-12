@@ -73,7 +73,42 @@ function popupcenter(url, title, w, h) {
 	  var top = (screen.height/2)-(h/2);
 	  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
 };
+function showTabMenu(n){
+	var conId;
 
+	for(i=1;i < 3; i++){
+	conId = document.getElementById("con"+i);	
+	if(i==n){
+	conId.style.display = "";
+	}else{
+	conId.style.display = "none";
+	}
+	}
+	}
+function showTabSeason(n){
+	var seasonId;
+
+	for(i=1;i < 5; i++){
+		seasonId = document.getElementById("seasonSeoul"+i);	
+	if(i==n){
+		seasonId.style.display = "";
+	}else{
+		seasonId.style.display = "none";
+	}
+	}
+	}
+function showTabSeason1(n){
+	var seasonId;
+
+	for(i=1;i < 5; i++){
+		seasonId = document.getElementById("seasonJeju"+i);	
+	if(i==n){
+		seasonId.style.display = "";
+	}else{
+		seasonId.style.display = "none";
+	}
+	}
+	}
 </script>
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
@@ -91,7 +126,7 @@ function popupcenter(url, title, w, h) {
 	<link rel="stylesheet" href="css/owl.theme.green.css">
 	<link rel="stylesheet" href="css/update.css">
 	<link rel="stylesheet" href="css/loginstyle.css">
-
+	<link rel="stylesheet" href="css/header1.css">
 </head>
 <body id="page-top" class="index">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
@@ -171,20 +206,44 @@ function popupcenter(url, title, w, h) {
     <!-- Header -->
     <header>
     	<div class="slide">
-    	 	<div id="first_list">
-		       	<div class="owl-carousel">
-		       		<img src="img/1.png">
-		       		<img src="img/2.png">
-		       		<img src="img/3.png">
+
+			<div>
+				<div class="contents" id="con1">
+					<img id="seasonSeoul1" width="100%" height="800px" src="img/seoul_1.jpg">
+					<img id="seasonSeoul2" width="100%" height="800px" src="img/seoul_2.jpg" style="display:none">
+					<img id="seasonSeoul3" width="100%" height="800px" src="img/seoul_3.jpg" style="display:none">
+					<img id="seasonSeoul4" width="100%" height="800px" src="img/seoul_4.jpg" style="display:none">
+					<div class="page-scroll" style=" position:absolute; top:400px; left:400px; z-index:2">
+                        <a href="#portfolio"><font size="10">서울 행사보기</font></a>
+                    </div>  
+                    <div>
+						<a href="javascript:showTabSeason(1)">봄</a>&nbsp
+						<a href="javascript:showTabSeason(2)">여름</a>&nbsp
+						<a href="javascript:showTabSeason(3)">가을</a>&nbsp
+						<a href="javascript:showTabSeason(4)">겨울</a>&nbsp
+					</div>  
 				</div>
-			
-				<div class="owl-carousel">
-					<img src="img/4.png">
-		       		<img src="img/5.png">
-		       		<img src="img/6.png">
+				<div class="contents" id="con2" style="display:none">
+					<img id="seasonJeju1" width="100%" height="800px" src="img/jeju_1.jpg">
+					<img id="seasonJeju2" width="100%" height="800px" src="img/jeju_2.jpg" style="display:none">
+					<img id="seasonJeju3" width="100%" height="800px" src="img/jeju_3.jpg" style="display:none">
+					<img id="seasonJeju4" width="100%" height="800px" src="img/jeju_4.jpg" style="display:none">
+					<div class="page-scroll" style=" position:absolute; top:400px; left:400px; z-index:2">
+                        <a href="#portfolio"><font size="10">제주도 행사보기</font></a>
+                    </div>  
+                    <div>
+						<a href="javascript:showTabSeason1(1)">봄</a>&nbsp
+						<a href="javascript:showTabSeason1(2)">여름</a>&nbsp
+						<a href="javascript:showTabSeason1(3)">가을</a>&nbsp
+						<a href="javascript:showTabSeason1(4)">겨울</a>&nbsp
+					</div>
 				</div>
 			</div>
-	
+			 <div style=" position:absolute; top:200px; left:100px; z-index:2">
+				<a href="javascript:showTabMenu(1)"><font size="7">서울</font></a><br><br><br><br>
+				<a href="javascript:showTabMenu(2)"><font size="7">제주도</font></a>
+			</div>
+
 		</div>
     </header>
      <!-- About Section -->
@@ -419,16 +478,5 @@ function popupcenter(url, title, w, h) {
 
 </body>
 <script src="js/owl.carousel.min.js"></script>
-<script>
 
-var owl = $('.owl-carousel');
-owl.owlCarousel({
-    items:3,
-    loop:true,
-    margin:100,
-    autoplay:true,
-    autoplayTimeout:5000
-});
-
-</script>
 </html>
