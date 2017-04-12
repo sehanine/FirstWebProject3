@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%
+	String email = request.getParameter("email");
+	if(email == null){
+		email = "NOT_VERIFIED";
+	} else {
+		email = "VERIFIED";
+	}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,8 +29,6 @@ $(function(){
 		var top = (screen.height/2)-(h/2);
 		window.open("../member/nickcheck.jsp","nickcheck","width=250,height=140,toolbar=no,statusbar=no,scrollbars=no, top="+top+", left="+left);
 	})
-
-	
 });
 function redirect(){
 	

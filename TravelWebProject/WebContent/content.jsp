@@ -8,6 +8,7 @@
 	if(pageNum == null){
 		pageNum = "1";
 	}   
+	
 	int TITLE_INDEX_NUMBER = 0;
 	int fesno = Integer.parseInt(pageNum);
 	int curPage = Integer.parseInt(curr);
@@ -18,7 +19,7 @@
 	ArrayList<ListVO> second_list = dao.getSecond_list(fesno);
 	ArrayList<ListVO> third_list = dao.getThird_list(fesno);
 	
-	ReplyDAO re_dao=new ReplyDAO();
+	ReplyDAO re_dao = new ReplyDAO();
 	ArrayList<ReplyVO> re_list = re_dao.replyListData(fesno);
 	
 	
@@ -48,7 +49,32 @@
 
 <style type="text/css">
 ul { list-style:none; }
+    .menui a{cursor:pointer;}
+    .menui .hidei{display:none;}
 </style>
+<script language = "javascript">
+function writeCheck()
+{
+var form = document.writeform; 
+
+if( !form.commentParentName.value ){ // form 에 있는 name 값이 없을 때 
+	alert( "이름을 적어주세요" ); // 경고창 띄움 
+	form.name.focus(); // form 에 있는 name 위치로 이동 
+	return; 
+} 
+
+if( !form.commentParentPassword.value ) { 
+	alert( "비밀번호를 적어주세요" ); 
+	form.password.focus(); 
+	return; } 
+if( !form.memo.value ) { 
+	alert( "내용을 적어주세요" ); 
+	form.memo.focus(); 
+	return; } 
+	
+	form.submit(); 
+}
+</script>
 </head>
 <body>
 	<!-- Portfolio Modals -->
@@ -103,7 +129,22 @@ ul { list-style:none; }
                            	<table id="table1" width=730 border="0px">
                             <%
                 				for(int i = 0; i < first_list.size(); i++){
-                					if(i != first_list.size() -1){
+                				
+                					if(i == 1){
+                            			%>
+                            			<tr>
+                            	
+                            				<td width="20%" align="left">
+                                       			<span style="font-weight:bold;"><%=first_list.get(i).getTitle() %></span>
+                                       		</td>
+                                 	   		<td width="80%" align="left"><%=first_list.get(i).getContent() %>
+                                 	   			&nbsp<a href="#" onclick="window.open('googleMap.jsp?add=<%=first_list.get(i).getContent() %>', '지도', 'top=100px, left=100px, height=800px, width=800px')">지도보기</a>
+                                 	   		</td>
+            	                		
+            	                			</tr>
+                            			<%
+                            					}
+                					else if(i != first_list.size() -1){
                 			%>
                 			<tr>
                 	
@@ -154,7 +195,7 @@ ul { list-style:none; }
 						 
                            
                          	  </table>
-                         	  <br/>
+                       
                          	  </div>
                              <!-- 이용안내 -->
                              <div class="menu">
@@ -181,9 +222,10 @@ ul { list-style:none; }
               
                 
                     <table class="table table-condensed" width="100%" >
-                        <tr>
+                         <form name=writeform method=post action="reply_ok.jsp?page=<%=pageNum%>&curr=<%=curr%>">
+                          <tr>
                             <td>
-                            <h3 align="left">자유로운 이야기</h1><br>   
+                            <h3 align="left">자유로운 이야기</h3><br>   
                                     <p align="left">
                                         
                                            <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10">
@@ -192,13 +234,17 @@ ul { list-style:none; }
                                     </p>
                                    
                                     <div align="left" style="padding:10px 10px 10px 10px; background-color: #c8c8c8;" >
-                                        
-                                        <textarea id="commentParentText" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
-                                        <button type="button" id="commentParentSubmit" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;">보내기</button>
-                                    	
+                                      <textarea id="commentParentText" name="memo" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
+                                        <button type="button" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;" OnClick="javascript:writeCheck();">보내기</button>
+                                     <!--     
+                                        <textarea id="commentParentText" name="memo" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
+                                        <button type="button" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;">보내기</button>
+                                    	-->
                                     </div>
                                  
-                            
+                            </td>
+                          </tr>
+                     	</form>
                     </table>
                     <br><br>
                     <table id="commentTable" class="table table-condensed" width="100%">
@@ -209,7 +255,17 @@ ul { list-style:none; }
                     	<tr id="r1" name="commentParentCode">
                     		<td colspan=2>
                     			<strong><%=re_list.get(i).getReply_name() %></strong><%=re_list.get(i).getReply_pass() %>
-                    			<a style="cursor:pointer;" 	name="pDel">삭제</a>
+                    			<%-- <a style="cursor:pointer;" 	name="pDel" 
+                    				OnClick="window.location='delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>'">삭제</a>
+      --%>  					    <span class="menui">
+                    				<a style="cursor:pointer;" 	name="pDel" >삭제</a>
+                    					<span class="hidei">
+                    						비밀번호:
+                    						<input name="password" type="password" size="20" >
+                    						<input type=button value="확인" OnClick="window.location='delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>'">
+                    					</span> 
+                    				</span>
+                    			
                     			<p><%=re_list.get(i).getReply_comment() %></p>
                     		</td>
                     	</tr>
@@ -253,7 +309,6 @@ ul { list-style:none; }
     
     
     
-<script src="js/reply.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script>
     // html dom 이 다 로딩된 후 실행된다.
@@ -267,7 +322,18 @@ ul { list-style:none; }
     });   
     
 </script>
-
+<script>
+    // html dom 이 다 로딩된 후 실행된다.
+    $(document).ready(function(){
+        // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+        $(".menui>a").click(function(){
+            // 현재 클릭한 태그가 a 이기 때문에
+            // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
+            $(this).next("span").toggleClass("hidei");
+        });
+    });   
+    
+</script>
 <script>
 var owl = $('.owl-carousel');
 owl.owlCarousel({

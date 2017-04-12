@@ -16,7 +16,7 @@ public class JavaMailAPI {
 	   * @param to 받는 사람
 	   * @param ranCode 랜덤 코드
 	   */
-	public JavaMailAPI(String to, String ranCode){
+	public JavaMailAPI(String to, String ranCode, String nick, String pwd){
 		
 		String from = "festigo.master@gmail.com";
 		
@@ -45,7 +45,13 @@ public class JavaMailAPI {
 			
 			
 			   message.setSubject("festigo 회원가입 이메일 인증");
-			   message.setText("festigo 회원가입 이메일 인증\n" + "인증번호: " + ranCode);
+			   message.setText(
+					   "안녕하세요 " + nick + "님, festigo입니다.\n\n" 
+					  +"닉네임: " + nick + "\n"
+					  +"비밀번호: " + pwd + "\n"
+					  
+					  +"\n이메일을 인증해 주세요.\n"
+					  +"인증번호: " + ranCode + "\n");
 
 			   // Send message
 			   Transport.send(message);
@@ -56,10 +62,6 @@ public class JavaMailAPI {
 		         throw new RuntimeException(e);
 		      }
 		   
-	}
-
-	public static void main(String[] args){
-		new JavaMailAPI("mymintah@gmail.com", "랜덤코드");
 	}
 
 }

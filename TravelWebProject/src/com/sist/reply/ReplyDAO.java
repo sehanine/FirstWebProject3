@@ -8,12 +8,26 @@ public class ReplyDAO {
 
 	private Connection conn;
 	private PreparedStatement ps;
+
 	private final String URL="jdbc:oracle:thin:@211.238.142.214:1521:ORCL";
+	private PreparedStatement ps2;
 	private static ReplyDAO dao;
 
 	//드라이버 등록
 	public ReplyDAO(){
+//		try{
+//			dropAll();
+//		}catch(Exception e){
+//			System.out.println("drop table");
+//		}
+//		
+//		try{
+//			initAll();
+//		}catch(Exception e){
+//			System.out.println("init table");
+//		}
 		try{
+			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
 		}catch(Exception ex){
@@ -110,32 +124,116 @@ public class ReplyDAO {
 	}
 	
 	//delete
-	public void replyDelete(int reply_ID){
+	public void replyDelete(int fesno,int idx){
 		try{
 			getConnection();
-			String sql="DELETE FROM project_reply "
-						+"WHERE reply_ID=?";
+			String sql="SELECT reply_ID FROM (SELECT project_reply.*,row_number() "
+					+ "OVER(ORDER BY reply_ID ASC) RN FROM project_reply WHERE fesno=? "
+					+ ")WHERE RN=?";
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, reply_ID);
-			ps.executeUpdate();
+			ps.setInt(1, fesno);
+			ps.setInt(2, idx);
+			ResultSet rs=ps.executeQuery();
+			String id="";
+			while(rs.next()){
+				id=rs.getString(1);
+			}
+			System.out.println(id);
+			String sql2="DELETE FROM project_reply WHERE reply_ID=?";
+			ps2=conn.prepareStatement(sql2);
+			ps2.setString(1, id);
+			
+			ps2.executeUpdate();
 			
 		}catch(Exception ex){
-			System.out.println("replyInsert()"+ex.getMessage());
+			System.out.println("replyDelete()"+ex.getMessage());
 		}finally{
 			disConnection();
 		}
 		
 	}
+
+	public void dropAll(){
+		try{
+			getConnection();
+			String[] sql = {
+					"DROP TABLE project_reply CASCADE CONSTRAINTS",
+					"DROP SEQUENCE seq_re_no"
+			};
+			for(int i = 0; i < sql.length; i++){
+				ps=conn.prepareStatement(sql[i]);
+				ps.executeUpdate();
+			}
+		} catch(Exception ex){
+			ex.printStackTrace();
+		} finally{
+			disConnection();
+		}
+	}
+	public void initAll(){
+		String[] sql = {
+				"CREATE TABLE project_reply( "
+				+ "fesno NUMBER NOT NULL ,"
+				+ "reply_ID NUMBER NOT NULL,"
+				+ "reply_name VARCHAR2(20),"
+				+ "reply_pass VARCHAR2(20),"
+				+ "reply_regdate DATE  DEFAULT sysdate,"
+				+ "reply_comment CLOB)",
+				
+				"CREATE SEQUENCE seq_re_no "
+				+ "START WITH 0 "
+				+ "INCREMENT BY 1 "
+				+ "NOCACHE "
+				+ "NOCYCLE "
+				+ "MINVALUE 0 "
+		};
+		
+		try{
+			getConnection();
+			for(int i = 0; i < sql.length; i++){
+				ps=conn.prepareStatement(sql[i]);
+				ps.executeUpdate();
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			disConnection();
+		}
+	}
+
 	
+	//삭제시 비밀번호 확인
+	public boolean replyPassCheck(int fesno,int idx,String pass){
+		boolean check=false;
+		try{
+			getConnection();
+			String sql="SELECT reply_pass FROM (SELECT project_reply.*,row_number() "
+					+ "OVER(ORDER BY reply_ID ASC) RN FROM project_reply WHERE fesno=? "
+					+ ")WHERE RN=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, fesno);
+			ps.setInt(2, idx);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()){
+				if(pass.equals(rs.getString(1))){
+					check=true;
+				}
+				
+			}
+			
+		}catch(Exception ex){
+			System.out.println("replyPassCheck()"+ex.getMessage());
+		}finally{
+			disConnection();
+		}
+		
+		return check;
+	}
+	
+
 	public static void main(String[] args) {
+		
 		ReplyDAO dao=new ReplyDAO();
-		ArrayList<ReplyVO> list=dao.replyListData(1);
-		ReplyVO vo = new ReplyVO();
-		vo.setFesno(1);
-		vo.setReply_name("김경철");
-		vo.setReply_pass("1234");
-		vo.setReply_comment("암튼 가지마셈");
-		dao.replyInsert(vo);
 		
 	}
 	

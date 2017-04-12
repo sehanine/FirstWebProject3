@@ -1,14 +1,15 @@
 package web.member;
 
 public class MemberVO {
-	private int member_no;
+	private String pwd;
 	private String email;
 	private String nickname;
-	public int getMember_no() {
-		return member_no;
+	
+	public String getPwd() {
+		return pwd;
 	}
-	public void setMember_no(int member_no) {
-		this.member_no = member_no;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public String getEmail() {
 		return email;

@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" import="java.util.ArrayList, web.dao.*"%>
-
 <%
-	
 	String pageNum = request.getParameter("page");
-	
+	String email;
+	try{
+		email = session.getAttribute("email").toString();
+	} catch(Exception e){
+		email = null;
+	}
 	if(pageNum == null){
 		pageNum = "1";
 	}   
@@ -13,6 +16,7 @@
 	QueryDAO dao = new QueryDAO();    
 	ArrayList<MainVO> list = dao.boardListData(curPage);
 	int totalPage = dao.getDivPage();
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -45,7 +49,7 @@ $(function(){
 
 var i=0;
 $(function(){
-	$('#logBtn').click(function(){
+	$('#member-join').click(function(){
 		if(i==0){
 			$('#logPop').show();
 			i=1;
@@ -69,7 +73,42 @@ function popupcenter(url, title, w, h) {
 	  var top = (screen.height/2)-(h/2);
 	  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
 };
+function showTabMenu(n){
+	var conId;
 
+	for(i=1;i < 3; i++){
+	conId = document.getElementById("con"+i);	
+	if(i==n){
+	conId.style.display = "";
+	}else{
+	conId.style.display = "none";
+	}
+	}
+	}
+function showTabSeason(n){
+	var seasonId;
+
+	for(i=1;i < 5; i++){
+		seasonId = document.getElementById("seasonSeoul"+i);	
+	if(i==n){
+		seasonId.style.display = "";
+	}else{
+		seasonId.style.display = "none";
+	}
+	}
+	}
+function showTabSeason1(n){
+	var seasonId;
+
+	for(i=1;i < 5; i++){
+		seasonId = document.getElementById("seasonJeju"+i);	
+	if(i==n){
+		seasonId.style.display = "";
+	}else{
+		seasonId.style.display = "none";
+	}
+	}
+	}
 </script>
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
@@ -86,7 +125,8 @@ function popupcenter(url, title, w, h) {
 	<link rel="stylesheet" href="css/owl.theme.green.min.css">
 	<link rel="stylesheet" href="css/owl.theme.green.css">
 	<link rel="stylesheet" href="css/update.css">
-
+	<link rel="stylesheet" href="css/loginstyle.css">
+	<link rel="stylesheet" href="css/header1.css">
 </head>
 <body id="page-top" class="index">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
@@ -118,13 +158,44 @@ function popupcenter(url, title, w, h) {
                     <li class="page-scroll">
                         <a href="#contact">Contact Us</a>
                     </li>
-                    <li class="page-scroll" id="logBtn">
-                        <a>Log-in</a>
+                   
+                    <%
+                    	if(email == null){
+                    %>
+                    <li id="member-join">
+                    	<a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>	
                     </li>
-                    <li id="logBtn">
-                    	<a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>
-                    	
+                    <li class="page-scroll" id="logBtn" style="position: fixed; left: 77%;">
+                    	<a id="loginform">로그인</a>
+                    	<div class="login">
+					      <div class="arrow-up"></div>
+					      <div class="formholder">
+					        <div class="randompad">
+					           <form action="member/login_ok.jsp">
+					             <label name="email">Email</label>
+					             <input type="email" name="input_email" value="example@example.com"/>
+					             <label name="password">Password</label>
+					             <input type="password" name="input_pwd" />
+					             <input type="submit" value="Login" />
+					           </form>
+					        </div>
+					      </div>
+					    </div>
+					    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+						<script src="js/login.js"></script>
                     </li>
+                    <%
+                    	} else {
+                    %>
+                   	 <li id="my-page"> <!--  마이페이지 창크기 -->
+                    	<a onclick="javascript:popupcenter('mypage/mypage.jsp', '마이페이지', 840, 740)">마이페이지</a>	
+                   	 </li>
+                     <li id="logout"> <!--  마이페이지 창크기 -->
+                    	<a onclick="location.href='member/logout.jsp?email=<%=email%>'">로그아웃</a>	
+                   	 </li>
+                    <%
+                    	}
+                    %>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -135,22 +206,70 @@ function popupcenter(url, title, w, h) {
     <!-- Header -->
     <header>
     	<div class="slide">
-    	 	<div id="first_list">
-		       	<div class="owl-carousel">
-		       		<img src="img/1.png">
-		       		<img src="img/2.png">
-		       		<img src="img/3.png">
+
+			<div>
+				<div class="contents" id="con1">
+					<img id="seasonSeoul1" width="100%" height="800px" src="img/seoul_1.jpg">
+					<img id="seasonSeoul2" width="100%" height="800px" src="img/seoul_2.jpg" style="display:none">
+					<img id="seasonSeoul3" width="100%" height="800px" src="img/seoul_3.jpg" style="display:none">
+					<img id="seasonSeoul4" width="100%" height="800px" src="img/seoul_4.jpg" style="display:none">
+					<div class="page-scroll" style=" position:absolute; top:400px; left:400px; z-index:2">
+                        <a href="#portfolio"><font size="10">서울 행사보기</font></a>
+                    </div>  
+                    <div>
+						<a href="javascript:showTabSeason(1)">봄</a>&nbsp
+						<a href="javascript:showTabSeason(2)">여름</a>&nbsp
+						<a href="javascript:showTabSeason(3)">가을</a>&nbsp
+						<a href="javascript:showTabSeason(4)">겨울</a>&nbsp
+					</div>  
 				</div>
-			
-				<div class="owl-carousel">
-					<img src="img/4.png">
-		       		<img src="img/5.png">
-		       		<img src="img/6.png">
+				<div class="contents" id="con2" style="display:none">
+					<img id="seasonJeju1" width="100%" height="800px" src="img/jeju_1.jpg">
+					<img id="seasonJeju2" width="100%" height="800px" src="img/jeju_2.jpg" style="display:none">
+					<img id="seasonJeju3" width="100%" height="800px" src="img/jeju_3.jpg" style="display:none">
+					<img id="seasonJeju4" width="100%" height="800px" src="img/jeju_4.jpg" style="display:none">
+					<div class="page-scroll" style=" position:absolute; top:400px; left:400px; z-index:2">
+                        <a href="#portfolio"><font size="10">제주도 행사보기</font></a>
+                    </div>  
+                    <div>
+						<a href="javascript:showTabSeason1(1)">봄</a>&nbsp
+						<a href="javascript:showTabSeason1(2)">여름</a>&nbsp
+						<a href="javascript:showTabSeason1(3)">가을</a>&nbsp
+						<a href="javascript:showTabSeason1(4)">겨울</a>&nbsp
+					</div>
 				</div>
 			</div>
-	
+			 <div style=" position:absolute; top:200px; left:100px; z-index:2">
+				<a href="javascript:showTabMenu(1)"><font size="7">서울</font></a><br><br><br><br>
+				<a href="javascript:showTabMenu(2)"><font size="7">제주도</font></a>
+			</div>
+
 		</div>
     </header>
+     <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="#" class="btn btn-lg btn-outline">
+                        <i class="fa fa-download"></i> Download Theme
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
@@ -198,13 +317,12 @@ function popupcenter(url, title, w, h) {
 			&#10095;</button>
     
     </section>
-
-    <!-- About Section -->
-    <section class="success" id="about">
+ 	<!-- About2 Section -->
+    <section class="success" id="about2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>About</h2>
+                    <h2>About2</h2>
                     <hr class="star-light">
                 </div>
             </div>
@@ -223,6 +341,7 @@ function popupcenter(url, title, w, h) {
             </div>
         </div>
     </section>
+   
 
     <!-- Contact Section -->
    
@@ -313,7 +432,7 @@ function popupcenter(url, title, w, h) {
                     </div>
                     <div class="footer-col col-md-4">
                         <h3>About Us</h3>
-                        <p>Festigo is created by open source, <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                        <p>Festigo is created by open source, <a href="board/list.jsp">Contact Board</a>.</p>
                     </div>
                 </div>
             </div>
@@ -359,16 +478,5 @@ function popupcenter(url, title, w, h) {
 
 </body>
 <script src="js/owl.carousel.min.js"></script>
-<script>
 
-var owl = $('.owl-carousel');
-owl.owlCarousel({
-    items:3,
-    loop:true,
-    margin:100,
-    autoplay:true,
-    autoplayTimeout:5000
-});
-
-</script>
 </html>

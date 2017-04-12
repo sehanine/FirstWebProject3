@@ -5,13 +5,13 @@
 	request.setCharacterEncoding("UTF-8");
 	int status = 0;
 	String email = request.getParameter("id"); // javascript의 밸류
-	System.out.println("parameter: " + email);
+	
 	if(email == null){
 		status = 0;
 	} else {
 		status = 1;
 	}
-	System.out.println("status: " + status);
+	
 	MemberDAO dao = new MemberDAO();
 	
 	int count = dao.isValueExist(email, "email");
