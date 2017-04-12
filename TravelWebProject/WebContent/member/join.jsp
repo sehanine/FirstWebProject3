@@ -29,8 +29,6 @@ $(function(){
 		var top = (screen.height/2)-(h/2);
 		window.open("../member/nickcheck.jsp","nickcheck","width=250,height=140,toolbar=no,statusbar=no,scrollbars=no, top="+top+", left="+left);
 	})
-
-	
 });
 function redirect(){
 	

@@ -8,7 +8,8 @@
 	String email=request.getParameter("email");
 	String subject=request.getParameter("subject");
 	String content=request.getParameter("content");
-	String pwd=request.getParameter("pwd");
+	//String pwd=request.getParameter("pwd");
+	String pwd = "1234";
 	
 	TeamVO vo=new TeamVO();
 	vo.setName(name);
@@ -16,7 +17,6 @@
 	vo.setSubject(subject);
 	vo.setContent(content);
 	vo.setPwd(pwd);
-	
 	
 	TeamDAO dao=TeamDAO.newInstance();
 	dao.boardInsert(vo);

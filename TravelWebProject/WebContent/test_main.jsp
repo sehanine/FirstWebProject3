@@ -2,7 +2,12 @@
     pageEncoding="EUC-KR" import="java.util.ArrayList, web.dao.*"%>
 <%
 	String pageNum = request.getParameter("page");
-	
+	String email;
+	try{
+		email = session.getAttribute("email").toString();
+	} catch(Exception e){
+		email = null;
+	}
 	if(pageNum == null){
 		pageNum = "1";
 	}   
@@ -11,6 +16,7 @@
 	QueryDAO dao = new QueryDAO();    
 	ArrayList<MainVO> list = dao.boardListData(curPage);
 	int totalPage = dao.getDivPage();
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -117,6 +123,10 @@ function popupcenter(url, title, w, h) {
                     <li class="page-scroll">
                         <a href="#contact">Contact Us</a>
                     </li>
+                   
+                    <%
+                    	if(email == null){
+                    %>
                     <li id="member-join">
                     	<a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>	
                     </li>
@@ -139,6 +149,18 @@ function popupcenter(url, title, w, h) {
 					    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 						<script src="js/login.js"></script>
                     </li>
+                    <%
+                    	} else {
+                    %>
+                   	 <li id="my-page"> <!--  마이페이지 창크기 -->
+                    	<a onclick="javascript:popupcenter('mypage/mypage.jsp', '마이페이지', 840, 740)">마이페이지</a>	
+                   	 </li>
+                     <li id="logout"> <!--  마이페이지 창크기 -->
+                    	<a onclick="location.href='member/logout.jsp?email=<%=email%>'">로그아웃</a>	
+                   	 </li>
+                    <%
+                    	}
+                    %>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -165,6 +187,30 @@ function popupcenter(url, title, w, h) {
 	
 		</div>
     </header>
+     <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="#" class="btn btn-lg btn-outline">
+                        <i class="fa fa-download"></i> Download Theme
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
@@ -212,13 +258,12 @@ function popupcenter(url, title, w, h) {
 			&#10095;</button>
     
     </section>
-
-    <!-- About Section -->
-    <section class="success" id="about">
+ 	<!-- About2 Section -->
+    <section class="success" id="about2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>About</h2>
+                    <h2>About2</h2>
                     <hr class="star-light">
                 </div>
             </div>
@@ -237,6 +282,7 @@ function popupcenter(url, title, w, h) {
             </div>
         </div>
     </section>
+   
 
     <!-- Contact Section -->
    
