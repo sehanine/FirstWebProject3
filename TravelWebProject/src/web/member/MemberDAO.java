@@ -94,6 +94,8 @@ public class MemberDAO {
 	 * @param target select condition
 	 * @param target2 where condition
 	 * @return string value
+	 * int nick = dao.getValue(pk, "nickname", "email")
+	 * int string = dao.getValue(kkc@naver.com, "pwd", "email")
 	 */
 	public String getValue(String id, String target, String target2){
 		String str = null;
@@ -123,7 +125,7 @@ public class MemberDAO {
 	 * @param id (email, pwd, nickname, is_login)의 고유값
 	 * id = "aa@naver.com" || "mintah@naver.com" ...
 	 * @param target colum_id ('email', 'pwd', 'nickname', 'is_login')
-	 * target = "email" || "pwd" || "nickname" || "is_login"
+	 * target = "email" || "pwd" || "nickname" ||
 	 * @return 
 	 */
 	public String getValue(String id, String target){

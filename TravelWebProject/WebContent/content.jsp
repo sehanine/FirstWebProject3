@@ -1,6 +1,6 @@
 <%@page import="com.sist.reply.ReplyDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import ="web.dao.*, java.util.ArrayList, com.sist.reply.*"%>
+    pageEncoding="UTF-8" import ="web.dao.*, java.util.ArrayList, com.sist.reply.*, web.member.*"%>
 
 <%
 	String pageNum = request.getParameter("page");
@@ -21,6 +21,23 @@
 	
 	ReplyDAO re_dao = new ReplyDAO();
 	ArrayList<ReplyVO> re_list = re_dao.replyListData(fesno);
+	
+	String email="";
+	try{
+	email= session.getAttribute("email").toString();
+	}catch(Exception ex){
+	}
+	MemberDAO member;
+	String nick="";
+	String pwd="";
+	
+	boolean login_check=false;
+	if(email!=""){
+		login_check=true;
+		member = new MemberDAO();
+		nick = member.getValue(email, "nickname", "email");
+		pwd = member.getValue(email, "pwd", "email");	
+	}
 	
 	
 %>
@@ -49,8 +66,6 @@
 
 <style type="text/css">
 ul { list-style:none; }
-    .menui a{cursor:pointer;}
-    .menui .hidei{display:none;}
 </style>
 <script language = "javascript">
 function writeCheck()
@@ -227,19 +242,19 @@ if( !form.memo.value ) {
                             <td>
                             <h3 align="left">자유로운 이야기</h3><br>   
                                     <p align="left">
-                                        
+                                        <%if(login_check==true){%>
+                                            <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10" value=<%=nick %> readOnly >
+                                         	<input type="hidden" id="commentParentPassword" name="commentParentPassword" class="form-control col-lg-2" data-rule-required="true" placeholder="패스워드" maxlength="10" value=<%=pwd %>>
+                                          <%}else{ %>  
                                            <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10">
                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                            <input type="password" id="commentParentPassword" name="commentParentPassword" class="form-control col-lg-2" data-rule-required="true" placeholder="패스워드" maxlength="10">
+                                    	<%} %>
                                     </p>
                                    
                                     <div align="left" style="padding:10px 10px 10px 10px; background-color: #c8c8c8;" >
-                                      <textarea id="commentParentText" name="memo" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
-                                        <button type="button" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;" OnClick="javascript:writeCheck();">보내기</button>
-                                     <!--     
-                                        <textarea id="commentParentText" name="memo" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
-                                        <button type="button" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;">보내기</button>
-                                    	-->
+                                   		<textarea id="commentParentText" name="memo" class="form-control col-lg-12" style="width:70%; height:100px"></textarea>
+                                    	<button type="button" name="commentParentSubmit" class="btn btn-default" style="display: inline-block; padding: 19px; vertical-align: top; background-color: #79bfc0; color: white;" OnClick="javascript:writeCheck();">보내기</button>
                                     </div>
                                  
                             </td>
@@ -255,17 +270,7 @@ if( !form.memo.value ) {
                     	<tr id="r1" name="commentParentCode">
                     		<td colspan=2>
                     			<strong><%=re_list.get(i).getReply_name() %></strong><%=re_list.get(i).getReply_pass() %>
-                    			<%-- <a style="cursor:pointer;" 	name="pDel" 
-                    				OnClick="window.location='delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>'">삭제</a>
-      --%>  					    <span class="menui">
-                    				<a style="cursor:pointer;" 	name="pDel" >삭제</a>
-                    					<span class="hidei">
-                    						비밀번호:
-                    						<input name="password" type="password" size="20" >
-                    						<input type=button value="확인" OnClick="window.location='delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>'">
-                    					</span> 
-                    				</span>
-                    			
+                    			<a style="cursor:pointer;" 	name="pDel" OnClick="window.location='delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>'">삭제</a>
                     			<p><%=re_list.get(i).getReply_comment() %></p>
                     		</td>
                     	</tr>
@@ -322,18 +327,7 @@ if( !form.memo.value ) {
     });   
     
 </script>
-<script>
-    // html dom 이 다 로딩된 후 실행된다.
-    $(document).ready(function(){
-        // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
-        $(".menui>a").click(function(){
-            // 현재 클릭한 태그가 a 이기 때문에
-            // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
-            $(this).next("span").toggleClass("hidei");
-        });
-    });   
-    
-</script>
+
 <script>
 var owl = $('.owl-carousel');
 owl.owlCarousel({
