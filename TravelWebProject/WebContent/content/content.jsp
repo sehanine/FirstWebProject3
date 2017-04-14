@@ -50,44 +50,45 @@
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	 -->
  
-    <link href="css/freelancer.min.css" rel="stylesheet">
-    
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-	<link href="css/update.css" rel="stylesheet" type="text/css">
-	<link href="css/event1.css" rel="stylesheet" type="text/css" >
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="css/owl.theme.green.min.css">
-	<link rel="stylesheet" href="css/owl.theme.green.css">
-	
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../css/freelancer.min.css">
+
+<link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" type="text/css">
+<link rel="stylesheet" href="../css/update.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/event1.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/owl.carousel.min.css">
+<link rel="stylesheet" href="../css/owl.theme.default.min.css">
+<link rel="stylesheet" href="../css/owl.theme.green.min.css">
+<link rel="stylesheet" href="../css/owl.theme.green.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <style type="text/css">
 ul { list-style:none; }
 </style>
+
 <script language = "javascript">
 function writeCheck()
 {
-var form = document.writeform; 
-
-if( !form.commentParentName.value ){ // form 에 있는 name 값이 없을 때 
-	alert( "이름을 적어주세요" ); // 경고창 띄움 
-	form.name.focus(); // form 에 있는 name 위치로 이동 
-	return; 
-} 
-
-if( !form.commentParentPassword.value ) { 
-	alert( "비밀번호를 적어주세요" ); 
-	form.password.focus(); 
-	return; } 
-if( !form.memo.value ) { 
-	alert( "내용을 적어주세요" ); 
-	form.memo.focus(); 
-	return; } 
+	var form = document.writeform; 
 	
-	form.submit(); 
+	if( !form.commentParentName.value ){ // form 에 있는 name 값이 없을 때 
+		alert( "이름을 적어주세요" ); // 경고창 띄움 
+		form.name.focus(); // form 에 있는 name 위치로 이동 
+		return; 
+	} 
+	
+	if( !form.commentParentPassword.value ) { 
+		alert( "비밀번호를 적어주세요" ); 
+		form.password.focus(); 
+		return; } 
+	if( !form.memo.value ) { 
+		alert( "내용을 적어주세요" ); 
+		form.memo.focus(); 
+		return; } 
+		
+		form.submit(); 
 }
 </script>
 </head>
@@ -95,7 +96,7 @@ if( !form.memo.value ) {
 	<!-- Portfolio Modals -->
     <div class="portfolio-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" onclick="location.href='test_main.jsp?page=<%=curPage %>#portfolio'">
+            <div class="close-modal" onclick="location.href='../main/main.jsp?page=<%=curPage %>#portfolio'">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -288,7 +289,7 @@ if( !form.memo.value ) {
                                 <li>·등록 및 수정문의:02-123-4567
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" onclick="location.href='test_main.jsp?page=<%=curPage %>#portfolio'" 
+                            <button type="button" class="btn btn-default" onclick="location.href='../main/main.jsp?page=<%=curPage %>#portfolio'" 
                             style="WIDTH: 80pt; HEIGHT: 40pt; background-color: #79bfc0; color: white;"></i> Close</button>
                         </div>
                     </div>
@@ -298,23 +299,23 @@ if( !form.memo.value ) {
     </div>
     
     <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="../js/jqBootstrapValidation.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="js/freelancer.min.js"></script>
+    <script src="../js/freelancer.min.js"></script>
     
     
-    
-<script src="js/owl.carousel.min.js"></script>
+    <!-- Slide show JavaScript -->
+	<script src="../js/owl.carousel.min.js"></script>
 <script>
     // html dom 이 다 로딩된 후 실행된다.
     $(document).ready(function(){
@@ -344,8 +345,8 @@ owl.owlCarousel({
 <script language="javascript">
 
 function allblur() {
-for (i = 0; i < document.links.length; i++)
-document.links[i].onfocus = document.links[i].blur;
+	for (i = 0; i < document.links.length; i++)
+		document.links[i].onfocus = document.links[i].blur;
 }
 
 </script>

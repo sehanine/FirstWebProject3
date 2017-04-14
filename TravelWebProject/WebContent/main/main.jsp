@@ -29,9 +29,9 @@
 <title>FestiGo</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script type="text/javascript" src="shadow/js/shadowbox.js"></script>
-<link rel="stylesheet" type="text/css" href="shadow/css/table.css">
-<link rel="stylesheet" type="text/css" href="shadow/css/shadowbox.css">
+<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
+<link rel="stylesheet" type="text/css" href="../shadow/css/table.css">
+<link rel="stylesheet" type="text/css" href="../shadow/css/shadowbox.css">
 
 <script type="text/javascript">
 
@@ -89,11 +89,11 @@ function showTabSeason(n){
 
 	for(i=1;i < 5; i++){
 		seasonId = document.getElementById("season"+i);	
-	if(i==n){
-		seasonId.style.display = "";
-	}else{
-		seasonId.style.display = "none";
-	}
+		if(i==n){
+			seasonId.style.display = "";
+		}else{
+			seasonId.style.display = "none";
+		}
 	}
 	
 	$("#menu li").removeClass();
@@ -102,19 +102,19 @@ function showTabSeason(n){
 }
 	
 </script>
-	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
     <!-- Theme CSS -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
+    <link href="../css/freelancer.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-	<link href="css/w3.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="css/update.css">
-	<link rel="stylesheet" href="css/loginstyle.css">
-	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="../css/w3.css" type="text/css">
+	<link rel="stylesheet" href="../css/update.css">
+	<link rel="stylesheet" href="../css/loginstyle.css">
+	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body id="page-top" class="index">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
@@ -154,7 +154,7 @@ function showTabSeason(n){
                     	<!--  <a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>-->
                     	<!-- modal test -->
                     	<!--  shadow box --> 
-                    	<a onclick="javascript:boxopen('member/join.jsp', '회원가입', 440, 470)">회원가입</a>
+                    	<a onclick="javascript:boxopen('../member/join.jsp', '회원가입', 440, 470)">회원가입</a>
                     	
                     </li>
                     
@@ -164,7 +164,7 @@ function showTabSeason(n){
 					      <div class="arrow-up"></div>
 					      <div class="formholder">
 					        <div class="randompad">
-					           <form action="member/login_ok.jsp">
+					           <form action="../member/login_ok.jsp">
 					             <label name="email">Email</label>
 					             <input type="email" name="input_email" value="example@example.com"/>
 					             <label name="password">Password</label>
@@ -175,16 +175,16 @@ function showTabSeason(n){
 					      </div>
 					    </div>
 					    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-						<script src="js/login.js"></script>
+						<script src="../js/login.js"></script>
                     </li>
                     <%
                     	} else {
                     %>
                    	 <li id="my-page"> <!--  마이페이지 창크기 -->
-                    	<a onclick="javascript:boxopen('mypage/mypage.jsp', '마이페이지', 840, 740)">마이페이지</a>	
+                    	<a onclick="javascript:boxopen('../mypage/mypage.jsp', '마이페이지', 840, 740)">마이페이지</a>	
                    	 </li>
                      <li id="logout"> <!--  마이페이지 창크기 -->
-                    	<a onclick="location.href='member/logout.jsp?email=<%=email%>'">로그아웃</a>	
+                    	<a onclick="location.href='../member/logout.jsp?email=<%=email%>'">로그아웃</a>	
                    	 </li>
                     <%
                     	}
@@ -208,52 +208,52 @@ function showTabSeason(n){
 			<div class="contents">
 				<!-- 첫 번째 박스 -->
 				<div id="season1" >
-					<img src="img/bg1.jpg" width="100%" height="960px">
+					<img src="../img/bg1.jpg" width="100%" height="960px">
 					<div class=mouseMove>
 						<article>
 							<p>FULL BLOSSOM</p>
 							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
 						</article>
-						<img class="p11" src="img/obj11.png" />
-						<img class="p12" src="img/obj12.png" />
-						<img class="p13" src="img/obj13.png" />
+						<img class="p11" src="../img/obj11.png" />
+						<img class="p12" src="../img/obj12.png" />
+						<img class="p13" src="../img/obj13.png" />
 					</div>
 				</div>
 				<!-- 두 번째 박스 -->
 				<div id="season2" style="display:none">
-					<img width="100%" height="960px" src="img/bg2.jpg" >
+					<img width="100%" height="960px" src="../img/bg2.jpg" >
 					<div class=mouseMove>
 						<article>
 							<p>BE COLORFUL</p>
 							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
 						</article>
-						<img class="p21" src="img/obj21.png" />
-						<img class="p22" src="img/obj22.png" />
+						<img class="p21" src="../img/obj21.png" />
+						<img class="p22" src="../img/obj22.png" />
 					</div>
 				</div>	
 				<!-- 세 번째 박스 -->	
 				<div id="season3" style="display:none">
-					<img width="100%" height="960px" src="img/bg3.jpg">
+					<img width="100%" height="960px" src="../img/bg3.jpg">
 					<div class=mouseMove>
 						<article>
 							<p>TIME ON BOARD</p>
 							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
 						</article>
-						<img class="p31" src="img/obj31.png" />
-						<img class="p32" src="img/obj32.png" />
-						<img class="p33" src="img/obj33.png" />
+						<img class="p31" src="../img/obj31.png" />
+						<img class="p32" src="../img/obj32.png" />
+						<img class="p33" src="../img/obj33.png" />
 					</div>
 				</div>	
 				<!-- 네 번째 박스 -->
 				<div id="season4" style="display:none">
-					<img width="100%" height="960px" src="img/bg4.jpg">
+					<img width="100%" height="960px" src="../img/bg4.jpg">
 					<div class=mouseMove>
 						<article>
 							<p>SHINY ADDICT</p>
 							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
 						</article>
-						<img class="p41" src="img/obj41.png" />
-						<img class="p42" src="img/obj42.png" />
+						<img class="p41" src="../img/obj41.png" />
+						<img class="p42" src="../img/obj42.png" />
 					</div>
 				</div>
 				
@@ -305,7 +305,7 @@ function showTabSeason(n){
            			String url = dao.getFirstImage(vo.getFesno());
             %>
                 <div class="col-sm-4 portfolio-item">
-                    <a href="content.jsp?page=<%=vo.getFesno() %>&curr=<%=curPage %>" class="portfolio-link" data-toggle="modal">
+                    <a href="../content/content.jsp?page=<%=vo.getFesno() %>&curr=<%=curPage %>" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
                                 <i class="fa fa-search-plus fa-3x"></i>
@@ -372,7 +372,7 @@ function showTabSeason(n){
                 <div class="col-lg-8 col-lg-offset-2">
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                    <form action="test/send_ok.jsp"  method="post" name="frm" >
+                    <form action="../board/send_ok.jsp"  method="post" name="frm" >
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label for="name">이름</label>
@@ -447,7 +447,7 @@ function showTabSeason(n){
                     </div>
                     <div class="footer-col col-md-4">
                         <h3>About Us</h3>
-                        <p>Festigo is created by open source, <a href="board/list.jsp">Contact Board</a>.</p>
+                        <p>Festigo is created by open source, <a href="../board/list.jsp">Contact Board</a>.</p>
                     </div>
                 </div>
             </div>
@@ -473,25 +473,24 @@ function showTabSeason(n){
     
 
     <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="../js/jqBootstrapValidation.js"></script>
   <!-- 
     <script src="js/contact_me.js"></script>  이메일 기능 삭제
  	-->
     <!-- Theme JavaScript -->
-    <script src="js/freelancer.min.js"></script>
-	<script type="text/javascript" src="js/custom.js"></script>
+    <script src="../js/freelancer.min.js"></script>
+	<script src="../js/custom.js" type="text/javascript"></script>
 
 
 </body>
-<script src="js/owl.carousel.min.js"></script>
 
 </html>

@@ -3,5 +3,5 @@
 <%
 	String email = session.getAttribute("email").toString();
 	session.removeAttribute("email"); 
-	response.sendRedirect("../test_main.jsp");
+	response.sendRedirect("../main/main.jsp");
 %>

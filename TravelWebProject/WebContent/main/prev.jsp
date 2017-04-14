@@ -6,11 +6,11 @@
 	int curPage = Integer.parseInt(currentPage);
 	QueryDAO dao = new QueryDAO();
 	int maxPage = dao.getDivPage();
-	if(curPage >= maxPage){
-		curPage = 1;
+	if(curPage <= 1){
+		curPage = maxPage;
 	} else{
-		curPage++;
+		curPage--;
 	}
-	response.sendRedirect("test_main.jsp?page=" +curPage +"#portfolio");
-	
+	response.sendRedirect("main.jsp?page=" +curPage +"#portfolio");
+
 %>

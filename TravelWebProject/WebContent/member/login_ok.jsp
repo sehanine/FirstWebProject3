@@ -30,7 +30,7 @@
 		// set id as a param back to main
 		// else alert back to main
 		session.setAttribute("email", email);
-		response.sendRedirect("../test_main.jsp");	
+		response.sendRedirect("../main/main.jsp");	
 	}
 %>
 	

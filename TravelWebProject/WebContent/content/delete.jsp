@@ -24,9 +24,7 @@ function deleteCheck()
 <html>
  <head>
  <title>°Ô½ÃÆÇ</title>
- <style type="text/css">
- 
- </style>
+
  </head>
  <body>
 <table>

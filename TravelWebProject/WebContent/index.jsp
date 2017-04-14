@@ -5,8 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-</head>
-<body>
-테스트
-</body>
-</html>
+<script type="text/javascript">
+	location.href="main/main.jsp";
+</script>
