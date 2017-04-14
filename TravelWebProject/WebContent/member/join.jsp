@@ -1,19 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%
-	String email = request.getParameter("email");
-	if(email == null){
-		email = "NOT_VERIFIED";
-	} else {
-		email = "VERIFIED";
-	}
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>회원가입</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/join.css">
+<link rel="stylesheet" type="text/css" href="../js/join.js">
 <script type="text/javascript">
 $(function(){
 	var w = 250;
@@ -30,11 +24,7 @@ $(function(){
 		window.open("../member/nickcheck.jsp","nickcheck","width=250,height=140,toolbar=no,statusbar=no,scrollbars=no, top="+top+", left="+left);
 	})
 });
-function redirect(){
-	
-	window.open("../member/join_ok.jsp","width=450,height=400,toolbar=no,statusbar=no,scrollbars=yes");
-	return true;
-}
+
 function validcheck(){
 	
 	var email=$('[name=email]').val();
@@ -53,44 +43,24 @@ function validcheck(){
 		return false;
 	} 
 }
-
 </script>
 </head>
 <body>
-	<center>
-		<h3>회원가입</h3>
-		<form name="join_frm" method="post" onsubmit="return validcheck();" action="join_ok.jsp">
-			<table id="table_content"> 
-				<tr height="30">
-					<td width="15%" align="right">이메일</td>
-					<td width="85%" align="left">
-						<input type="text" size="30" readonly name="email">
-						<input type="button" value="중복체크" id="emailcheck">
-					</td>
-				</tr>
-				<tr height="30">
-					<td width="15%" align="right">닉네임</td>
-					<td width="85%" align="left">
-						<input type="text" size="30" readonly name="nick">
-						<input type="button" value="중복체크" id="nickcheck">
-					</td>
-				</tr>
-				<tr height="30">
-					<td width="15%" align="right">Password</td>
-					<td width="85%" align="left">
-						<input type="password" size="12" name="pwd">
-						&nbsp;재입력
-						<input type="password" size="12" name="pwd1">
-					</td>
-				</tr>			
-				<tr>
-					<td colspan="2" align="center">
-						<input type="submit" value="가입">
-						<input type="button" value="취소" onclick="javascript:history.back()"> <!--  -->
-					</td>
-				</tr>																				
-			</table>
-		</form>
-	</center>
+	<!-- multistep form -->
+<form id="msform" method="post" onsubmit="return validcheck();" action="../member/join_ok.jsp">
+  
+  <!-- fieldsets -->
+  <fieldset>
+    <h2 class="fs-title">회원가입</h2>
+    <input type="text" name="email" id = "emailcheck" readonly placeholder="이메일" />
+    <!-- <input type="button" id="emailcheck" class="email action-button" value="중복체크" />  -->
+    <input type="nickname" name="nick" id="nickcheck" readonly placeholder="닉네임" />
+   <!-- <input type="button" id="nickcheck" class="nick action-button" value="중복체크" />  --> 
+    <input type="password" name="pwd" placeholder="비밀번호" />
+    <input type="password" name="pwd1" placeholder="비밀번호 확인" />
+    <input type="submit" name="submit" class="submit action-button" value="가입하기" />
+  </fieldset>
+ 
+</form>
 </body>
 </html>

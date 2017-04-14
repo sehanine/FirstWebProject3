@@ -1,3 +1,4 @@
+<%@page import="web.member.MemberDAO"%>
 <%@page import="web.change.JspChange"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -8,6 +9,9 @@
 	if(mode==null)
 		mode="0";
 	String jsp=JspChange.change(Integer.parseInt(mode));
+	MemberDAO dao = new MemberDAO();
+	String content = dao.getValue(email, "comment_", "email");
+	String nick = dao.getValue(email, "nickname", "email");
 	//String log_jsp="";
 %>
 <!DOCTYPE html>
@@ -36,7 +40,8 @@
 <jsp:include page="<%=jsp %>"></jsp:include>
 
 <div class="w3-container">
-<p><%=email %>의 마이페이지</p>
+<p><%=nick%>의 마이페이지</p>
+<p><%=content %>
 </div>
 
 <script>

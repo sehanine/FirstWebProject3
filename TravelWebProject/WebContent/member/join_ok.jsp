@@ -20,6 +20,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="shadow/js/shadowbox.js"></script>
+<link rel="stylesheet" type="text/css" href="../shadow/css/table.css">
 <script type="text/javascript">
 function send(){
 	var ranNum = <%= ranNum%>;
@@ -33,7 +35,8 @@ function send(){
 		})
 		
 		alert("가입을 축하합니다.");
-		window.close();
+		
+		parent.Shadowbox.close();
 		
 	} else{
 		document.getElementById("error_msg").innerHTML = "인증코드가 일치하지 않습니다.";

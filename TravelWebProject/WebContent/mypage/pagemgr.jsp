@@ -52,7 +52,7 @@ $(function(){
 				<tr height="30">
 					<td width="20%" align="right">¼Ò°³</td>
 					<td width="80%" align="left">
-					<textarea rows="8" cols="31" name="content"></textarea>
+					<textarea rows="8" cols="31" name="coment"></textarea>
 					</td>	
 				</tr>			
 				<tr>

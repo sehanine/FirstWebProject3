@@ -34,7 +34,7 @@ $(function(){
 	
 	
 	$('#okBtn').click(function(){
-		opener.join_frm.nick.value=$('#nickname').val();
+		opener.msform.nick.value=$('#nickname').val();
 		self.close();
 	});
 	

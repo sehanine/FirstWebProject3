@@ -25,9 +25,45 @@
 <title>FestiGo</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="shadow/js/shadowbox.js"></script>
+<link rel="stylesheet" type="text/css" href="shadow/css/table.css">
+<link rel="stylesheet" type="text/css" href="shadow/css/shadowbox.css">
+
+<!-- <link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox.min.css">
+<script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="fancybox/jquery.fancybox.min.js"></script>
+ -->
 <script type="text/javascript">
 
+Shadowbox.init({
+	players:["iframe"]
+});
+/*
 $(function(){
+	$('#join_click').click(function(){
+		Shadowbox.open({
+			content:'member/join_.jsp',
+			player:'iframe',
+			title:'회원가입',
+			width:440,
+			height:420
+		});
+	});
+});
+*/
+function boxopen(url, name, w, h) {
+	  Shadowbox.open({
+		  content: url,
+		  player:'iframe',
+		  title: name,
+		  width: w,
+		  height: h
+	  });
+	  return;
+};
+
+$(function(){
+
 	$('.portfolio-link').click(function(){
 		var newUrl = $(this).attr("href");
 
@@ -47,68 +83,45 @@ $(function(){
 	});
 });
 
-var i=0;
-$(function(){
-	$('#member-join').click(function(){
-		if(i==0){
-			$('#logPop').show();
-			i=1;
-		}else{
-			$('#logPop').hide();
-			i=0;
-		}
-	});
-});
-/*
- * code ref. from http://stackoverflow.com/questions/4068373/center-a-popup-window-on-screen
- */
-$(function(){
-	$('#btn').click(function(){
-		window.open('member/join.jsp', 'newwindow', 'width=450, height=250,toolbar=no,statusbar=no,scrollbars=no'); 
-	});
-});
-                  
-function popupcenter(url, title, w, h) {
-	  var left = (screen.width/2)-(w/2);
-	  var top = (screen.height/2)-(h/2);
-	  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
-};
+
 function showTabMenu(n){
 	var conId;
 
 	for(i=1;i < 3; i++){
-	conId = document.getElementById("con"+i);	
-	if(i==n){
-	conId.style.display = "";
-	}else{
-	conId.style.display = "none";
+		conId = document.getElementById("con"+i);	
+		if(i==n){
+		conId.style.display = "";
+		}else{
+		conId.style.display = "none";
+		}
 	}
-	}
-	}
+}
 function showTabSeason(n){
 	var seasonId;
 
 	for(i=1;i < 5; i++){
 		seasonId = document.getElementById("seasonSeoul"+i);	
-	if(i==n){
-		seasonId.style.display = "";
-	}else{
-		seasonId.style.display = "none";
+		if(i==n){
+			seasonId.style.display = "";
+		}else{
+			seasonId.style.display = "none";
+		}
 	}
-	}
-	}
+}
 function showTabSeason1(n){
 	var seasonId;
 
 	for(i=1;i < 5; i++){
 		seasonId = document.getElementById("seasonJeju"+i);	
-	if(i==n){
-		seasonId.style.display = "";
-	}else{
-		seasonId.style.display = "none";
+		if(i==n){
+			seasonId.style.display = "";
+		}else{
+			seasonId.style.display = "none";
+		}
 	}
-	}
-	}
+}
+
+
 </script>
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
@@ -120,13 +133,8 @@ function showTabSeason1(n){
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 	<link href="css/w3.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="css/owl.theme.green.min.css">
-	<link rel="stylesheet" href="css/owl.theme.green.css">
 	<link rel="stylesheet" href="css/update.css">
 	<link rel="stylesheet" href="css/loginstyle.css">
-	<link rel="stylesheet" href="css/header1.css">
 </head>
 <body id="page-top" class="index">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
@@ -163,8 +171,13 @@ function showTabSeason1(n){
                     	if(email == null){
                     %>
                     <li id="member-join">
-                    	<a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>	
+                    	<!--  <a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>-->
+                    	<!-- modal test -->
+                    	<!--  shadow box --> 
+                    	<a onclick="javascript:boxopen('member/join.jsp', '회원가입', 440, 580)">회원가입</a>
+                    	
                     </li>
+                    
                     <li class="page-scroll" id="logBtn" style="position: fixed; left: 77%;">
                     	<a id="loginform">로그인</a>
                     	<div class="login">
@@ -188,7 +201,7 @@ function showTabSeason1(n){
                     	} else {
                     %>
                    	 <li id="my-page"> <!--  마이페이지 창크기 -->
-                    	<a onclick="javascript:popupcenter('mypage/mypage.jsp', '마이페이지', 840, 740)">마이페이지</a>	
+                    	<a onclick="javascript:boxopen('mypage/mypage.jsp', '마이페이지', 840, 740)">마이페이지</a>	
                    	 </li>
                      <li id="logout"> <!--  마이페이지 창크기 -->
                     	<a onclick="location.href='member/logout.jsp?email=<%=email%>'">로그아웃</a>	

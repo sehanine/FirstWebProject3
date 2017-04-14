@@ -148,6 +148,30 @@ public class MemberDAO {
 		}
 		return str;
 	}
+	public void update(MemberVO vo){
+		
+		try{
+			getConnection();
+			String sql = "UPDATE festigo_member "
+					+ "SET nickname=?, img=?, comment_=? "
+					+ "WHERE email=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, vo.getNickname());
+			ps.setString(2, vo.getImg());
+			ps.setString(3, vo.getComment());
+			ps.setString(4, vo.getEmail());
+			ps.executeUpdate();
+			
+			//TODO
+			ps.close();
+	
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
+		}finally{
+			disConnection();
+		}
+	}
 	/**
 	 * @param vo MemberVO
 	 * 회원 가입시 신규회원을 데이터베이스에 넣음
