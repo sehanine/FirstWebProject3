@@ -7,9 +7,9 @@
 	String pwd = request.getParameter("input_pwd");
 	// email pwd check
 	MemberDAO dao = new MemberDAO();
-	//int res = dao.iSLogin(email, pwd);
+	int res = dao.iSLogin(email, pwd);
 	// ********************** 아래 라인 지우고 10번 라인 dao.islogin 활성화
-	int res = 2; 
+	//int res = 2; 
 	
 	if(res == 0){
 %>	
