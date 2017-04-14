@@ -10,18 +10,16 @@
 <link rel="stylesheet" type="text/css" href="../js/join.js">
 <script type="text/javascript">
 $(function(){
-	var w = 250;
-	var h = 140;
+	var w = 450;
+	var h = 340;
+	var left = (screen.width/2)-(w/2);
+	var top = (screen.height/2)-(h/2);
+	var strWindowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=yes";
 	$('#emailcheck').click(function(){
-		
-		var left = (screen.width/2)-(w/2);
-		var top = (screen.height/2)-(h/2);
-		window.open("../member/emailcheck.jsp","idcheck","width=250,height=140,toolbar=no,statusbar=no,scrollbars=no, top="+top+", left="+left);
+		window.open("../member/emailcheck.jsp","idcheck","width="+w+",height="+h+", top="+top+", left="+left, strWindowFeatures);
 	})
 	$('#nickcheck').click(function(){
-		var left = (screen.width/2)-(w/2);
-		var top = (screen.height/2)-(h/2);
-		window.open("../member/nickcheck.jsp","nickcheck","width=250,height=140,toolbar=no,statusbar=no,scrollbars=no, top="+top+", left="+left);
+		window.open("../member/nickcheck.jsp","nickcheck","width="+w+",height="+h+",toolbar=no,statusbar=no,scrollbars=no, top="+top+", left="+left);
 	})
 });
 

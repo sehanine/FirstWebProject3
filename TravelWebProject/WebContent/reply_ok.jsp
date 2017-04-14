@@ -17,7 +17,7 @@ vo.setReply_comment(memo);
 dao.replyInsert(vo);
 %>
 <script language=javascript>
-   self.window.alert("입력한 글을 저장하였습니다."); 
+  self.window.alert("입력한 글을 저장하였습니다."); 
   location.href="content.jsp?page=<%=pageNum %>&curr=<%=curr %>";
   
 </script>

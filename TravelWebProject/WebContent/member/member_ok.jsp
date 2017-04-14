@@ -8,7 +8,7 @@
 	String nick = URLDecoder.decode(request.getParameter("nick"),"EUC-KR");
 	String pwd = request.getParameter("pwd");
 	
-	System.out.println("email: " + email + " nick: " + nick + " pwd: " + pwd);
+	System.out.println("memberok.jsp" + "email: " + email + " nick: " + nick + " pwd: " + pwd);
 	MemberDAO dao = new MemberDAO();
 	MemberVO vo = new MemberVO();
 	vo.setEmail(email);

@@ -19,7 +19,14 @@ public class ReplyVO {
 	private String reply_pass;
 	private Date reply_regdate;
 	private String reply_comment;
+	private String email;
 	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getFesno() {
 		return fesno;
 	}

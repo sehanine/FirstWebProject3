@@ -6,7 +6,9 @@
 	String email = (String)session.getAttribute("email");
 	MemberDAO dao = new MemberDAO();
 	String img = dao.getValue(email, "img", "email");
-	
+	if(img == null){
+		img = "../img/defaultIcon.png";
+	}
 	/*
 	
 SELECT img FROM festigo_member
@@ -21,7 +23,7 @@ SELECT img FROM festigo_member
 </head>
 <body>
 <center>
-	<img src=<%=img %> alt="cabin" style=" width:35%">
+	<img src=<%=img %> alt="profilepic" style=" width:35%">
 </center>
 </body>
 </html>

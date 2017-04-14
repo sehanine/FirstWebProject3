@@ -3,16 +3,27 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
-	String email = session.getAttribute("email").toString();
+	String email;
+	try{
+		email = session.getAttribute("email").toString();
+	} catch(Exception e){
+		email = null;
+		response.sendRedirect("../test_main.jsp");
+	}
 	// 관련 정보 받아오기
 	String mode=request.getParameter("mode");
-	if(mode==null)
-		mode="0";
-	String jsp=JspChange.change(Integer.parseInt(mode));
+	if(mode == null)
+		mode="0"; 
+	String jsp = JspChange.change(Integer.parseInt(mode));
 	MemberDAO dao = new MemberDAO();
 	String content = dao.getValue(email, "comment_", "email");
 	String nick = dao.getValue(email, "nickname", "email");
+	
+	if(content == null){
+		content = "자기소개가 없습니다.";
+	}
 	//String log_jsp="";
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -45,6 +56,7 @@
 </div>
 
 <script>
+
 function w3_open() {
     document.getElementById("mySidebar").style.display = "block";
 }

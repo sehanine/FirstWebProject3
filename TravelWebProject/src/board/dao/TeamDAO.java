@@ -4,8 +4,6 @@ import java.util.*;
 
 import java.sql.*;
 
-
-
 public class TeamDAO {
 	private Connection conn;
 	private PreparedStatement ps;
@@ -28,9 +26,7 @@ public class TeamDAO {
 			dao=new TeamDAO();
 		return dao;
 	}
-	
-	
-	
+		
 	//오라클 해제
 	public void disConnection(){
 		try{
@@ -48,8 +44,7 @@ public class TeamDAO {
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
 		}
-	}
-	
+	} 
 	//기능처리-리스트
 	public List<TeamVO> boardListData(int page){
 		ArrayList<TeamVO> list=new ArrayList<>();
@@ -60,7 +55,7 @@ public class TeamDAO {
 					+"FROM festigo_board "
 					+"ORDER BY group_id DESC,group_step ASC";
 			ps=conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			
 			int i=0;
 			int j=0;

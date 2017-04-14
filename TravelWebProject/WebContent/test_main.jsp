@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" import="java.util.ArrayList, web.dao.*"%>
+<!-- 
+	1. 로그인 disable see login_ok.jsp
+	2. email 인증 disable see join_ok.jsp
+ -->
 <%
 	String pageNum = request.getParameter("page");
 	String email;
@@ -174,7 +178,7 @@ function showTabSeason1(n){
                     	<!--  <a onclick="javascript:popupcenter('member/join.jsp', '회원가입', 440, 240)">회원가입</a>-->
                     	<!-- modal test -->
                     	<!--  shadow box --> 
-                    	<a onclick="javascript:boxopen('member/join.jsp', '회원가입', 440, 580)">회원가입</a>
+                    	<a onclick="javascript:boxopen('member/join.jsp', '회원가입', 440, 470)">회원가입</a>
                     	
                     </li>
                     

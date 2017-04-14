@@ -1,5 +1,4 @@
-<%@page import="web.member.RandomNumGen"%>
-<%@page import="web.member.JavaMailAPI"%>
+<%@page import="web.member.*"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
@@ -11,24 +10,23 @@
 	create vo set attributes, put them in the database
 	*/
 	String ranNum = RandomNumGen.getRanNum();
-	//JavaMailAPI mailAPI = new JavaMailAPI(email, ranNum, nick, pwd);
+	JavaMailAPI mailAPI = new JavaMailAPI(email, ranNum, nick, pwd);
 	// ------------------------지울것 --------------------------------------
-	System.out.println("join_ok.jsp ranNum: " + ranNum);
+	System.out.println("ranNum: " + ranNum);
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>회원가입</title>
+<title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/join.css">
-<link rel="stylesheet" type="text/css" href="../js/join.js">
+<script type="text/javascript" src="shadow/js/shadowbox.js"></script>
 <link rel="stylesheet" type="text/css" href="../shadow/css/table.css">
 <script type="text/javascript">
 function send(){
 	var ranNum = <%= ranNum%>;
 	var vrfCode=$('[name=vrfCode]').val();
-	console.log("in");
 	var vo = {"email": "<%=email%>","nick": "<%=nick%>","pwd": "<%=pwd%>"};
 	if(ranNum == vrfCode){
 		$.ajax({
@@ -49,20 +47,13 @@ function send(){
 </script>
 </head>
 <body>
-	<!-- multistep form -->
-<form id="msform" >
-  
-  <!-- fieldsets -->
-  <fieldset>
-    <h2 class="fs-title">이메일 인증</h2>
-    	이메일을 인증해 주세요.<br/>
-		보낸주소: <%=email %> <br/><br/>
-		<input type="text" size="30" name="vrfCode" placeholder="인증코드">
-		<p id="error_msg"></p>
-		<input type="button" value="이메일 인증" class="verification action-button" id="emailcheck" onclick="send()">
-  </fieldset>
-  	
- 
-</form>
+	이메일을 인증해 주세요.<br/>
+	보낸주소: <%=email %> <br/>
+	<input type="text" size="30" name="vrfCode">
+	<input type="button" value="이메일 인증" id="emailcheck" onclick="send()">
+	
+	<br/>
+	<p id="error_msg"></p>
+	
 </body>
 </html>
