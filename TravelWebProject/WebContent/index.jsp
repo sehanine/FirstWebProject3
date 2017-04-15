@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>Festigo</title>
 <script type="text/javascript">
 	location.href="main/main.jsp";
 </script>

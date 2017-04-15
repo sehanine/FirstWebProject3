@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/join.css">
 <link rel="stylesheet" type="text/css" href="../js/join.js">
-<link rel="stylesheet" type="text/css" href="../registerVailidator.js">
+<script type="text/javascript" src="../js/registerVailidator.js" charset="UTF-8"></script>
 </head>
 <body>
 	<!-- multistep form -->
