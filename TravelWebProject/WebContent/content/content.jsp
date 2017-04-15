@@ -24,7 +24,7 @@
 	
 	String email="";
 	try{
-	email= session.getAttribute("email").toString();
+		email= session.getAttribute("email").toString();
 	}catch(Exception ex){
 	}
 	MemberDAO member;
@@ -38,37 +38,58 @@
 		nick = member.getValue(email, "nickname", "email");
 		pwd = member.getValue(email, "pwd", "email");	
 	}
-	
+	// get star 
+	String star = null;
+	// star = dao.getisstared()
+	if(star == null){
+		star = "unchecked";
+	} else{
+		star = "checked";
+	}
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%= main_list.get(TITLE_INDEX_NUMBER)%></title>
 	<!--  
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	 -->
  
 <link rel="stylesheet" href="../css/freelancer.min.css">
-
 <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" type="text/css">
-<link rel="stylesheet" href="../css/update.css" rel="stylesheet">
-<link rel="stylesheet" href="../css/event1.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/update.css">
+<link rel="stylesheet" href="../css/event1.css">
 <link rel="stylesheet" href="../css/owl.carousel.min.css">
 <link rel="stylesheet" href="../css/owl.theme.default.min.css">
 <link rel="stylesheet" href="../css/owl.theme.green.min.css">
 <link rel="stylesheet" href="../css/owl.theme.green.css">
-
+<link rel="stylesheet" href="../css/tiny-toggle.css">
+<link rel="stylesheet" href="../shadow/css/shadowbox.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<!-- shadow box javascript -->
+<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <style type="text/css">
 ul { list-style:none; }
 </style>
+<script type="text/javascript">
+Shadowbox.init({
+	players:["iframe"]
+});
 
-<script language = "javascript">
+function boxopen(url, name, w, h) {
+	  Shadowbox.open({
+		  content: url,
+		  player:'iframe',
+		  title: name,
+		  width: w,
+		  height: h
+	  });
+	  return;
+};
 function writeCheck()
 {
 	var form = document.writeform; 
@@ -86,13 +107,26 @@ function writeCheck()
 	if( !form.memo.value ) { 
 		alert( "내용을 적어주세요" ); 
 		form.memo.focus(); 
-		return; } 
+		return; 
+	} 
 		
 		form.submit(); 
 }
+
+$(function(){
+	$('#star').tinyToggle();
+	$("#star").tinyToggle("event", "onCheck", function() {
+	  console.log("onCheck Input now is TRUE");
+	});
+	$("#star").tinyToggle("event", "onUncheck", function() {
+		  console.log("onUncheck Input now is FALSE");
+	});
+});
+
 </script>
 </head>
 <body>
+               
 	<!-- Portfolio Modals -->
     <div class="portfolio-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
@@ -108,9 +142,9 @@ function writeCheck()
                     	<!-- 축제내용  -->
                         <div class="modal-body">
                             <h2><%=main_list.get(TITLE_INDEX_NUMBER) %></h2>
-
-                            <hr class="star-primary">
-                       		   
+				  
+							<hr class="star-primary">
+								
                        		   <!--  
                        		    <table>
 									<tr>
@@ -126,6 +160,7 @@ function writeCheck()
 									</tr>
 								</table>
  						-->
+ 						    
  			<center>
 			<div class="slide">
 	    	 	<div id="first_list">
@@ -143,6 +178,8 @@ function writeCheck()
 			</div>
 			</center>
                            	<table id="table1" width=730 border="0px">
+                           	
+                          
                             <%
                 				for(int i = 0; i < first_list.size(); i++){
                 				
@@ -157,7 +194,7 @@ function writeCheck()
                                  	   			&nbsp<a href="#" onclick="window.open('googleMap.jsp?add=<%=first_list.get(i).getContent() %>', '지도', 'top=100px, left=100px, height=800px, width=800px')">지도보기</a>
                                  	   		</td>
             	                		
-            	                			</tr>
+            	                		</tr>
                             			<%
                             					}
                 					else if(i != first_list.size() -1){
@@ -179,7 +216,7 @@ function writeCheck()
 	                           			<span style="font-weight:bold;"><%=first_list.get(i).getTitle() %></span>
 	                           		</td>
 	                     	   		<td width="80%" align="left">
-	                     	   			<a href="<%=first_list.get(i).getContent() %>">
+	                     	   			<a href="<%=first_list.get(i).getContent() %>"></a>
 	                     	   			<%=first_list.get(i).getContent() %></td>
                 		
                 				</tr>
@@ -189,8 +226,19 @@ function writeCheck()
                 			<%
                 				}
                 			%>
+                			<!-- 즐겨찾기 -->
+                           	<tr>
+	                           	<td width="20%" align="left">
+	                           	<span style="font-weight:bold;">즐겨찾기</span>
+	                           	</td>
+                          	 	<td width="80%" align="left">
+	                          	 	<input id="star" name="my_option" type="checkbox" class="tiny-toggle" 
+										data-tt-type="star" data-tt-palette="purple" data-tt-size="large" <%=star %>>
+								</td>
+							</tr>	
                         	</table>
-                        	<br/>
+                        
+                        	
                             <!-- 개요 -->
                             <div class="menu">
                            	 <a id="a_color"><h1 class="h1_back" align="left" >개요</h1></a>
@@ -271,7 +319,8 @@ function writeCheck()
                     	<tr id="r1" name="commentParentCode">
                     		<td colspan=2>
                     			<strong><%=re_list.get(i).getReply_name() %></strong><%=re_list.get(i).getReply_pass() %>
-                    			<a style="cursor:pointer;" 	name="pDel" OnClick="window.location='delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>'">삭제</a>
+                    			<a style="cursor:pointer;" 	name="pDel" 
+                    			onclick="javascript:boxopen('delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>', '댓글삭제', 280, 250)">삭제</a>
                     			<p><%=re_list.get(i).getReply_comment() %></p>
                     		</td>
                     	</tr>
@@ -298,8 +347,6 @@ function writeCheck()
         </div>
     </div>
     
-    <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -307,15 +354,17 @@ function writeCheck()
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
-    <!-- Contact Form JavaScript -->
-    <script src="../js/jqBootstrapValidation.js"></script>
-
     <!-- Theme JavaScript -->
     <script src="../js/freelancer.min.js"></script>
     
+    <!-- tiny toggle javascript -->
+    <script src="../js/tiny-toggle.js"></script>
     
     <!-- Slide show JavaScript -->
 	<script src="../js/owl.carousel.min.js"></script>
+	
+	
+	
 <script>
     // html dom 이 다 로딩된 후 실행된다.
     $(document).ready(function(){
@@ -340,7 +389,10 @@ owl.owlCarousel({
     autoplay:true,
     autoplayTimeout:5000
 });
+
+
 </script>
+
 
 <script language="javascript">
 
@@ -350,6 +402,5 @@ function allblur() {
 }
 
 </script>
-
 </body>
 </html>

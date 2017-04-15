@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<script language = "javascript">  // 자바 스크립트 시작
+
+ <%
+ 	int pageNum = Integer.parseInt(request.getParameter("page"));
+	int curr = Integer.parseInt(request.getParameter("curr"));
+ 	int idx = Integer.parseInt(request.getParameter("idx"));
+ %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>게시판</title>
+<script type="text/javascript">  // 자바 스크립트 시작
 
 function deleteCheck()
   {
@@ -15,23 +25,12 @@ function deleteCheck()
  		form.submit();
   }
  </script>
- <%
- 	int pageNum = Integer.parseInt(request.getParameter("page"));
-	int curr = Integer.parseInt(request.getParameter("curr"));
- 	int idx = Integer.parseInt(request.getParameter("idx"));
- %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
- <head>
- <title>게시판</title>
 
  </head>
  <body>
-<table>
-<center>
+
 <form name=deleteform method=post action="delete_ok.jsp?pageNum=<%=pageNum%>&curr=<%=curr%>&idx=<%=idx%>">
-  <tr>
-   <td>
+
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
      <tr style="repeat-x; text-align:center;">
       <td>댓글 삭제</td>
@@ -53,10 +52,8 @@ function deleteCheck()
       <td>&nbsp;</td>
      </tr>
     </table>
-   </td>
-  </tr>
+  
   </form>
- </table>
- </center>
+
 </body> 
 </html>

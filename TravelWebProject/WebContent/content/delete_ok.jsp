@@ -9,13 +9,24 @@ String pass = request.getParameter("password");
 
 ReplyDAO dao=new ReplyDAO();
 boolean pass_check=dao.replyPassCheck(pageNum,idx,pass);
-
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>회원가입</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../shadow/css/table.css">
+<%
 if(pass_check==true){
 	dao.replyDelete(pageNum, idx);
 	%>
-		<script language=javascript>
+		
+		<script type="text/javascript">
   			self.window.alert("해당 글을 삭제하였습니다.");
+  			window.opener.location.reload();
   			location.href="content.jsp?page=<%=pageNum %>&curr=<%=curr %>";
+  			parent.Shadowbox.close();
  		</script>
 	<%
 }else{

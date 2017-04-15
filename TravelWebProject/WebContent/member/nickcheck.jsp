@@ -33,13 +33,20 @@ function validcheck(){
 	}		
 	return true;
 }
-
+function realloc(){
+	location.href = "nickcheck.jsp";
+	$('#nickname').focus();
+}
 $(function(){
+	var form_original_data = $("#email").serialize(); 
+	//console.log(form_original_data);
 	$('#nickname').change(function(){
-		location.href = "nickcheck.jsp";
-		$('#nickname').focus();
+		realloc();
 	});
 	$('#okBtn').click(function(){
+		if($('#nickname').serialize() != form_original_data){
+			realloc();
+		}
 		opener.msform.nick.value=$('#nickname').val();
 		self.close();
 	});
@@ -79,10 +86,6 @@ $(function(){
 	%>
 			<input type="button" class="submit action-button" onclick="" value="확인" id="okBtn">
 	<%					
-		} else{
-	%>
-    		<input type="submit" class="submit action-button" value="중복확인" id="checkBtn"/>
-  	<%
 		}
   	%>
   </fieldset>

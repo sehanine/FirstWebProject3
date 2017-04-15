@@ -20,28 +20,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>닉네임 중복 확인</title>
+<title>이메일 중복 확인</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/join.css">
 <script type="text/javascript">
+
 function validcheck(){
 	var nick=$('#email').val();
 	if(nick.trim()==""){
-		alert("닉네임을 입력하세요.");
+		alert("이메일을 입력하세요.");
 		$('#email').focus();		
 		return false;
 	}		
 	return true;
 }
-
+function realloc(){
+	location.href = "emailcheck.jsp";
+	$('#email').focus();
+}
 $(function(){
+	var form_original_data = $("#email").serialize(); 
+	//console.log(form_original_data);
 	$('#email').change(function(){
-		location.href = "emailcheck.jsp";
-		$('#email').focus();
+		realloc();
 	});
+	
 	$('#okBtn').click(function(){
-		opener.msform.email.value=$('#email').val();
-		self.close();
+		 if($('#email').serialize() != form_original_data){
+			 realloc();
+		  } else {
+			opener.msform.email.value=$('#email').val();
+			self.close();
+		  }
 	});
 });
 
@@ -54,7 +64,7 @@ $(function(){
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">이메일 중복 확인</h2>
-    <input type="text" name="id" id="email" placeholder="닉네임" value="<%=email!=null?email:""%>"/>
+    <input type="text" name="id" id="email" placeholder="이메일" value="<%=email!=null?email:""%>"/>
   	<p align="center">
 			<%
 				if(count==0 && status==1){
@@ -77,12 +87,8 @@ $(function(){
   	<%
 		if(count==0 && status==1){
 	%>
-			<input type="button" class="submit action-button" onclick="" value="확인" id="okBtn">
+			<input type="button" class="submit action-button" value="확인" id="okBtn">
 	<%					
-		} else{
-	%>
-    		<input type="submit" class="submit action-button" value="중복확인" id="checkBtn"/>
-  	<%
 		}
   	%>
   </fieldset>

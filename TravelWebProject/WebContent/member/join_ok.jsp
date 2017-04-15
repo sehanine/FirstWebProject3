@@ -23,34 +23,34 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/join.css">
 <link rel="stylesheet" type="text/css" href="../js/join.js">
-<link rel="stylesheet" type="text/css" href="../shadow/css/table.css">
 <script type="text/javascript">
-function send(){
+
+function validcheck(){
 	var ranNum = <%= ranNum%>;
 	var vrfCode=$('[name=vrfCode]').val();
-	console.log("in");
-	var vo = {"email": "<%=email%>","nick": "<%=nick%>","pwd": "<%=pwd%>"};
 	if(ranNum == vrfCode){
-		$.ajax({
-			type: "POST",
-			url: "member_ok.jsp",
-			data: vo
-		})
-		
 		alert("가입을 축하합니다.");
-		
-		parent.Shadowbox.close();
-		
+		send();
+		return true;
 	} else{
 		document.getElementById("error_msg").innerHTML = "인증코드가 일치하지 않습니다.";
+		return false;
 	}
-	
+}
+function send(){
+	var vo = {"email": "<%=email%>","nick": "<%=nick%>","pwd": "<%=pwd%>"};
+	$.ajax({
+		type: "POST",
+		url: "member_ok.jsp",
+		data: vo
+	})
+	parent.Shadowbox.close();	
 }
 </script>
 </head>
 <body>
 	<!-- multistep form -->
-<form id="msform" >
+<form id="msform" onsubmit="return validcheck();" >
   
   <!-- fieldsets -->
   <fieldset>
@@ -59,7 +59,7 @@ function send(){
 		보낸주소: <%=email %> <br/><br/>
 		<input type="text" size="30" name="vrfCode" placeholder="인증코드">
 		<p id="error_msg"></p>
-		<input type="button" value="이메일 인증" class="verification action-button" id="emailcheck" onclick="send()">
+		<input type="button" value="이메일 인증" class="verification action-button" id="okBtn">
   </fieldset>
   	
  
