@@ -21,18 +21,16 @@ boolean pass_check=dao.replyPassCheck(pageNum,idx,pass);
 if(pass_check==true){
 	dao.replyDelete(pageNum, idx);
 	%>
-		
 		<script type="text/javascript">
-  			self.window.alert("해당 글을 삭제하였습니다.");
-  			window.opener.location.reload();
-  			location.href="content.jsp?page=<%=pageNum %>&curr=<%=curr %>";
+			parent.location.href="content.jsp?page=<%=pageNum %>&curr=<%=curr %>";
   			parent.Shadowbox.close();
- 		</script>
+  		</script>
 	<%
 }else{
 	%>
+	
 	<script language=javascript>
-	 self.window.alert("비밀번호를 틀렸습니다.");
+		self.window.alert("비밀번호가 일치하지 않습니다.");
 		location.href="javascript:history.back()";
 	</script>
 <%

@@ -1,3 +1,4 @@
+<%@page import="web.star.dao.StarDAO"%>
 <%@page import="com.sist.reply.ReplyDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import ="web.dao.*, java.util.ArrayList, com.sist.reply.*, web.member.*"%>
@@ -39,14 +40,9 @@
 		pwd = member.getValue(email, "pwd", "email");	
 	}
 	// get star 
-	String star = null;
+	StarDAO sdao = new StarDAO();
+	String star = sdao.isStarred(fesno, email);
 	// star = dao.getisstared()
-	if(star == null){
-		star = "unchecked";
-	} else{
-		star = "checked";
-	}
-	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -74,6 +70,9 @@
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <style type="text/css">
 ul { list-style:none; }
+.status_msg p{
+line-height: 1.5;
+}
 </style>
 <script type="text/javascript">
 Shadowbox.init({
@@ -116,10 +115,24 @@ function writeCheck()
 $(function(){
 	$('#star').tinyToggle();
 	$("#star").tinyToggle("event", "onCheck", function() {
-	  console.log("onCheck Input now is TRUE");
+		var vo = {"email": "<%=email%>", "fesno": "<%=fesno%>"};
+		$.ajax({
+			type: "POST",
+			url: "../star/star.jsp",
+			data: vo
+		})
+		document.getElementById("star_msg").innerHTML = "행사가 즐겨찾기에 추가 되었습니다.";
+		document.getElementById("unstar_msg").innerHTML = "";
 	});
 	$("#star").tinyToggle("event", "onUncheck", function() {
-		  console.log("onUncheck Input now is FALSE");
+		var vo = {"email": "<%=email%>", "fesno": "<%=fesno%>"};
+		$.ajax({
+			type: "POST",
+			url: "../star/unstar.jsp",
+			data: vo
+		})
+		document.getElementById("star_msg").innerHTML = "";
+		document.getElementById("unstar_msg").innerHTML = "행사가 즐겨찾기에서 해제 되었습니다.";
 	});
 });
 
@@ -211,14 +224,14 @@ $(function(){
                 					} else {
                 			%>
                 				<tr>
-                	
 	                				<td width="20%" align="left">
 	                           			<span style="font-weight:bold;"><%=first_list.get(i).getTitle() %></span>
 	                           		</td>
 	                     	   		<td width="80%" align="left">
-	                     	   			<a href="<%=first_list.get(i).getContent() %>"></a>
-	                     	   			<%=first_list.get(i).getContent() %></td>
-                		
+	                     	   			<a href="<%=first_list.get(i).getContent() %>">
+	                     	   			<span>	<%=first_list.get(i).getContent() %></span>
+	                     	   			</a>
+	                     	   		</td>
                 				</tr>
                 			<%
                 					}
@@ -231,12 +244,17 @@ $(function(){
 	                           	<td width="20%" align="left">
 	                           	<span style="font-weight:bold;">즐겨찾기</span>
 	                           	</td>
-                          	 	<td width="80%" align="left">
+                          	 	<td width="10%" align="left">
 	                          	 	<input id="star" name="my_option" type="checkbox" class="tiny-toggle" 
 										data-tt-type="star" data-tt-palette="purple" data-tt-size="large" <%=star %>>
 								</td>
+								
+								
+								
 							</tr>	
                         	</table>
+                        		<p id="star_msg"></p>
+								<p id="unstar_msg" style="color:red;"></p>
                         
                         	
                             <!-- 개요 -->
@@ -320,7 +338,7 @@ $(function(){
                     		<td colspan=2>
                     			<strong><%=re_list.get(i).getReply_name() %></strong><%=re_list.get(i).getReply_pass() %>
                     			<a style="cursor:pointer;" 	name="pDel" 
-                    			onclick="javascript:boxopen('delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>', '댓글삭제', 280, 250)">삭제</a>
+                    			onclick="javascript:boxopen('delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>', '댓글삭제', 360, 100)">삭제</a>
                     			<p><%=re_list.get(i).getReply_comment() %></p>
                     		</td>
                     	</tr>

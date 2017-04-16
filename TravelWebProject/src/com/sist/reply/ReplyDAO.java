@@ -138,7 +138,7 @@ public class ReplyDAO {
 			while(rs.next()){
 				id=rs.getString(1);
 			}
-			System.out.println(id);
+			System.out.println("replyDAO.replyDelete called by delete_ok " + id);
 			String sql2="DELETE FROM project_reply WHERE reply_ID=?";
 			ps2=conn.prepareStatement(sql2);
 			ps2.setString(1, id);

@@ -126,7 +126,7 @@ public class VisitKoreaDAO {
 						} else if(temp.contains("연 락 처")){
 							vo.setTel(temp.replace("연 락 처 ", ""));
 						} else if(temp.contains("홈페이지")){
-							vo.setHomepage(temp.replace("홈페이지 ", ""));
+							vo.setHomepage(trimHttp(temp.replace("홈페이지 ", "")));
 						} else {
 							vo.setLocAddr(null);
 						}
@@ -241,6 +241,16 @@ public class VisitKoreaDAO {
 		}catch(Exception ex){
 			System.out.println("VisitKoreaDAO.java getAllData");
 			ex.printStackTrace();
+		}
+	}
+	
+	public static String trimHttp(String input) {
+		if(input == null) 
+			return null;
+		try{
+			return input.substring(input.indexOf("http"));
+		}catch(Exception ex){
+			return input.substring(input.indexOf("www"));
 		}
 	}
 	public static String removeTags(String s){

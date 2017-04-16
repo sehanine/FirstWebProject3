@@ -18,7 +18,7 @@ function deleteCheck()
    
    if( !form.password.value )
    {
-    alert( "비밀번호를 적어주세요" );
+    alert( "비밀번호를 입력하세요" );
     form.password.focus();
     return;
    }
@@ -28,20 +28,19 @@ function deleteCheck()
 
  </head>
  <body>
-
+<center>
 <form name=deleteform method=post action="delete_ok.jsp?pageNum=<%=pageNum%>&curr=<%=curr%>&idx=<%=idx%>">
-
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-     <tr style="repeat-x; text-align:center;">
-      <td>댓글 삭제</td>
-     </tr>
-    </table>
+   <table>
+   		<tr>
+   			<td>
+   			&nbsp;
+   			</td>
+   		</tr>
+   </table>
    <table>
      <tr>
-      <td>&nbsp;</td>
       <td align="center">비밀번호</td>
-      <td><input name="password" type="password" size="50" maxlength="100"></td>
-      <td>&nbsp;</td>
+      <td><input name="password" type="password" size="30" maxlength="100"></td>
      </tr>
      <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
      <tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
@@ -54,6 +53,7 @@ function deleteCheck()
     </table>
   
   </form>
+</center>
 
 </body> 
 </html>
