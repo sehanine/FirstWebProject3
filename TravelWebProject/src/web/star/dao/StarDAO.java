@@ -153,6 +153,7 @@ public class StarDAO {
 				StarVO vo = new StarVO();
 				
 				while(rs.next()){
+					vo.setFesno(fesno_);
 					vo.setMaintitle(rs.getString(1));
 					vo.setMainloc(rs.getString(2));
 					vo.setFesdate(rs.getString(3));
@@ -163,6 +164,7 @@ public class StarDAO {
 				
 			}
 			//  test use only
+			/*
 			for(StarVO vo: list){
 				System.out.println("StarDAO.getAllData()");
 				System.out.println("mainTitle: " + vo.getMaintitle());
@@ -170,6 +172,7 @@ public class StarDAO {
 				System.out.println("fesdate: " + vo.getFesdate());
 				System.out.println("mainloc: " + vo.getMainloc());
 			}
+			*/
 			// test use only
 			ps.close();
 	

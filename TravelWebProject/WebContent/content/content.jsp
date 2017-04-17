@@ -9,6 +9,9 @@
 	if(pageNum == null){
 		pageNum = "1";
 	}   
+	if(curr == null){
+		curr = "1";
+	}
 	
 	int TITLE_INDEX_NUMBER = 0;
 	int fesno = Integer.parseInt(pageNum);
@@ -228,8 +231,8 @@ $(function(){
 	                           			<span style="font-weight:bold;"><%=first_list.get(i).getTitle() %></span>
 	                           		</td>
 	                     	   		<td width="80%" align="left">
-	                     	   			<a href="<%=first_list.get(i).getContent() %>">
-	                     	   			<span>	<%=first_list.get(i).getContent() %></span>
+	                     	   			<a href="<%=first_list.get(i).getContent()!=null? first_list.get(i).getContent(): ""%>">
+	                     	   			<span>	<%=first_list.get(i).getContent()!=null? first_list.get(i).getContent(): ""%></span>
 	                     	   			</a>
 	                     	   		</td>
                 				</tr>

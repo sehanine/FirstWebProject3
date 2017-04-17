@@ -2,6 +2,7 @@ package web.star.dao;
 import web.star.dao.Month;
 
 public class StarVO {
+	private int fesno;
 	private String maintitle;
 	private String mainloc;
 	private String fesdate;
@@ -10,6 +11,12 @@ public class StarVO {
 	private int month;
 	private int date;
 	
+	public int getFesno() {
+		return fesno;
+	}
+	public void setFesno(int fesno) {
+		this.fesno = fesno;
+	}
 	public int getYear() {
 		return year;
 	}

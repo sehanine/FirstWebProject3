@@ -63,6 +63,7 @@
 
 .tt {  
   line-height: 1em;
+  display: inline;
 }
 
 .tt-icon {

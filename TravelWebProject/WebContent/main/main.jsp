@@ -429,20 +429,18 @@ function showTabSeason(n){
                         <h3>Around the Web</h3>
                         <ul class="list-inline">
                             <li>
-                                <a href="https://www.facebook.com/" class="btn-social btn-outline"><span class="sr-only">페이스북</span><i class="fa fa-fw fa-facebook"></i></a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=festigo.com" class="btn-social btn-outline"><span class="sr-only">페이스북</span><i class="fa fa-fw fa-facebook"></i></a>
                             </li>
                             <li>
-                                <a href="https://plus.google.com/collections/featured" class="btn-social btn-outline"><span class="sr-only">구글플러스</span><i class="fa fa-fw fa-google-plus"></i></a>
+                                <a href="https://plus.google.com/share?url=festigo.com" class="btn-social btn-outline"><span class="sr-only">구글플러스</span><i class="fa fa-fw fa-google-plus"></i></a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/?lang=ko" class="btn-social btn-outline"><span class="sr-only">트위터</span><i class="fa fa-fw fa-twitter"></i></a>
+                                <a href="https://twitter.com/home?status=festigo.com" class="btn-social btn-outline"><span class="sr-only">트위터</span><i class="fa fa-fw fa-twitter"></i></a>
                             </li>
                             <li>
-                                <a href="https://kr.linkedin.com/" class="btn-social btn-outline"><span class="sr-only">링크드인</span><i class="fa fa-fw fa-linkedin"></i></a>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url=festigo.com&title=&summary=&source=" class="btn-social btn-outline"><span class="sr-only">링크드인</span><i class="fa fa-fw fa-linkedin"></i></a>
                             </li>
-                            <li>
-                                <a href="https://dribbble.com/" class="btn-social btn-outline"><span class="sr-only">드리블</span><i class="fa fa-fw fa-dribbble"></i></a>
-                            </li>
+                           
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
@@ -473,7 +471,7 @@ function showTabSeason(n){
     
 
     <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    <!-- <script src="../vendor/jquery/jquery.min.js"></script>  -->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -481,15 +479,10 @@ function showTabSeason(n){
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
-    <!-- Contact Form JavaScript -->
-    <script src="../js/jqBootstrapValidation.js"></script>
-  <!-- 
-    <script src="js/contact_me.js"></script>  이메일 기능 삭제
- 	-->
     <!-- Theme JavaScript -->
     <script src="../js/freelancer.min.js"></script>
+    
 	<script src="../js/custom.js" type="text/javascript"></script>
-
 
 </body>
 

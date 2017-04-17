@@ -290,7 +290,7 @@ public class QueryDAO {
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
 			ex.printStackTrace();
-			url = "img/1.png";
+			url = "../img/2.png";
 		}finally{
 			disConnection();
 		}
