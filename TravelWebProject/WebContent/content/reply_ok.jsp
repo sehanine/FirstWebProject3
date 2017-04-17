@@ -8,12 +8,15 @@ String password = request.getParameter("commentParentPassword");
 String memo = request.getParameter("memo");
 String pageNum = request.getParameter("page");
 String curr = request.getParameter("curr");
+String email= request.getParameter("email");
+
  ReplyDAO dao=new ReplyDAO();
 ReplyVO vo = new ReplyVO();
 vo.setFesno(Integer.parseInt(pageNum));
 vo.setReply_name(name);
 vo.setReply_pass(password);
 vo.setReply_comment(memo);
+vo.setEmail(email);
 dao.replyInsert(vo);
 %>
 <script language=javascript>

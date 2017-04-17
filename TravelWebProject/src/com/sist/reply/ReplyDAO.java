@@ -9,7 +9,7 @@ public class ReplyDAO {
 	private Connection conn;
 	private PreparedStatement ps;
 
-	private final String URL="jdbc:oracle:thin:@211.238.142.214:1521:ORCL";
+	private final String URL="jdbc:oracle:thin:@211.238.142.230:1521:ORCL";
 	private PreparedStatement ps2;
 	private static ReplyDAO dao;
 
@@ -69,7 +69,7 @@ public class ReplyDAO {
 		
 		try{
 			getConnection();
-			String sql="SELECT fesno,reply_ID,reply_name,reply_pass,reply_regdate,reply_comment "
+			String sql="SELECT fesno,reply_ID,reply_name,reply_pass,reply_regdate,reply_comment,email "
 					+"FROM project_reply "
 					+"WHERE fesno=? "
 					+"ORDER BY fesno ASC,reply_ID ASC";
@@ -86,6 +86,7 @@ public class ReplyDAO {
 					vo.setReply_pass(rs.getString(4));
 					vo.setReply_regdate(rs.getDate(5));
 					vo.setReply_comment(rs.getString(6));
+					vo.setEmail(rs.getString(7));
 					list.add(vo);
 			}
 			
@@ -105,13 +106,14 @@ public class ReplyDAO {
 	public void replyInsert(ReplyVO vo){
 		try{
 			getConnection();
-			String sql="INSERT INTO project_reply(fesno,reply_ID,reply_name,reply_pass,reply_comment) "
-						+"VALUES (?,seq_re_no.nextval,?,?,?)";
+			String sql="INSERT INTO project_reply(fesno,reply_ID,reply_name,reply_pass,reply_comment,email) "
+						+"VALUES (?,seq_re_no.nextval,?,?,?,?)";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, vo.getFesno());
 			ps.setString(2, vo.getReply_name());
 			ps.setString(3, vo.getReply_pass());
 			ps.setString(4, vo.getReply_comment());
+			ps.setString(5, vo.getEmail());
 			
 			ps.executeUpdate();
 			
@@ -230,6 +232,45 @@ public class ReplyDAO {
 		return check;
 	}
 	
+	//email로 내용 가져오기
+	public ArrayList<ReplyVO> emailListData(String email){
+		ArrayList<ReplyVO> list=new ArrayList<>();
+		
+		try{
+			getConnection();
+			String sql="SELECT project_reply.fesno,reply_ID,reply_name,reply_pass,reply_regdate,reply_comment,email,VK_MAIN.MAINTITLE "
+					+"FROM project_reply,VK_MAIN "
+					+"WHERE PROJECT_REPLY.FESNO=VK_MAIN.FESNO AND PROJECT_REPLY.email=? "
+					+"ORDER BY reply_regdate DESC";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, email);
+			ResultSet rs=ps.executeQuery();
+			
+
+			while(rs.next()){
+					ReplyVO vo=new ReplyVO();
+					vo.setFesno(rs.getInt(1));
+					vo.setReply_ID(rs.getInt(2));
+					vo.setReply_name(rs.getString(3));
+					vo.setReply_pass(rs.getString(4));
+					vo.setReply_regdate(rs.getDate(5));
+					vo.setReply_comment(rs.getString(6));
+					vo.setEmail(rs.getString(7));
+					vo.setTitle(rs.getString(8));
+					list.add(vo);
+			}
+			
+			ps.close();
+			
+		}catch(Exception ex){
+			System.out.println("replyListData()"+ex.getMessage());
+		}finally{
+			disConnection();
+		}
+		
+		
+		return list;
+	}
 
 	public static void main(String[] args) {
 		
