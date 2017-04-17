@@ -47,7 +47,7 @@ function deleteCheck()
      <tr align="center">
       <td>&nbsp;</td>
       <td colspan="2"><input type=button value="삭제" OnClick="javascript:deleteCheck();">
-       <input type=button value="취소" OnClick="javascript:history.back(-1)">
+       <input type=button value="취소" OnClick="javascript:parent.Shadowbox.close();">
       <td>&nbsp;</td>
      </tr>
     </table>

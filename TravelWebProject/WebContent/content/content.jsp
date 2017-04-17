@@ -315,6 +315,7 @@ $(function(){
                                         <%if(login_check==true){%>
                                             <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10" value=<%=nick %> readOnly >
                                          	<input type="hidden" id="commentParentPassword" name="commentParentPassword" class="form-control col-lg-2" data-rule-required="true" placeholder="패스워드" maxlength="10" value=<%=pwd %>>
+                                         	<input type="hidden" id="email" name="email" value=<%=email %>>
                                           <%}else{ %>  
                                            <input type="text" id="commentParentName" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10">
                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -339,7 +340,7 @@ $(function(){
 								%>
                     	<tr id="r1" name="commentParentCode">
                     		<td colspan=2>
-                    			<strong><%=re_list.get(i).getReply_name() %></strong><%=re_list.get(i).getReply_pass() %>
+                    			<strong><%=re_list.get(i).getReply_name() %></strong>&nbsp;&nbsp;<%=re_list.get(i).getReply_regdate() %>&nbsp;&nbsp;
                     			<a style="cursor:pointer;" 	name="pDel" 
                     			onclick="javascript:boxopen('delete.jsp?page=<%=pageNum%>&curr=<%=curr%>&idx=<%=i%>', '댓글삭제', 360, 100)">삭제</a>
                     			<p><%=re_list.get(i).getReply_comment() %></p>

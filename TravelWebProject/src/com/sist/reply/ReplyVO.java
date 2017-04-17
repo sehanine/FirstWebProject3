@@ -20,7 +20,14 @@ public class ReplyVO {
 	private Date reply_regdate;
 	private String reply_comment;
 	private String email;
+	private String title;
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getEmail() {
 		return email;
 	}
