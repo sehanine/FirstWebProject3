@@ -280,7 +280,7 @@ $(function(){
     </header>
     
      <!-- About Section 공지사항 섹션 -->
-    <section class="" id="about">
+    <section class="" id="about" >
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
