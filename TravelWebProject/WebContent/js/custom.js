@@ -32,25 +32,6 @@
 
 	
 	
-	$(window).on("scroll",function(){	
-	
-		//변수 ht에 현재 브라우저의 넓이값 저장
-		var ht = $(window).height();
-		
-		//변수 scroll에 현재 문서가 스크롤된 거리 저장
-		var scroll = $(window).scrollTop();
-		
-		for(var i=0; i<5;i++){
-			if(scroll>=ht*i && scroll< ht*(i+1)){
-				$("#menu li").removeClass();
-				$("#menu li").eq(i).addClass("on");
-			};
-		}
-		
-		
-	});
-	
-	
 });
 
 

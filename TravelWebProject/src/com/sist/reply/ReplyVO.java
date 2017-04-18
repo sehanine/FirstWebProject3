@@ -21,7 +21,14 @@ public class ReplyVO {
 	private String reply_comment;
 	private String email;
 	private String title;
+	private String cal;
 	
+	public String getCal() {
+		return cal;
+	}
+	public void setCal(String cal) {
+		this.cal = cal;
+	}
 	public String getTitle() {
 		return title;
 	}

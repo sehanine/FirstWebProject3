@@ -17,7 +17,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css" type="text/css">
 <link rel="stylesheet" type="text/css" href="../css/starmgr.css">
-<link rel="stylesheet" href="../css/tiny-toggle.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="../js/tiny-toggle.js"></script>
 <script type="text/javascript">
@@ -52,25 +51,17 @@ $(function(){
 			<div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
 				<ul class="event-list">
 					<%
-						for(int i = 0; i < size; i++){	
-					//for(ReplyVO vo: re_list){
+						for(int i = 0; i < size; i++){
 							ReplyVO vo = re_list.get(i);
-							if(currentTime.getYear()-vo.getReply_regdate().getYear()!=0){
-								compare=currentTime.getYear()-vo.getReply_regdate().getYear()+"년전";
-							}else if(currentTime.getMonth()-vo.getReply_regdate().getMonth()!=0){
-								compare=currentTime.getMonth()-vo.getReply_regdate().getMonth()+"달전";
-							}else if(currentTime.getDay()-vo.getReply_regdate().getDay()!=0){
-								compare=currentTime.getMonth()-vo.getReply_regdate().getMonth()+"일전";
-							}else{
-								compare="오늘";
-							}
+							String time=vo.getCal().substring(0, 19);
+							time=time.replace("-", ".");
 					%>
 					<li>
 						<div class="info">
 						
 							<h2 class="title"><%=vo.getTitle() %></h2>
-							<span class="compare"><%=compare %></span>
-							<span class="date"><%=vo.getReply_regdate() %></span>
+							<%-- <span class="compare"><%=compare %></span> --%>
+							<span class="date"><%=time %></span>
 							<p class="comment"><%=vo.getReply_comment() %>
 						<!-- 
 							<input id="check<%=i%>" name="my_option" type="checkbox" class="tiny-toggle" 

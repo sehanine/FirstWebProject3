@@ -412,6 +412,44 @@ public class TeamDAO {
 				disConnection();
 	}
 		}
+		
+		//공지사항
+		public List<TeamVO> boardGongjiData(){
+			ArrayList<TeamVO> list=new ArrayList<>();
+			
+			try{
+				getConnection();
+				String sql="SELECT no,subject,name,regdate,hit,group_tab "
+						+"FROM festigo_board "
+						+"WHERE SUBJECT LIKE '[공지사항]%' "
+						+"ORDER BY no DESC";
+				ps=conn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();
+				
+				
+				while(rs.next()){
+						TeamVO vo=new TeamVO();
+						vo.setNo(rs.getInt(1));
+						vo.setSubject(rs.getString(2));
+						vo.setName(rs.getString(3));
+						vo.setRegdate(rs.getDate(4));
+						vo.setHit(rs.getInt(5));
+						vo.setGroup_tab(rs.getInt(6));
+						list.add(vo);
+						
+					}
+				
+			}catch(Exception ex){
+				System.out.println("boardGongjiData()"+ex.getMessage());
+			}finally{
+				disConnection();
+			}
+			
+			
+			return list;
+		}
+		
+		
 }
 
 

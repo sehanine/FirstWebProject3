@@ -304,6 +304,7 @@ public class ReplyDAO {
 					vo.setReply_name(rs.getString(3));
 					vo.setReply_pass(rs.getString(4));
 					vo.setReply_regdate(rs.getDate(5));
+					vo.setCal(rs.getString(5));
 					vo.setReply_comment(rs.getString(6));
 					vo.setEmail(rs.getString(7));
 					vo.setTitle(rs.getString(8));
