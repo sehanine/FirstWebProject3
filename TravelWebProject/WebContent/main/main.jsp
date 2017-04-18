@@ -15,7 +15,12 @@
 	if(pageNum == null){
 		pageNum = "1";
 	}   
-	
+	/*
+	String search = request.getParameter("search");
+	if(search == null){
+		//search
+	}
+	*/
 	int curPage = Integer.parseInt(pageNum);
 	QueryDAO dao = new QueryDAO();    
 	ArrayList<MainVO> list = dao.boardListData(curPage);
