@@ -24,21 +24,15 @@
 				<ul class="event-list">
 					<%
 						for(ReplyVO vo: re_list){
-							if(currentTime.getYear()-vo.getReply_regdate().getYear()!=0){
-								compare=currentTime.getYear()-vo.getReply_regdate().getYear()+"년전";
-							}else if(currentTime.getMonth()-vo.getReply_regdate().getMonth()!=0){
-								compare=currentTime.getMonth()-vo.getReply_regdate().getMonth()+"달전";
-							}else if(currentTime.getDay()-vo.getReply_regdate().getDay()!=0){
-								compare=currentTime.getMonth()-vo.getReply_regdate().getMonth()+"일전";
-							}else{
-								compare="오늘";
-							}
+							
+							String time=vo.getCal().substring(0, 19);
+							time=time.replace("-", ".");
 					%>
 					<li>
 						<div class="info">
 							<h2 class="title"><%=vo.getTitle() %></h2>
-							<span class="compare"><%=compare %></span>
-							<span class="date"><%=vo.getReply_regdate() %></span>
+							<%-- <span class="compare"><%=compare %></span> --%>
+							<span class="date"><%=time %></span>
 							<p class="comment"><%=vo.getReply_comment() %></p>
 						</div>
 					</li>

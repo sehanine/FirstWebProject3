@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import="java.util.ArrayList, web.dao.*"%>
+    pageEncoding="EUC-KR" import="java.util.*, web.dao.*,board.dao.*,java.text.*"%>
 <!-- 
 	1. 로그인 disable see login_ok.jsp
 	2. email 인증 disable see join_ok.jsp
@@ -20,7 +20,12 @@
 	QueryDAO dao = new QueryDAO();    
 	ArrayList<MainVO> list = dao.boardListData(curPage);
 	int totalPage = dao.getDivPage();
+//-----------------------------------
 
+	TeamDAO t_dao=new TeamDAO();
+	List<TeamVO> t_list=t_dao.boardGongjiData();
+	int count=t_list.size();
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -32,7 +37,21 @@
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <link rel="stylesheet" type="text/css" href="../shadow/css/table.css">
 <link rel="stylesheet" type="text/css" href="../shadow/css/shadowbox.css">
-
+<link rel="stylesheet" type="text/css" href="../css/table.css">
+<style type="text/css">
+	td,th{
+		font-family: 맑은 고딕;
+		font-size: 11pt;
+	}
+	a{
+		text-decoration: none;
+		color: black;
+	}
+	a:HOVER {
+		text-decoration: underline;
+		color: green;
+	}
+</style>
 <script type="text/javascript">
 
 Shadowbox.init({
@@ -100,7 +119,18 @@ function showTabSeason(n){
 	$("#menu li").eq(n-1).addClass("on");
 	
 }
-	
+$(function(){
+	$('#findBtn').click(function(){
+		var ss=$('#ss').val();
+		$('#print').html("");
+		if(ss==""){
+			$('#print').html("<font color=red>검색어 입력</font>");
+			$('#ss').focus();
+			return;
+		}
+		$('#ff').submit();
+	});
+});
 </script>
 	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
@@ -210,10 +240,7 @@ function showTabSeason(n){
 				<div id="season1" >
 					<img src="../img/bg1.jpg" width="100%" height="960px">
 					<div class=mouseMove>
-						<article>
-							<p>FULL BLOSSOM</p>
-							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
-						</article>
+
 						<img class="p11" src="../img/obj11.png" />
 						<img class="p12" src="../img/obj12.png" />
 						<img class="p13" src="../img/obj13.png" />
@@ -223,10 +250,7 @@ function showTabSeason(n){
 				<div id="season2" style="display:none">
 					<img width="100%" height="960px" src="../img/bg2.jpg" >
 					<div class=mouseMove>
-						<article>
-							<p>BE COLORFUL</p>
-							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
-						</article>
+
 						<img class="p21" src="../img/obj21.png" />
 						<img class="p22" src="../img/obj22.png" />
 					</div>
@@ -235,10 +259,7 @@ function showTabSeason(n){
 				<div id="season3" style="display:none">
 					<img width="100%" height="960px" src="../img/bg3.jpg">
 					<div class=mouseMove>
-						<article>
-							<p>TIME ON BOARD</p>
-							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
-						</article>
+
 						<img class="p31" src="../img/obj31.png" />
 						<img class="p32" src="../img/obj32.png" />
 						<img class="p33" src="../img/obj33.png" />
@@ -248,10 +269,7 @@ function showTabSeason(n){
 				<div id="season4" style="display:none">
 					<img width="100%" height="960px" src="../img/bg4.jpg">
 					<div class=mouseMove>
-						<article>
-							<p>SHINY ADDICT</p>
-							<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry</span>
-						</article>
+
 						<img class="p41" src="../img/obj41.png" />
 						<img class="p42" src="../img/obj42.png" />
 					</div>
@@ -259,33 +277,81 @@ function showTabSeason(n){
 				
 			</div>
 		</div>
-
     </header>
-     <!-- About Section -->
-    <section class="success" id="about">
+    
+     <!-- About Section 공지사항 섹션 -->
+    <section class="" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>About</h2>
+                    <h2>공지사항</h2>
                     <hr class="star-light">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-2">
-                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
-                </div>
-                <div class="col-lg-4">
-                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
-                </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="#" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download Theme
-                    </a>
-                </div>
-            </div>
+        <center>
+		
+		<table width="1100" id="table_content">
+			<tr bgcolor="#ccccff" height="27">
+				<th width="10%">번호</th>
+				<th width="45%">제목</th>
+				<th width="15%">이름</th>
+				<th width="20%">작성일</th>
+				<th width="10%">조회수</th>
+			</tr>
+			<%
+				int ii=0;
+				String color="white";
+				for(TeamVO vo:t_list){
+					color="white";
+			%>
+				<tr bgcolor="<%=color%>" height="27" id="dataTr">
+					<td width="10%" align="center"><%=count-- %></td>
+					<td width="45%" align="left">
+						<%
+							if(vo.getGroup_tab()!=0){
+								for(int j=0;j<vo.getGroup_tab();j++){
+									out.write("&nbsp;&nbsp;");
+								}
+						%>
+								<img alt="다시" src="../board/image/icon_reply.gif">&nbsp;
+						<%		
+							}
+							String msg="관리자에 의해 삭제된 게시물입니다.";
+							if(msg.equals(vo.getSubject())){
+						%>
+							<span style="color: gray;cursor: default;"><%=vo.getSubject() %></span>
+						<%		
+							}else{
+						%>
+								<a href="../board/content.jsp?no=<%=vo.getNo()%>"><%=vo.getSubject() %></a>
+						<%		
+							}
+							SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+							String today=sdf.format(new Date());
+							String dbday=vo.getRegdate().toString();
+							//2017-03-09
+							if(today.equals(dbday)){
+						%>
+								<sup><img alt="오늘" src="../board/image/new.gif"></sup>
+						<%		
+							}
+						%>
+					</td>
+					<td width="15%" align="center"><%=vo.getName() %></td>
+					<td width="20%" align="center"><%=vo.getRegdate().toString() %></td>
+					<td width="10%" align="center"><%=vo.getHit() %></td>
+				</tr>
+			
+			<%	
+				ii++;
+				}
+			%>
+		</table>
+		
+		</center>
         </div>
     </section>
-
+	<!-- 공지사항섹션 끝 -->
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
     	 
@@ -333,7 +399,7 @@ function showTabSeason(n){
     
     </section>
  	<!-- About2 Section -->
-    <section class="success" id="about2">
+<!--     <section class="success" id="about2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -355,7 +421,7 @@ function showTabSeason(n){
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
    
 
     <!-- Contact Section -->
