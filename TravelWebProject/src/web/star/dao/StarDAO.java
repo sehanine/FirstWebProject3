@@ -62,7 +62,24 @@ public class StarDAO {
 			System.out.println(ex.getMessage());
 		}
 	}
-	
+	public int getReplyCount(int fesno){
+		int count = 0;
+		try{
+			getConnection();
+			String sql="SELECT COUNT(*) FROM project_reply WHERE fesno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, fesno);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			count = rs.getInt(1);
+		}catch(Exception ex){
+			System.out.println("getReplyCount() " + ex.getMessage());
+		}finally{
+			disConnection();
+		}
+		return count;
+	}
 	public void setStar(int fesno, String email){
 		try{
 			getConnection();

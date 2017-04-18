@@ -81,12 +81,12 @@
 	line-height: 1em;
 	padding: 0px 0.5em;
 }
-
+/*
 .tt-hover {
 	-moz-opacity: 0.70;
   opacity: 0.70;
 }
-
+*/
 .tt-disabled {
   -moz-opacity: 0.40;
   opacity: 0.40;	

@@ -6,6 +6,7 @@
 	StarDAO dao = new StarDAO();
 	List<StarVO> list = dao.getAllData(email);
 	int size = list.size();
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,7 +27,6 @@ $(function(){
 		$('#star'+i).tinyToggle();
 	}
 	$('.tiny-toggle').tinyToggle("event", "onCheck", function() {
-		var id = $(this).attr('id'); // $(this) refers to button that was clicked
 		var fesno = $(this).attr('value');
 		var vo = {"email": "<%=email%>", "fesno": fesno};
 		$.ajax({
@@ -37,7 +37,6 @@ $(function(){
 		// console.log("onCheck Input now is TRUE " + id + " fesno: " + fesno );
 	});
 	$('.tiny-toggle').tinyToggle("event", "onUncheck", function() {
-		var id = $(this).attr('id'); // $(this) refers to button that was clicked
 		var fesno = $(this).attr('value');
 		var vo = {"email": "<%=email%>", "fesno": fesno};
 		$.ajax({
@@ -74,11 +73,11 @@ $(function(){
 							<p class="desc"><%=vo.getMainloc() + " " + vo.getFesdate() %>
 							<input id="star<%=i%>" name="my_option" type="checkbox" class="tiny-toggle" 
 							data-tt-type="star" data-tt-size="large" value="<%=vo.getFesno()%>"
-							<%=dao.isStarred(vo.getFesno(), email)%>></p>
+							checked style="margin-left: 102%"></p>
 							
 							<ul>
 								<li style="width:50%;"><a onclick="parent.location.href='../content/content.jsp?page=<%=vo.getFesno() %>';parent.Shadowbox.close();"><span class="fa fa-globe"></span>행사정보</a></li>
-								<li style="width:50%;"><span class="fa fa-envelope"></span>리플수</li>
+								<li style="width:50%;"><span class="fa fa-envelope"></span> <%=dao.getReplyCount(vo.getFesno()) %></li>
 							</ul>
 						</div>
 					
@@ -99,4 +98,9 @@ $(function(){
 	</div>
 	
 </body>
+<style>
+	.tt-icon i{
+		margin-left:93%;
+	}
+</style>
 </html>

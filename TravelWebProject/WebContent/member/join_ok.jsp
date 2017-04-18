@@ -37,6 +37,21 @@ function validcheck(){
 		return false;
 	}
 }
+$(function(){
+	$('#okBtn').click(function(){
+		var ranNum = <%= ranNum%>;
+		var vrfCode=$('[name=vrfCode]').val();
+		if(ranNum == vrfCode){
+			alert("가입을 축하합니다.");
+			send();
+			return true;
+		} else{
+			document.getElementById("error_msg").innerHTML = "인증코드가 일치하지 않습니다.";
+			return false;
+		}
+	});
+	
+})
 function send(){
 	var vo = {"email": "<%=email%>","nick": "<%=nick%>","pwd": "<%=pwd%>"};
 	$.ajax({
