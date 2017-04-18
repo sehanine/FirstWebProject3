@@ -27,23 +27,9 @@ $(function(){
 	for(i = 0; i < size; i++){
 		$('#trash'+i).click();
 	}
-	/*
-	$('.tiny-toggle').tinyToggle("event", "onCheck", function() {
-		if (confirm('리플을 삭제 합니다.')) {
-			var replyid = $(this).attr('value');
-			var vo = {"replyid": replyid};
-			
-			$.ajax({
-				type: "POST",
-				url: "reply/delete_ok.jsp",
-				data: vo
-			}) 
-			location.reload(true);
-		} 
-	});
-	*/
+
 	$('.fa.fa-trash-o.fa-lg').click(function(){
-		if (confirm('리플을 삭제 합니다.')) {
+		if (confirm('리플을 삭제 하겠습니까?')) {
 			var replyid = $(this).attr('value');
 			var vo = {"replyid": replyid};
 			

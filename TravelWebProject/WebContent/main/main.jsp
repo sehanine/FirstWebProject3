@@ -32,6 +32,7 @@
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <link rel="stylesheet" type="text/css" href="../shadow/css/table.css">
 <link rel="stylesheet" type="text/css" href="../shadow/css/shadowbox.css">
+<link rel="stylesheet" type="text/css" href="../css/searchbar.css">
 
 <script type="text/javascript">
 
@@ -133,6 +134,8 @@ function showTabSeason(n){
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+                
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden active">
                         <a href="#page-top"></a>
@@ -140,6 +143,7 @@ function showTabSeason(n){
                     <li class="page-scroll">
                         <a href="#portfolio">행사목록</a>
                     </li>
+                    
                     <li class="page-scroll">
                         <a href="#about">About</a>
                     </li>       
@@ -290,7 +294,12 @@ function showTabSeason(n){
     <section id="portfolio">
     	 
         <div class="container w3-display-container mySlides">
-        
+        	<!-- 검색바 -->
+            <div class="container">
+				<form id="searchbar">
+					<input type="search" placeholder="검색" name="search">
+				</form>
+			</div>
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>행사목록</h2>
@@ -483,7 +492,13 @@ function showTabSeason(n){
     <script src="../js/freelancer.min.js"></script>
     
 	<script src="../js/custom.js" type="text/javascript"></script>
-
+	
 </body>
+<style>
+	.navbar-custom .navbar-nav li a{
+		font-size: 20px;
+	}
+	
+</style>
 
 </html>
