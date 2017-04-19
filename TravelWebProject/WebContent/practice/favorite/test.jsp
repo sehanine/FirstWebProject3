@@ -11,12 +11,13 @@
 
 <link href="css/tiny-toggle.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script src="js/tiny-toggle.js"></script>
 <script type="text/javascript">
 
 $(function(){
 	$('#star').tinyToggle();
 	$('#star2').tinyToggle();
+
 	$("#star").tinyToggle("event", "onCheck", function() {
 	  console.log("onCheck Input now is TRUE");
 	});
@@ -24,22 +25,7 @@ $(function(){
 		  console.log("onUncheck Input now is FALSE");
 	});
 });
-/*
-$(function(){
-	$("#cb1").tinyToggle({
-		  
-		  onReady: function(obj) { writeLog("onReady", "TinyToggle '" + obj.attr("name") + "'  is ready!"); },
-		  onClick: function(obj) { writeLog("onClick", "TinyToggle '" + obj.attr("name") + "'  was clicked!"); },
-		  onChange: function(obj, value) { writeLog("onChange", "Input value changed for '" + obj.attr("name") + "' new value is " + value ); },
-		  onUncheck: function(obj) { writeLog("onUncheck", "Input '" + obj.attr("name") + "' now is FALSE"); },
-		  onDisabled: function(obj) { writeLog("onDisabled", "Input '" + obj.attr("name") + "' now is DISABLED"); },
-		  onEnabled: function(obj) { writeLog("onEnabled", "Input '" + obj.attr("name") + "' now is ENABLED"); }          
-	});
-});
-*/
-function writeLog(status, log){
-	console.log(status + " " + log);
-}
+
 </script>
 </head>
 <body>
@@ -50,6 +36,6 @@ function writeLog(status, log){
 data-tt-type="star"
 data-tt-size="large" checked>
 
-<script src="js/tiny-toggle.js"></script>
+
 </body>
 </html>

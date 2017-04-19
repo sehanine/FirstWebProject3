@@ -5,6 +5,8 @@
 	MemberDAO dao = new MemberDAO();	
 	String email = (String) session.getAttribute("email");
 	String nick = dao.getValue(email, "nickname", "email");	
+	String url = dao.getValue(email, "img", "email");
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -45,7 +47,7 @@ $(function(){
 				<tr height="30">
 					<td width="15%" align="right">프로필사진</td>
 					<td width="80%" align="left">
-						<input type="text" size="30" name="pic">
+						<input type="text" size="30" name="pic" value="<%=url!=null?url:""%>">
 						&nbsp;
 					</td>
 				</tr>	

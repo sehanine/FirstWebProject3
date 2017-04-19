@@ -422,7 +422,7 @@ public class TeamDAO {
 				String sql="SELECT no,subject,name,regdate,hit,group_tab "
 						+"FROM festigo_board "
 						+"WHERE SUBJECT LIKE '[공지사항]%' "
-						+"ORDER BY group_id DESC,group_step ASC";
+						+"ORDER BY no DESC";
 				ps=conn.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery();
 				

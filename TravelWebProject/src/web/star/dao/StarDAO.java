@@ -62,7 +62,24 @@ public class StarDAO {
 			System.out.println(ex.getMessage());
 		}
 	}
-	
+	public int getReplyCount(int fesno){
+		int count = 0;
+		try{
+			getConnection();
+			String sql="SELECT COUNT(*) FROM project_reply WHERE fesno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, fesno);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			count = rs.getInt(1);
+		}catch(Exception ex){
+			System.out.println("getReplyCount() " + ex.getMessage());
+		}finally{
+			disConnection();
+		}
+		return count;
+	}
 	public void setStar(int fesno, String email){
 		try{
 			getConnection();
@@ -153,6 +170,7 @@ public class StarDAO {
 				StarVO vo = new StarVO();
 				
 				while(rs.next()){
+					vo.setFesno(fesno_);
 					vo.setMaintitle(rs.getString(1));
 					vo.setMainloc(rs.getString(2));
 					vo.setFesdate(rs.getString(3));
@@ -163,6 +181,7 @@ public class StarDAO {
 				
 			}
 			//  test use only
+			/*
 			for(StarVO vo: list){
 				System.out.println("StarDAO.getAllData()");
 				System.out.println("mainTitle: " + vo.getMaintitle());
@@ -170,6 +189,7 @@ public class StarDAO {
 				System.out.println("fesdate: " + vo.getFesdate());
 				System.out.println("mainloc: " + vo.getMainloc());
 			}
+			*/
 			// test use only
 			ps.close();
 	

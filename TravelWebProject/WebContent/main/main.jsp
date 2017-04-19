@@ -37,6 +37,7 @@
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <link rel="stylesheet" type="text/css" href="../shadow/css/table.css">
 <link rel="stylesheet" type="text/css" href="../shadow/css/shadowbox.css">
+<link rel="stylesheet" type="text/css" href="../css/searchbar.css">
 <link rel="stylesheet" type="text/css" href="../css/table.css">
 <style type="text/css">
 	td,th{
@@ -119,18 +120,7 @@ function showTabSeason(n){
 	$("#menu li").eq(n-1).addClass("on");
 	
 }
-$(function(){
-	$('#findBtn').click(function(){
-		var ss=$('#ss').val();
-		$('#print').html("");
-		if(ss==""){
-			$('#print').html("<font color=red>검색어 입력</font>");
-			$('#ss').focus();
-			return;
-		}
-		$('#ff').submit();
-	});
-});
+
 </script>
 	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
@@ -323,7 +313,7 @@ $(function(){
 						<%		
 							}else{
 						%>
-								<a href="../board/content.jsp?no=<%=vo.getNo()%>"><%=vo.getSubject() %></a>
+								<a href="javascript:boxopen('gongji.jsp?no=<%=vo.getNo()%>','공지사항',800,500)"><%=vo.getSubject() %></a>
 						<%		
 							}
 							SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -354,7 +344,13 @@ $(function(){
 	<!-- 공지사항섹션 끝 -->
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
-    	 
+    	 <div class="container w3-display-container mySlides">
+        	<!-- 검색바 -->
+            <div class="container">
+				<form id="searchbar">
+					<input type="search" placeholder="검색" name="search">
+				</form>
+			</div>
         <div class="container w3-display-container mySlides">
         
             <div class="row">
@@ -494,21 +490,19 @@ $(function(){
                     <div class="footer-col col-md-4">
                         <h3>Around the Web</h3>
                         <ul class="list-inline">
-                            <li>
-                                <a href="https://www.facebook.com/" class="btn-social btn-outline"><span class="sr-only">페이스북</span><i class="fa fa-fw fa-facebook"></i></a>
+                                <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=festigo.com" class="btn-social btn-outline"><span class="sr-only">페이스북</span><i class="fa fa-fw fa-facebook"></i></a>
                             </li>
                             <li>
-                                <a href="https://plus.google.com/collections/featured" class="btn-social btn-outline"><span class="sr-only">구글플러스</span><i class="fa fa-fw fa-google-plus"></i></a>
+                                <a href="https://plus.google.com/share?url=festigo.com" class="btn-social btn-outline"><span class="sr-only">구글플러스</span><i class="fa fa-fw fa-google-plus"></i></a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/?lang=ko" class="btn-social btn-outline"><span class="sr-only">트위터</span><i class="fa fa-fw fa-twitter"></i></a>
+                                <a href="https://twitter.com/home?status=festigo.com" class="btn-social btn-outline"><span class="sr-only">트위터</span><i class="fa fa-fw fa-twitter"></i></a>
                             </li>
                             <li>
-                                <a href="https://kr.linkedin.com/" class="btn-social btn-outline"><span class="sr-only">링크드인</span><i class="fa fa-fw fa-linkedin"></i></a>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url=festigo.com&title=&summary=&source=" class="btn-social btn-outline"><span class="sr-only">링크드인</span><i class="fa fa-fw fa-linkedin"></i></a>
                             </li>
-                            <li>
-                                <a href="https://dribbble.com/" class="btn-social btn-outline"><span class="sr-only">드리블</span><i class="fa fa-fw fa-dribbble"></i></a>
-                            </li>
+                           
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
@@ -539,7 +533,7 @@ $(function(){
     
 
     <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+     <!-- <script src="../vendor/jquery/jquery.min.js"></script>  -->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -547,16 +541,19 @@ $(function(){
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
-    <!-- Contact Form JavaScript -->
-    <script src="../js/jqBootstrapValidation.js"></script>
-  <!-- 
-    <script src="js/contact_me.js"></script>  이메일 기능 삭제
- 	-->
-    <!-- Theme JavaScript -->
+   
+     <!-- Theme JavaScript -->
     <script src="../js/freelancer.min.js"></script>
 	<script src="../js/custom.js" type="text/javascript"></script>
 
 
 </body>
-
+<style>
+	.navbar-custom .navbar-nav li a{
+		font-size: 20px;
+	}
+	section{
+		 border-style: ridge;
+	}
+</style>
 </html>

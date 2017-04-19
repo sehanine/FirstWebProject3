@@ -4,7 +4,7 @@
 request.setCharacterEncoding("UTF-8");
 int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 int curr = Integer.parseInt(request.getParameter("curr"));
-int idx = Integer.parseInt(request.getParameter("idx"))+1;
+int idx = Integer.parseInt(request.getParameter("idx"))+1; // 
 String pass = request.getParameter("password");
 
 ReplyDAO dao=new ReplyDAO();

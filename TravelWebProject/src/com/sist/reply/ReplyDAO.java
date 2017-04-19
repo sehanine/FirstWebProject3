@@ -62,7 +62,33 @@ public class ReplyDAO {
 			System.out.println(ex.getMessage());
 		}
 	}
-	
+	public ReplyVO getData(int replyId){
+		ReplyVO vo = new ReplyVO();
+		try{
+			getConnection();
+			String sql="SELECT * FROM project_reply WHERE reply_id = ?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, replyId);
+			ResultSet rs=ps.executeQuery();
+			//fesno,reply_ID,reply_name,reply_pass, reply_regdate, reply_comment, email
+			rs.next();
+					
+			vo.setFesno(rs.getInt(1));
+			vo.setReply_ID(rs.getInt(2));
+			vo.setReply_name(rs.getString(3));
+			vo.setReply_pass(rs.getString(4));
+			vo.setReply_regdate(rs.getDate(5));
+			vo.setReply_comment(rs.getString(6));
+			vo.setEmail(rs.getString(7));
+			ps.close();	
+		}catch(Exception ex){
+			System.out.println("replyListData()"+ex.getMessage());
+		}finally{
+			disConnection();
+		}
+		
+		return vo;
+	}
 	//기능처리-리스트
 	public ArrayList<ReplyVO> replyListData(int fesno){
 		ArrayList<ReplyVO> list=new ArrayList<>();
@@ -124,7 +150,24 @@ public class ReplyDAO {
 		}
 		
 	}
-	
+	/**
+	 * mypage 리플 관리에서 사용하는 함수
+	 * @param replyid
+	 */
+	public void deleteReply(int replyId){
+		try{
+			getConnection();
+			String sql="DELETE FROM project_reply WHERE reply_id=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, replyId);
+			ps.executeUpdate();
+			
+		}catch(Exception ex){
+			System.out.println("deleteReply()"+ex.getMessage());
+		}finally{
+			disConnection();
+		}
+	}
 	//delete
 	public void replyDelete(int fesno,int idx){
 		try{
@@ -205,6 +248,13 @@ public class ReplyDAO {
 
 	
 	//삭제시 비밀번호 확인
+	/**
+	 * 
+	 * @param fesno
+	 * @param idx nth 댓글 in contents reply
+	 * @param pass
+	 * @return
+	 */
 	public boolean replyPassCheck(int fesno,int idx,String pass){
 		boolean check=false;
 		try{
@@ -214,7 +264,7 @@ public class ReplyDAO {
 					+ ")WHERE RN=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, fesno);
-			ps.setInt(2, idx);
+			ps.setInt(2, idx); //nth 번째 댓글 
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
 				if(pass.equals(rs.getString(1))){
