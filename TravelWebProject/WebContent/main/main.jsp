@@ -1,4 +1,3 @@
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" import="java.util.*, web.dao.*,board.dao.*,java.text.*"%>
 <!-- 
@@ -16,20 +15,17 @@
 	if(pageNum == null){
 		pageNum = "1";
 	}   
-	/*
-	String search = request.getParameter("search");
-	if(search == null){
-		//search
-	}
-	*/
+	
 	int curPage = Integer.parseInt(pageNum);
 	QueryDAO dao = new QueryDAO();    
 	ArrayList<MainVO> list = dao.boardListData(curPage);
 	int totalPage = dao.getDivPage();
+//-----------------------------------
 
 	TeamDAO t_dao=new TeamDAO();
 	List<TeamVO> t_list=t_dao.boardGongjiData();
 	int count=t_list.size();
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -124,7 +120,7 @@ function showTabSeason(n){
 	$("#menu li").eq(n-1).addClass("on");
 	
 }
-	
+
 </script>
 	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  	
@@ -157,8 +153,6 @@ function showTabSeason(n){
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                
-                
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden active">
                         <a href="#page-top"></a>
@@ -166,7 +160,6 @@ function showTabSeason(n){
                     <li class="page-scroll">
                         <a href="#portfolio">행사목록</a>
                     </li>
-                    
                     <li class="page-scroll">
                         <a href="#about">About</a>
                     </li>       
@@ -237,7 +230,7 @@ function showTabSeason(n){
 				<div id="season1" >
 					<img src="../img/bg1.jpg" width="100%" height="960px">
 					<div class=mouseMove>
-					
+
 						<img class="p11" src="../img/obj11.png" />
 						<img class="p12" src="../img/obj12.png" />
 						<img class="p13" src="../img/obj13.png" />
@@ -247,7 +240,7 @@ function showTabSeason(n){
 				<div id="season2" style="display:none">
 					<img width="100%" height="960px" src="../img/bg2.jpg" >
 					<div class=mouseMove>
-					
+
 						<img class="p21" src="../img/obj21.png" />
 						<img class="p22" src="../img/obj22.png" />
 					</div>
@@ -256,7 +249,7 @@ function showTabSeason(n){
 				<div id="season3" style="display:none">
 					<img width="100%" height="960px" src="../img/bg3.jpg">
 					<div class=mouseMove>
-					
+
 						<img class="p31" src="../img/obj31.png" />
 						<img class="p32" src="../img/obj32.png" />
 						<img class="p33" src="../img/obj33.png" />
@@ -266,7 +259,7 @@ function showTabSeason(n){
 				<div id="season4" style="display:none">
 					<img width="100%" height="960px" src="../img/bg4.jpg">
 					<div class=mouseMove>
-						
+
 						<img class="p41" src="../img/obj41.png" />
 						<img class="p42" src="../img/obj42.png" />
 					</div>
@@ -274,10 +267,10 @@ function showTabSeason(n){
 				
 			</div>
 		</div>
-
     </header>
-     <!-- About Section -->
-     <section class="" id="about">
+    
+     <!-- About Section 공지사항 섹션 -->
+    <section class="" id="about" >
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -285,7 +278,7 @@ function showTabSeason(n){
                     <hr class="star-light">
                 </div>
             </div>
-   <center>
+        <center>
 		
 		<table width="1100" id="table_content">
 			<tr bgcolor="#ccccff" height="27">
@@ -320,7 +313,7 @@ function showTabSeason(n){
 						<%		
 							}else{
 						%>
-								<a href="../board/content.jsp?no=<%=vo.getNo()%>"><%=vo.getSubject() %></a>
+								<a href="javascript:boxopen('gongji.jsp?no=<%=vo.getNo()%>','공지사항',800,500)"><%=vo.getSubject() %></a>
 						<%		
 							}
 							SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -348,17 +341,18 @@ function showTabSeason(n){
 		</center>
         </div>
     </section>
-
+	<!-- 공지사항섹션 끝 -->
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
-    	 
-        <div class="container w3-display-container mySlides">
+    	 <div class="container w3-display-container mySlides">
         	<!-- 검색바 -->
             <div class="container">
 				<form id="searchbar">
 					<input type="search" placeholder="검색" name="search">
 				</form>
 			</div>
+        <div class="container w3-display-container mySlides">
+        
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>행사목록</h2>
@@ -401,7 +395,7 @@ function showTabSeason(n){
     
     </section>
  	<!-- About2 Section -->
- <!--   <section class="success" id="about2">
+<!--     <section class="success" id="about2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -496,7 +490,7 @@ function showTabSeason(n){
                     <div class="footer-col col-md-4">
                         <h3>Around the Web</h3>
                         <ul class="list-inline">
-                            <li>
+                                <li>
                                 <a href="https://www.facebook.com/sharer/sharer.php?u=festigo.com" class="btn-social btn-outline"><span class="sr-only">페이스북</span><i class="fa fa-fw fa-facebook"></i></a>
                             </li>
                             <li>
@@ -539,7 +533,7 @@ function showTabSeason(n){
     
 
     <!-- jQuery -->
-    <!-- <script src="../vendor/jquery/jquery.min.js"></script>  -->
+     <!-- <script src="../vendor/jquery/jquery.min.js"></script>  -->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -547,11 +541,12 @@ function showTabSeason(n){
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
-    <!-- Theme JavaScript -->
+   
+     <!-- Theme JavaScript -->
     <script src="../js/freelancer.min.js"></script>
-    
 	<script src="../js/custom.js" type="text/javascript"></script>
-	
+
+
 </body>
 <style>
 	.navbar-custom .navbar-nav li a{
@@ -561,5 +556,4 @@ function showTabSeason(n){
 		 border-style: ridge;
 	}
 </style>
-
 </html>
