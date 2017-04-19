@@ -35,7 +35,7 @@ public class VisitKoreaDAO {
 
 			<p class="total bottom">총 게시물 : 67건 , 페이지 : 1/7</p>
 			 */
-			dao.dropAndCreateImageTable();
+			//dao.dropAndCreateImageTable();
 			Document contents = Jsoup.connect(addr1 + pageNumber + addr2).get();
 			Elements conNum = contents.select("div.doc p.total");
 			Element conNum_ = conNum.get(0);

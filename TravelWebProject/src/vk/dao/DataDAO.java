@@ -196,6 +196,11 @@ public class DataDAO {
 			disConnection();
 		}
 	}
+	/**
+	 * VK Korea에서 사용하는 first list를 할당하는데 사용함
+	 * @param VisitKorea
+	 *  
+	 */
 	public void setFirstList(VisitKoreaVO vo){
 /*		
 		행사기간 2016.12.02 ~ 2017.03.26

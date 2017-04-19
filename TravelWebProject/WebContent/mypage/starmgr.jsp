@@ -84,13 +84,13 @@ $(function(){
 						<div class="social">
 							<ul>
 								<li class="facebook" style="width:33%;">
-								<a onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http://localhost:8080/TravelWebProject/main/main.jsp?page=<%=vo.getFesno() %>', '_blank', 'location=yes,height=330,width=520,scrollbars=yes,status=yes');">
+								<a onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http://211.238.142.230:8080/TravelWebProject/main/main.jsp?page=<%=vo.getFesno() %>', '_blank', 'location=yes,height=330,width=520,scrollbars=yes,status=yes');">
 								<span class="fa fa-facebook"></span></a></li>
 								<li class="twitter" style="width:34%;">
-								<a onclick="window.open('https://twitter.com/home?status=http://localhost:8080/TravelWebProject/main/main.jsp?page=<%=vo.getFesno() %>', '_blank', 'location=yes,height=430,width=610,scrollbars=yes,status=yes');">
+								<a onclick="window.open('https://twitter.com/home?status=http://211.238.142.230:8080/TravelWebProject/main/main.jsp?page=<%=vo.getFesno() %>', '_blank', 'location=yes,height=430,width=610,scrollbars=yes,status=yes');">
 								<span class="fa fa-twitter"></span></a></li>
 								<li class="google-plus" style="width:33%;">
-								<a onclick="window.open('https://plus.google.com/share?url=http://localhost:8080/TravelWebProject/main/main.jsp?page=<%=vo.getFesno() %>', '_blank', 'location=yes,height=770,width=520,scrollbars=yes,status=yes');">
+								<a onclick="window.open('https://plus.google.com/share?url=http://211.238.142.230:8080/TravelWebProject/main/main.jsp?page=<%=vo.getFesno() %>', '_blank', 'location=yes,height=770,width=520,scrollbars=yes,status=yes');">
 								<span class="fa fa-google-plus"></span></a></li>
 							</ul>
 						</div>

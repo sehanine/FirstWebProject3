@@ -1,3 +1,6 @@
+<%@page import="com.sun.corba.se.impl.ior.ByteBuffer"%>
+<%@page import="java.nio.charset.Charset"%>
+<%@page import="java.nio.CharBuffer"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" import="java.util.*, web.dao.*,board.dao.*,java.text.*"%>
 <!-- 
@@ -6,6 +9,7 @@
  -->
 <%
 	String pageNum = request.getParameter("page");
+	
 	String email;
 	try{
 		email = session.getAttribute("email").toString();
@@ -103,6 +107,14 @@ $(function(){
 	});
 });
 
+$(function(){
+	$('.admin_login').click(function(){
+		var passwd = prompt("Enter Password : ", "your password here");
+		if(passwd == "adminadmin"){
+			window.open('../board/list.jsp', 'Admin notice');
+		}
+	});
+});
 
 function showTabSeason(n){
 	var seasonId;
@@ -158,11 +170,11 @@ function showTabSeason(n){
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
+                        <a href="#about">공지사항</a>
+                    </li>  
+                    <li class="page-scroll">
                         <a href="#portfolio">행사목록</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="#about">About</a>
-                    </li>       
                     <li class="page-scroll">
                         <a href="#contact">Contact Us</a>
                     </li>
@@ -506,8 +518,8 @@ function showTabSeason(n){
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>About Us</h3>
-                        <p>Festigo is created by open source, <a href="../board/list.jsp">Contact Board</a>.</p>
+                        <h3>About Us</h3>   	<!--  here -->
+                        <p>Festigo is created by open source Bootstrap</p>
                     </div>
                 </div>
             </div>
@@ -516,7 +528,7 @@ function showTabSeason(n){
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        copyleft ← SISTH Absent is right
+                        copyleft ← SISTH Absent is <a class="admin_login">right</a>
                     </div>
                 </div>
             </div>
@@ -549,8 +561,11 @@ function showTabSeason(n){
 
 </body>
 <style>
+	.navbar-custom .navbar-brand {
+    	font-size: 4em;
+    }
 	.navbar-custom .navbar-nav li a{
-		font-size: 20px;
+		font-size: 25px;
 	}
 	section{
 		 border-style: ridge;

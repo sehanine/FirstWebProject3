@@ -20,7 +20,7 @@ h1 img { width:200px; height:auto;}
 
 /*메뉴*/
 #menu { position:absolute; top:500px; left:0px; margin-top:-140px; z-index:13;}
-#menu a { display:block; width:300px; height:120px; font-family:righteous; font-size:24px; color:#000; text-align:right; overflow:hidden; box-sizing:border-box;  border-top:1px solid #111;  opacity:0.8; transition:all 0.5s;}
+#menu a { display:block; width:300px; height:120px; font-family:righteous; font-size:40px; color:#205; text-align:right; overflow:hidden; box-sizing:border-box;  border-top:1px solid #111;  opacity:0.8; transition:all 0.5s;}
 #menu li:hover a { font-size:48px;  opacity:1; }
 #menu li.on a { font-size:48px; opacity:1;}
 

@@ -46,6 +46,12 @@ public class TeamDAO {
 		}
 	} 
 	//기능처리-리스트
+	/**
+	 * 
+	 * @param 한화면에 10개씩 프린트 하기 때문에 
+	 * page=1 => 1~10, page=2 => 11~20 
+	 * @return 해당 페이지값의 10개 이하의 컨텐츠 정보를 리턴함
+	 */
 	public List<TeamVO> boardListData(int page){
 		ArrayList<TeamVO> list=new ArrayList<>();
 		
@@ -53,7 +59,7 @@ public class TeamDAO {
 			getConnection();
 			String sql="SELECT no,subject,name,regdate,hit,group_tab "
 					+"FROM festigo_board "
-					+"ORDER BY group_id DESC,group_step ASC";
+					+"ORDER BY no DESC";
 			ps=conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			
@@ -86,7 +92,10 @@ public class TeamDAO {
 		
 		return list;
 	}
-	
+	/**
+	 * 
+	 * @return 컨텐츠 개수를 10개로 나눈값을 보내줌
+	 */
 	public int boardTotalPage(){
 		int total=0;
 		

@@ -38,7 +38,6 @@ public class StarDAO {
 			
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
-			ex.printStackTrace();
 		}
 	}
 	public void disConnection(){
@@ -91,7 +90,7 @@ public class StarDAO {
 			ps.executeUpdate();
 			ps.close();
 		}catch(Exception ex){
-			ex.printStackTrace();
+			System.out.println(ex.getMessage());
 		}finally{
 			disConnection();
 		}
@@ -108,7 +107,8 @@ public class StarDAO {
 			ps.executeUpdate();
 			ps.close();
 		}catch(Exception ex){
-			ex.printStackTrace();
+			System.out.println(ex.getMessage());
+			//ex.printStackTrace();
 		}finally{
 			disConnection();
 		}
@@ -125,7 +125,7 @@ public class StarDAO {
 			rs.next();
 			res = rs.getString(1);
 			
-			System.out.println("StarDAO.isStarred called by content.jsp " + res);
+			//System.out.println("StarDAO.isStarred called by content.jsp " + res);
 			if(res.equals("1")){
 				res = "checked";
 			} else {
@@ -133,7 +133,8 @@ public class StarDAO {
 			}
 			ps.close();
 		}catch(Exception ex){
-			ex.printStackTrace();
+			System.out.println(ex.getMessage());
+			//ex.printStackTrace();
 		}finally{
 			disConnection();
 		}
@@ -195,14 +196,14 @@ public class StarDAO {
 	
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
-			ex.printStackTrace();
+		//	ex.printStackTrace();
 		}finally{
 			disConnection();
 		}
 		return list;
 		
 	}
-	public static void main(String[] args){
-		new StarDAO().getAllData("aa@naver.com");
-	}
+//	public static void main(String[] args){
+//		new StarDAO().getAllData("aa@naver.com");
+//	}
 }

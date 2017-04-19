@@ -11,9 +11,9 @@
 	create vo set attributes, put them in the database
 	*/
 	String ranNum = RandomNumGen.getRanNum();
-	//JavaMailAPI mailAPI = new JavaMailAPI(email, ranNum, nick, pwd);
+	JavaMailAPI mailAPI = new JavaMailAPI(email, ranNum, nick, pwd);
 	// ------------------------Áö¿ï°Í --------------------------------------
-	System.out.println("join_ok.jsp ranNum: " + ranNum);
+	//System.out.println("join_ok.jsp ranNum: " + ranNum);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
