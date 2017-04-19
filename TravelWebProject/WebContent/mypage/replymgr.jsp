@@ -36,9 +36,13 @@ $(function(){
 				type: "POST",
 				url: "reply/delete_ok.jsp",
 				data: vo
-			}) 
-			location.reload(true);
+			});
+			setTimeout(function(){
+				location.reload(true);
+  			}, 500);
+			
 		}
+		
 	});
 	
 });
